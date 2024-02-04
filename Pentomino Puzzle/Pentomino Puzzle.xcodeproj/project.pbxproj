@@ -18,6 +18,7 @@
 		9CAA43182B6F228700E1CF27 /* PuzzleOutlines.json in Resources */ = {isa = PBXBuildFile; fileRef = 9CAA43152B6F228700E1CF27 /* PuzzleOutlines.json */; };
 		9CAA43192B6F228700E1CF27 /* Solutions.json in Resources */ = {isa = PBXBuildFile; fileRef = 9CAA43162B6F228700E1CF27 /* Solutions.json */; };
 		9CAA431A2B6F228700E1CF27 /* PentominoOutlines.json in Resources */ = {isa = PBXBuildFile; fileRef = 9CAA43172B6F228700E1CF27 /* PentominoOutlines.json */; };
+		9CAA431D2B6F2A1D00E1CF27 /* PuzzleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CAA431C2B6F2A1D00E1CF27 /* PuzzleManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		9CAA43152B6F228700E1CF27 /* PuzzleOutlines.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PuzzleOutlines.json; sourceTree = "<group>"; };
 		9CAA43162B6F228700E1CF27 /* Solutions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Solutions.json; sourceTree = "<group>"; };
 		9CAA43172B6F228700E1CF27 /* PentominoOutlines.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PentominoOutlines.json; sourceTree = "<group>"; };
+		9CAA431C2B6F2A1D00E1CF27 /* PuzzleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,10 +104,11 @@
 		9CAA42E82B6F1FFD00E1CF27 /* Pentomino Puzzle */ = {
 			isa = PBXGroup;
 			children = (
+				9CAA431E2B6F2A2700E1CF27 /* ViewModel */,
+				9CAA431B2B6F27F500E1CF27 /* Model */,
 				9CAA43172B6F228700E1CF27 /* PentominoOutlines.json */,
 				9CAA43152B6F228700E1CF27 /* PuzzleOutlines.json */,
 				9CAA43162B6F228700E1CF27 /* Solutions.json */,
-				9CAA43132B6F226500E1CF27 /* Model.swift */,
 				9CAA42E92B6F1FFD00E1CF27 /* Pentomino_PuzzleApp.swift */,
 				9CAA42EB2B6F1FFD00E1CF27 /* ContentView.swift */,
 				9CAA42ED2B6F1FFF00E1CF27 /* Assets.xcassets */,
@@ -137,6 +140,22 @@
 				9CAA43062B6F200000E1CF27 /* Pentomino_PuzzleUITestsLaunchTests.swift */,
 			);
 			path = "Pentomino PuzzleUITests";
+			sourceTree = "<group>";
+		};
+		9CAA431B2B6F27F500E1CF27 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9CAA43132B6F226500E1CF27 /* Model.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9CAA431E2B6F2A2700E1CF27 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9CAA431C2B6F2A1D00E1CF27 /* PuzzleManager.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,6 +294,7 @@
 				9CAA43142B6F226500E1CF27 /* Model.swift in Sources */,
 				9CAA42EC2B6F1FFD00E1CF27 /* ContentView.swift in Sources */,
 				9CAA42EA2B6F1FFD00E1CF27 /* Pentomino_PuzzleApp.swift in Sources */,
+				9CAA431D2B6F2A1D00E1CF27 /* PuzzleManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

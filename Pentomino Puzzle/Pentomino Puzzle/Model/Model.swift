@@ -18,7 +18,7 @@ struct Size {
     let height : Int
 }
 
-typealias Outline : [Point]
+typealias Outline = [Point]
 
 struct PentominoOutline {
     let name : String
