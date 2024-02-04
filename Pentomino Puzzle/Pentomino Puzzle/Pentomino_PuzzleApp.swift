@@ -11,7 +11,7 @@ import SwiftUI
 struct Pentomino_PuzzleApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            GameboardRootView()
         }
     }
 }
