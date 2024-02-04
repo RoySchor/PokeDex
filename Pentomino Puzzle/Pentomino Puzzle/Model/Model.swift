@@ -8,25 +8,25 @@ import Foundation
 
 
 //Mark:- Shapes models
-struct Point {
+struct Point: Decodable {
     let x : Int
     let y : Int
 }
 
-struct Size {
+struct Size: Decodable {
     let width : Int
     let height : Int
 }
 
 typealias Outline = [Point]
 
-struct PentominoOutline {
+struct PentominoOutline: Decodable {
     let name : String
     let size : Size
     let outline : Outline
 }
 
-struct PuzzleOutline {
+struct PuzzleOutline: Decodable {
     let name : String
     let size : Size
     let outlines : [Outline]
