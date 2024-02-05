@@ -7,7 +7,12 @@
 
 import Foundation
 
-class PentominoesViewModel {
+class PuzzleManager: ObservableObject {
+    @Published var leftSideImages: [String] = (0...3).map { "Board\($0)" }
+    @Published var rightSideImages: [String] = (4...7).map { "Board\($0)" }
+    @Published var gridViewSideSize: Int = 14
+    @Published var gridViewBlockSize: CGFloat = CGFloat(30)
+    
     var pieces: [Piece] = []
     var puzzles: [PuzzleOutline] = []
     
