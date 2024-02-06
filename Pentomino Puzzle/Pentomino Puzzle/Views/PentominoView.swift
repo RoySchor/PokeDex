@@ -22,10 +22,9 @@ struct PentominoView: View {
                 .fill(color)
                 .frame(width: 100, height: 100)
             
-//            GridShape(rows: outline.size.height, columns: outline.size.width)
-//                .stroke(Color.black, lineWidth: 1)
-//                .frame(width: 100, height: 100)
-//                .clipShape(PentominoShape(outline: outline))
+            GridView(rows: outline.size.height, columns: outline.size.width, blocksize: 100 / CGFloat(outline.size.width))
+                .clipShape(PentominoShape(outline: outline))
+                .frame(width: 100, height: 100)
         }
     }
 }

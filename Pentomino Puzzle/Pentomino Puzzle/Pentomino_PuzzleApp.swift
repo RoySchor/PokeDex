@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct Pentomino_PuzzleApp: App {
+    var puzzleManager = PuzzleManager()
+    
     var body: some Scene {
         WindowGroup {
             GameboardRootView()
+                .environmentObject(puzzleManager)
         }
     }
 }

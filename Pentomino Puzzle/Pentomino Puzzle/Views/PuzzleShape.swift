@@ -8,34 +8,45 @@
 import SwiftUI
 
 struct PuzzleShape: Shape {
-    var outline: PuzzleOutline
+    var puzzleOutline: PuzzleOutline
     
     func path(in rect: CGRect) -> Path {
-        var combinedPath = Path()
+        var path = Path()
 
-        let scaleX = rect.width / CGFloat(outline.size.width)
-        let scaleY = rect.height / CGFloat(outline.size.height)
+        let rowHeight = rect.height / CGFloat(puzzleOutline.size.height)
+        let columnWidth = rect.width / CGFloat(puzzleOutline.size.width)
 
-        // Iterate through each outline in the puzzle outline
-        for singleOutline in outline.outlines {
-            var path = Path()
+        for outline in puzzleOutline.outlines {
+            var outlinePath = Path()
 
-            if let firstPoint = singleOutline.first {
-                path.move(to: CGPoint(x: CGFloat(firstPoint.x) * scaleX, y: CGFloat(firstPoint.y) * scaleY))
-            }
-
-            // Add lines to the rest of the points in the outline, scaling each
-            for point in singleOutline.dropFirst() {
-                path.addLine(to: CGPoint(x: CGFloat(point.x) * scaleX, y: CGFloat(point.y) * scaleY))
+            
+            if let firstPoint = outline.first {
+                let start = CGPoint(x: CGFloat(firstPoint.x) * columnWidth, y: CGFloat(firstPoint.y) * rowHeight)
+                outlinePath.move(to: start)
             }
             
-            combinedPath.addPath(path)
+            for point in outline.dropFirst() {
+                let x = CGFloat(point.x) * columnWidth
+                let y = CGFloat(point.y) * rowHeight
+                outlinePath.addLine(to: CGPoint(x: x, y: y))
+            }
+            
+            path.addPath(outlinePath)
         }
-        return combinedPath
+
+        return path
     }
 }
 
 #Preview {
-    PuzzleShape(outline: PuzzleOutline(name: "X", size: Size(width: 6, height: 10), outlines: [[Point(x: 15, y: 15)]]))
+    PuzzleShape(puzzleOutline: PuzzleOutline(
+        name: "6x10",
+        size: Size(width: 10, height: 6),
+        outlines: [
+            [
+                Point(x: 0, y: 0), Point(x: 10, y: 0), Point(x: 10, y: 6), Point(x: 0, y: 6), Point(x: 0, y: 0)
+            ]]))
+    .stroke(lineWidth: 2)
+    .frame(width: 200, height: 120)
     
 }

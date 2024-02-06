@@ -13,17 +13,47 @@ class PuzzleManager: ObservableObject {
     @Published var gridViewSideSize: Int = 14
     @Published var gridViewBlockSize: CGFloat = CGFloat(40)
     @Published var lineWidth: CGFloat = CGFloat(2)
+    @Published var currentPuzzle: PuzzleOutline?
     
     var pieces: [Piece] = []
     var puzzles: [PuzzleOutline] = []
+    let puzzleNameMap = [
+            "Board0": nil,
+            "Board1": "6x10",
+            "Board2": "5x12",
+            "Board3": "OneHole",
+            "Board4": "FourNotches",
+            "Board5": "FourHoles",
+            "Board6": "13Holes",
+            "Board7": "Flower"
+        ]
     
     init() {
         loadPentominoes()
         loadPuzzles()
     }
     
-    func doItNow() {
-        let _ = print(loadPentominoes())
+    func getPuzzleOutline(for imageName: String) -> PuzzleOutline? {
+        guard let puzzleName = puzzleNameMap[imageName] else {
+            print("No puzzle associated with \(imageName)")
+            return nil
+        }
+        return puzzles.first { $0.name == puzzleName }
+    }
+    
+    func calculateOffsetToCenterPuzzle() -> CGFloat {
+        let totalGridHeight = CGFloat(gridViewSideSize) * gridViewBlockSize
+        return totalGridHeight / 2
+    }
+    
+    func calculateOffsetX(for piece: Piece) -> CGFloat {
+        let index = pieces.firstIndex(where: { $0.outline.name == piece.outline.name }) ?? 0
+        return CGFloat(index % 6) * 100
+    }
+        
+    func calculateOffsetY(for piece: Piece) -> CGFloat {
+        let index = pieces.firstIndex(where: { $0.outline.name == piece.outline.name }) ?? 0
+        return CGFloat(index / 6) * 100
     }
     
     private func loadPentominoes() {
@@ -32,7 +62,7 @@ class PuzzleManager: ObservableObject {
             print("PentominoOutlines.json file not found")
             return
         }
-        
+            
         do {
             let decoder = JSONDecoder()
             let outlines = try decoder.decode([PentominoOutline].self, from: data)

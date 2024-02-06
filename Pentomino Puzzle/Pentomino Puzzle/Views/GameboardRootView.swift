@@ -19,7 +19,7 @@ struct GameboardRootView: View {
                     }
                     
                     Button {
-                        puzzleManager.doItNow()
+                        
                     } label: {
                         Text("Reset")
                             .font(.system(size: 25))
@@ -30,7 +30,16 @@ struct GameboardRootView: View {
                 }
                 
                 GridView(rows: puzzleManager.gridViewSideSize, columns: puzzleManager.gridViewSideSize, blocksize: puzzleManager.gridViewBlockSize)
-                    .offset(y:-310)
+                    .offset(y:-290)
+                    .overlay(
+                        Group {
+                            if let puzzleOutline = puzzleManager.currentPuzzle {
+                                PuzzleView(puzzleOutline: puzzleOutline)
+                                    .offset(y: -puzzleManager.calculateOffsetToCenterPuzzle() - 10)
+
+                            }
+                        }
+                    )
                 
                 VStack {
                     ForEach(puzzleManager.rightSideImages, id: \.self) { imageName in
@@ -47,6 +56,11 @@ struct GameboardRootView: View {
                     Spacer()
                         .frame(height:630)
                 }
+            }
+            
+            ForEach(puzzleManager.pieces, id: \.outline.name) { piece in
+                PentominoView(outline: piece.outline, color: Color(piece: piece))
+                    .offset(x: puzzleManager.calculateOffsetX(for: piece), y: puzzleManager.calculateOffsetY(for: piece))
             }
             
         }
