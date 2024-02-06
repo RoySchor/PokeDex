@@ -14,7 +14,7 @@ struct PuzzleButtonView: View {
     var body: some View {
         Button(action: {
             if puzzleButtonImage == "Board0" {
-                puzzleManager.currentPuzzle = nil
+                puzzleManager.resetCurrentPuzzle()
             } else if let puzzleOutline = puzzleManager.getPuzzleOutline(for: puzzleButtonImage) {
                 puzzleManager.currentPuzzle = puzzleOutline
             }

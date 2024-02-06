@@ -46,6 +46,10 @@ class PuzzleManager: ObservableObject {
         return totalGridHeight / 2
     }
     
+    func resetCurrentPuzzle() {
+        currentPuzzle = nil
+    }
+    
     private func loadPentominoes() {
         guard let url = Bundle.main.url(forResource: "PentominoOutlines", withExtension: "json"),
               let data = try? Data(contentsOf: url) else {

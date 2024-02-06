@@ -19,7 +19,7 @@ struct GameboardRootView: View {
                     }
                     
                     Button {
-                        
+                        puzzleManager.resetCurrentPuzzle()
                     } label: {
                         Text("Reset")
                             .font(.system(size: 25))
