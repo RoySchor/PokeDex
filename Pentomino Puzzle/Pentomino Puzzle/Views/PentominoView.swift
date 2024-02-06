@@ -16,24 +16,21 @@ struct PentominoView: View {
         ZStack{
             PentominoShape(outline: outline)
                 .stroke(lineWidth: puzzleManager.lineWidth)
-                .frame(width: 100, height: 100)
             
             PentominoShape(outline: outline)
                 .fill(color)
-                .frame(width: 100, height: 100)
             
-            GridView(rows: outline.size.height, columns: outline.size.width, blocksize: 100 / CGFloat(outline.size.width))
+            GridView(rows: outline.size.height, columns: outline.size.width, blocksize: puzzleManager.gridViewBlockSize)
                 .clipShape(PentominoShape(outline: outline))
-                .frame(width: 100, height: 100)
         }
+        .frame(width: CGFloat(outline.size.width) * puzzleManager.gridViewBlockSize, height: CGFloat(outline.size.height) * puzzleManager.gridViewBlockSize)
     }
 }
 
 #Preview {
-    PentominoView(outline: PentominoOutline(
-        name: "X",
-        size: Size(width: 3, height: 3),
-        outline: [Point(x: 1, y: 0), Point(x: 2, y: 0), Point(x: 2, y: 1), Point(x: 3, y: 1), Point(x: 3, y: 2), Point(x: 2, y: 2), Point(x: 2, y: 3), Point(x: 1, y: 3), Point(x: 1, y: 2), Point(x: 0, y: 2), Point(x: 0, y: 1), Point(x: 1, y: 1), Point(x: 1, y: 0)]),
-          color: .blue)
-    .environmentObject(PuzzleManager())
+    PentominoView(outline: PentominoOutline(name: "I", size: Size(width: 1, height: 5), outline: [Point(x: 0, y: 0), Point(x: 1, y: 0), Point(x: 1, y: 5), Point(x: 0, y: 5), Point(x: 0, y: 0)]),
+                  color: .blue)
+        .environmentObject(PuzzleManager())
 }
+
+//PentominoOutline(name: "X", size: Size(width: 3, height: 3), outline: [Point(x: 1, y: 0), Point(x: 2, y: 0), Point(x: 2, y: 1), Point(x: 3, y: 1), Point(x: 3, y: 2), Point(x: 2, y: 2), Point(x: 2, y: 3), Point(x: 1, y: 3), Point(x: 1, y: 2), Point(x: 0, y: 2), Point(x: 0, y: 1), Point(x: 1, y: 1), Point(x: 1, y: 0)]

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9CA5F5FD2B7291C600859844 /* PieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA5F5FC2B7291C600859844 /* PieceView.swift */; };
+		9CA5F5FF2B7291EC00859844 /* PiecesGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA5F5FE2B7291EC00859844 /* PiecesGridView.swift */; };
 		9CAA42EA2B6F1FFD00E1CF27 /* Pentomino_PuzzleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CAA42E92B6F1FFD00E1CF27 /* Pentomino_PuzzleApp.swift */; };
 		9CAA42EE2B6F1FFF00E1CF27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CAA42ED2B6F1FFF00E1CF27 /* Assets.xcassets */; };
 		9CAA42F12B6F1FFF00E1CF27 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CAA42F02B6F1FFF00E1CF27 /* Preview Assets.xcassets */; };
@@ -47,6 +49,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9CA5F5FC2B7291C600859844 /* PieceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceView.swift; sourceTree = "<group>"; };
+		9CA5F5FE2B7291EC00859844 /* PiecesGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiecesGridView.swift; sourceTree = "<group>"; };
 		9CAA42E62B6F1FFD00E1CF27 /* Pentomino Puzzle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pentomino Puzzle.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CAA42E92B6F1FFD00E1CF27 /* Pentomino_PuzzleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pentomino_PuzzleApp.swift; sourceTree = "<group>"; };
 		9CAA42ED2B6F1FFF00E1CF27 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -194,6 +198,8 @@
 				9CAB37082B718FAE005DC69E /* GridSquareShape.swift */,
 				9CAB370A2B719049005DC69E /* GridView.swift */,
 				9CAB370C2B71D99E005DC69E /* PuzzleView.swift */,
+				9CA5F5FC2B7291C600859844 /* PieceView.swift */,
+				9CA5F5FE2B7291EC00859844 /* PiecesGridView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -340,8 +346,10 @@
 				9CAA42EA2B6F1FFD00E1CF27 /* Pentomino_PuzzleApp.swift in Sources */,
 				9CAA431D2B6F2A1D00E1CF27 /* PuzzleManager.swift in Sources */,
 				9CAB370D2B71D99E005DC69E /* PuzzleView.swift in Sources */,
+				9CA5F5FF2B7291EC00859844 /* PiecesGridView.swift in Sources */,
 				9CAB37072B7169A4005DC69E /* PuzzleButtonView.swift in Sources */,
 				9CAB370B2B719049005DC69E /* GridView.swift in Sources */,
+				9CA5F5FD2B7291C600859844 /* PieceView.swift in Sources */,
 				9CAA43262B6F2DE000E1CF27 /* PuzzleShape.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

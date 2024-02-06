@@ -58,11 +58,8 @@ struct GameboardRootView: View {
                 }
             }
             
-            ForEach(puzzleManager.pieces, id: \.outline.name) { piece in
-                PentominoView(outline: piece.outline, color: Color(piece: piece))
-                    .offset(x: puzzleManager.calculateOffsetX(for: piece), y: puzzleManager.calculateOffsetY(for: piece))
-            }
-            
+            PiecesGridView()
+               .offset(y: 580)
         }
         .containerRelativeFrame([.horizontal, .vertical])
         .background(Gradient(colors: [.green, .yellow]).opacity(0.5))
