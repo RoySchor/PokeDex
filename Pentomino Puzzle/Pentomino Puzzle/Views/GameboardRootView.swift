@@ -19,7 +19,7 @@ struct GameboardRootView: View {
                     }
                     
                     Button {
-                        
+                        puzzleManager.doItNow()
                     } label: {
                         Text("Reset")
                             .font(.system(size: 25))
@@ -30,7 +30,7 @@ struct GameboardRootView: View {
                 }
                 
                 GridView(rows: puzzleManager.gridViewSideSize, columns: puzzleManager.gridViewSideSize, blocksize: puzzleManager.gridViewBlockSize)
-                    .offset(y:-330)
+                    .offset(y:-310)
                 
                 VStack {
                     ForEach(puzzleManager.rightSideImages, id: \.self) { imageName in

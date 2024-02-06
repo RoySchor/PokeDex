@@ -11,7 +11,8 @@ class PuzzleManager: ObservableObject {
     @Published var leftSideImages: [String] = (0...3).map { "Board\($0)" }
     @Published var rightSideImages: [String] = (4...7).map { "Board\($0)" }
     @Published var gridViewSideSize: Int = 14
-    @Published var gridViewBlockSize: CGFloat = CGFloat(30)
+    @Published var gridViewBlockSize: CGFloat = CGFloat(40)
+    @Published var lineWidth: CGFloat = CGFloat(2)
     
     var pieces: [Piece] = []
     var puzzles: [PuzzleOutline] = []
@@ -19,6 +20,10 @@ class PuzzleManager: ObservableObject {
     init() {
         loadPentominoes()
         loadPuzzles()
+    }
+    
+    func doItNow() {
+        let _ = print(loadPentominoes())
     }
     
     private func loadPentominoes() {

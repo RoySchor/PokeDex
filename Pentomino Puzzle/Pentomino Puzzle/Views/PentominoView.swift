@@ -8,50 +8,33 @@
 import SwiftUI
 
 struct PentominoView: View {
+    @EnvironmentObject var puzzleManager : PuzzleManager
     var outline: PentominoOutline
     var color: Color
     
     var body: some View {
-        GeometryReader { geometry in
-            ZStack {
-                Path { path in
-                    let scaleX = geometry.size.width / CGFloat(outline.size.width)
-                    let scaleY = geometry.size.height / CGFloat(outline.size.height)
-                    
-                    if let firstPoint = outline.outline.first {
-                        path.move(to: CGPoint(x: CGFloat(firstPoint.x) * scaleX, y: CGFloat(firstPoint.y) * scaleY))
-                    }
-                    
-                    for point in outline.outline.dropFirst() {
-                        path.addLine(to: CGPoint(x: CGFloat(point.x) * scaleX, y: CGFloat(point.y) * scaleY))
-                    }
-                }
+        ZStack{
+            PentominoShape(outline: outline)
+                .stroke(lineWidth: puzzleManager.lineWidth)
+                .frame(width: 100, height: 100)
+            
+            PentominoShape(outline: outline)
                 .fill(color)
-                
-                Path { path in
-                    let width = geometry.size.width
-                    let height = geometry.size.height
-                    let blockWidth = width / CGFloat(outline.size.width)
-                    let blockHeight = height / CGFloat(outline.size.height)
-                    
-                    // Horizontal grid lines
-                    for y in stride(from: 0, to: height, by: blockHeight) {
-                        path.move(to: CGPoint(x: 0, y: y))
-                        path.addLine(to: CGPoint(x: width, y: y))
-                    }
-                    
-                    // Vertical grid lines
-                    for x in stride(from: 0, to: width, by: blockWidth) {
-                        path.move(to: CGPoint(x: x, y: 0))
-                        path.addLine(to: CGPoint(x: x, y: height))
-                    }
-                }
-                .stroke(Color.black, lineWidth: 1)
-            }
+                .frame(width: 100, height: 100)
+            
+//            GridShape(rows: outline.size.height, columns: outline.size.width)
+//                .stroke(Color.black, lineWidth: 1)
+//                .frame(width: 100, height: 100)
+//                .clipShape(PentominoShape(outline: outline))
         }
     }
 }
 
 #Preview {
-    PentominoView(outline: PentominoOutline(name: "X", size: Size(width: 10, height: 10), outline: [Point(x: 5, y: 5)]), color: .yellow)
+    PentominoView(outline: PentominoOutline(
+        name: "X",
+        size: Size(width: 3, height: 3),
+        outline: [Point(x: 1, y: 0), Point(x: 2, y: 0), Point(x: 2, y: 1), Point(x: 3, y: 1), Point(x: 3, y: 2), Point(x: 2, y: 2), Point(x: 2, y: 3), Point(x: 1, y: 3), Point(x: 1, y: 2), Point(x: 0, y: 2), Point(x: 0, y: 1), Point(x: 1, y: 1), Point(x: 1, y: 0)]),
+          color: .blue)
+    .environmentObject(PuzzleManager())
 }
