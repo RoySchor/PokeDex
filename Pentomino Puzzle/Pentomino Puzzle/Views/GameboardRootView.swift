@@ -59,7 +59,7 @@ struct GameboardRootView: View {
             }
             
             PiecesGridView()
-               .offset(y: 580)
+               .offset(y: 305)
         }
         .containerRelativeFrame([.horizontal, .vertical])
         .background(Gradient(colors: [.green, .yellow]).opacity(0.5))

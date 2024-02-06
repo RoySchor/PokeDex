@@ -46,16 +46,6 @@ class PuzzleManager: ObservableObject {
         return totalGridHeight / 2
     }
     
-    func calculateOffsetX(for piece: Piece) -> CGFloat {
-        let index = pieces.firstIndex(where: { $0.outline.name == piece.outline.name }) ?? 0
-        return CGFloat(index % 6) * 100
-    }
-        
-    func calculateOffsetY(for piece: Piece) -> CGFloat {
-        let index = pieces.firstIndex(where: { $0.outline.name == piece.outline.name }) ?? 0
-        return CGFloat(index / 6) * 100
-    }
-    
     private func loadPentominoes() {
         guard let url = Bundle.main.url(forResource: "PentominoOutlines", withExtension: "json"),
               let data = try? Data(contentsOf: url) else {
