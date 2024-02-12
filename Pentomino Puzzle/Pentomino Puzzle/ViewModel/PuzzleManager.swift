@@ -15,8 +15,10 @@ class PuzzleManager: ObservableObject {
     @Published var lineWidth: CGFloat = CGFloat(2)
     @Published var currentPuzzle: PuzzleOutline?
     
-    var pieces: [Piece] = []
-    var puzzles: [PuzzleOutline] = []
+    @Published var pieces: [Piece] = []
+    @Published var puzzles: [PuzzleOutline] = []
+    @Published var solutions: [String: [String: Position]] = [:]
+    
     let puzzleNameMap = [
             "Board0": nil,
             "Board1": "6x10",
@@ -31,6 +33,7 @@ class PuzzleManager: ObservableObject {
     init() {
         loadPentominoes()
         loadPuzzles()
+        loadSolutions()
     }
     
     func getPuzzleOutline(for imageName: String) -> PuzzleOutline? {
@@ -78,6 +81,21 @@ class PuzzleManager: ObservableObject {
             self.puzzles = try decoder.decode([PuzzleOutline].self, from: data)
         } catch {
             print("Error decoding PuzzleOutlines: \(error)")
+        }
+    }
+    
+    private func loadSolutions() {
+        guard let url = Bundle.main.url(forResource: "Solutions", withExtension: "json"),
+              let data = try? Data(contentsOf: url) else {
+            print("Solutions.json file not found")
+            return
+        }
+            
+        do {
+            let decoder = JSONDecoder()
+            self.solutions = try decoder.decode([String: [String: Position]].self, from: data)
+        } catch {
+            print("Error decoding Solutions: \(error)")
         }
     }
 }

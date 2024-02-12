@@ -9,14 +9,33 @@ import SwiftUI
 
 struct PieceView: View {
     @EnvironmentObject var puzzleManager: PuzzleManager
+    @State private var dragOffset: CGSize = .zero
+    @State private var isDragging: Bool = false
     var piece: Piece
-    
 
     var body: some View {
         let blockSize: CGFloat = puzzleManager.gridViewBlockSize
+        let piecePosition = CGPoint(x: CGFloat(piece.position.x) * blockSize, y: CGFloat(piece.position.y) * blockSize)
+
         
         PentominoView(outline: piece.outline, color: Color(piece: piece))
             .frame(width: CGFloat(piece.outline.size.width) * blockSize, height: CGFloat(piece.outline.size.height) * blockSize)
+            .scaleEffect(isDragging ? 1.2 : 1.0)
+            .shadow(radius: isDragging ? 5 : 0)
+            .offset(x: piecePosition.x + dragOffset.width, y: piecePosition.y + dragOffset.height)
+            .gesture(
+                DragGesture()
+                    .onChanged { gesture in
+                        self.isDragging = true
+                        self.dragOffset = gesture.translation
+                        
+                    }
+                    .onEnded { gesture in
+                        self.isDragging = false
+                    }
+            )
+            .animation(.easeInOut, value: isDragging)
+            .animation(.easeInOut, value: dragOffset)
     }
 }
 

@@ -20,6 +20,11 @@ struct Size: Decodable {
 
 typealias Outline = [Point]
 
+// Not needed
+//struct Solution: Decodable {
+//    let solutions: [String: [String: Position]]
+//}
+
 struct PentominoOutline: Decodable {
     let name : String
     let size : Size
@@ -35,9 +40,10 @@ struct PuzzleOutline: Decodable {
 //Mark:- Pieces Model
 
 // specifies the complete position of a piece using unit coordinates
-struct Position  {
+struct Position: Decodable  {
     var x : Int = 0
     var y : Int = 0
+    var orientation: Orientation3D = Orientation3D(x: 0, y: 0, z: 0)
 }
 
 // a Piece is the model data that the view uses to display a pentomino
@@ -47,6 +53,8 @@ struct Piece  {
 
 }
 
-
-
-
+struct Orientation3D: Decodable {
+    var x: Int
+    var y: Int
+    var z: Int
+}
