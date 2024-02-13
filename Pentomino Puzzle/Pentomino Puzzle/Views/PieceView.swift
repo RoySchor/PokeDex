@@ -51,6 +51,7 @@ struct PieceView: View {
         let combinedGesture = dragGesture.simultaneously(with: tapGesture).simultaneously(with: longPressGesture)
         
         PentominoView(outline: piece.outline, color: Color(piece: piece))
+            .opacity(piece.isCorrect ? 0.5 : 1.0)
             .scaleEffect(isDragging ? 1.2 : 1.0)
             .shadow(radius: isDragging ? 5 : 0)
             .position(puzzleManager.positionFor(piece).applying(CGAffineTransform(translationX: offset.width, y: offset.height)))

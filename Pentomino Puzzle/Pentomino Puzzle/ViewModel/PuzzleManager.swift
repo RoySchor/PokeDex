@@ -55,7 +55,7 @@ class PuzzleManager: ObservableObject {
             pieces[index].position.x = 0
             pieces[index].position.y = 0
             
-            // Reset the orientation to the default state
+            // Reset the orientation to default
             pieces[index].position.orientation.x = 0
             pieces[index].position.orientation.y = 0
             pieces[index].position.orientation.z = 0
@@ -72,6 +72,33 @@ class PuzzleManager: ObservableObject {
         let x = (CGFloat(piece.position.x) + 2.3) * CGFloat(gridViewBlockSize)
         let y = (CGFloat(piece.position.y) + 1.9) * CGFloat(gridViewBlockSize)
         return CGPoint(x: x, y: y)
+    }
+    
+    func solveCurrentPuzzle() {
+        guard let puzzleName = currentPuzzle?.name else { return }
+        guard let solutionPositions = solutions[puzzleName] else { return }
+        
+        for index in pieces.indices {
+            let pieceName = pieces[index].outline.name
+            if let solutionPosition = solutionPositions[pieceName] {
+                pieces[index].position = solutionPosition
+                pieces[index].isCorrect = true
+            }
+        }
+    }
+    
+    func updatePiecesCorrectness() {
+        guard let puzzleName = currentPuzzle?.name else { return }
+        guard let solutionPositions = solutions[puzzleName] else { return }
+        
+        for index in pieces.indices {
+            let piece = pieces[index]
+            if let solutionPosition = solutionPositions[piece.outline.name], piece.position == solutionPosition {
+                pieces[index].isCorrect = true
+            } else {
+                pieces[index].isCorrect = false
+            }
+        }
     }
     
     private func offset( for size:CGSize) -> Position {

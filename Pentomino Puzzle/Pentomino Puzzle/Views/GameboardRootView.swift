@@ -47,12 +47,16 @@ struct GameboardRootView: View {
                     }
                     
                     Button {
-                        
+                        withAnimation {
+                            puzzleManager.solveCurrentPuzzle()
+                        }
                     } label: {
                         Text("Solve")
                             .font(.system(size: 25))
                             .foregroundColor(.black)
+                            .opacity(puzzleManager.currentPuzzle == nil ? 0.5 : 1.0)
                     }
+                    .disabled(puzzleManager.currentPuzzle == nil)
                     Spacer()
                         .frame(height:630)
                 }

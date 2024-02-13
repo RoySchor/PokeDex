@@ -43,19 +43,19 @@ struct Position: Decodable  {
     static func +(lhs: Position, rhs: Position) -> Position {
         Position(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
     }
-//    mutating func rotateClockwise() {
-//        orientation.z = (orientation.z + 1) % 4
-//    }
-//    
-//    mutating func flipVertically() {
-//        orientation.y = (orientation.y + 1) % 2
-//    }
+}
+
+extension Position: Equatable {
+    static func ==(lhs: Position, rhs: Position) -> Bool {
+        return lhs.x == rhs.x && lhs.y == rhs.y && lhs.orientation == rhs.orientation
+    }
 }
 
 // a Piece is the model data that the view uses to display a pentomino
 struct Piece  {
     var position : Position = Position()
     var outline : PentominoOutline
+    var isCorrect: Bool = false
     
 }
 
@@ -84,7 +84,7 @@ extension Piece {
     }
 }
 
-struct Orientation3D: Decodable {
+struct Orientation3D: Decodable, Equatable {
     var x: Int
     var y: Int
     var z: Int
