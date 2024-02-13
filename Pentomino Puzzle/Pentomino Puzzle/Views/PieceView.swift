@@ -9,39 +9,60 @@ import SwiftUI
 
 struct PieceView: View {
     @EnvironmentObject var puzzleManager: PuzzleManager
-    @State private var dragOffset: CGSize = .zero
+    @State private var offset = CGSize.zero
     @State private var isDragging: Bool = false
-    var piece: Piece
-
+    
+    @Binding var piece: Piece
+    
     var body: some View {
-        let blockSize: CGFloat = puzzleManager.gridViewBlockSize
-        let piecePosition = CGPoint(x: CGFloat(piece.position.x) * blockSize, y: CGFloat(piece.position.y) * blockSize)
+        let dragGesture = DragGesture()
+            .onChanged{ (value) in
+                self.isDragging = true
+                offset = value.translation
+            }
+            .onEnded { (value) in
+                withAnimation {
+                    self.isDragging = false
 
+                    let newOffset = puzzleManager.offset(for: piece, from: value.translation)
+                    piece.moveBy(positionOffset: newOffset)
+                    self.offset = CGSize.zero
+                }
+            }
+        
+        let tapGesture = TapGesture()
+            .onEnded { _ in
+                if !isDragging {
+                    withAnimation {
+                        piece.rotate90DegreesClockwise()
+                    }
+                }
+            }
+        
+        let longPressGesture = LongPressGesture()
+            .onEnded { _ in
+                if !isDragging {
+                    withAnimation {
+                        piece.flipVertically()
+                    }
+                }
+            }
+        
+        let combinedGesture = dragGesture.simultaneously(with: tapGesture).simultaneously(with: longPressGesture)
         
         PentominoView(outline: piece.outline, color: Color(piece: piece))
-            .frame(width: CGFloat(piece.outline.size.width) * blockSize, height: CGFloat(piece.outline.size.height) * blockSize)
             .scaleEffect(isDragging ? 1.2 : 1.0)
             .shadow(radius: isDragging ? 5 : 0)
-            .offset(x: piecePosition.x + dragOffset.width, y: piecePosition.y + dragOffset.height)
-            .gesture(
-                DragGesture()
-                    .onChanged { gesture in
-                        self.isDragging = true
-                        self.dragOffset = gesture.translation
-                        
-                    }
-                    .onEnded { gesture in
-                        self.isDragging = false
-                    }
-            )
-            .animation(.easeInOut, value: isDragging)
-            .animation(.easeInOut, value: dragOffset)
+            .position(puzzleManager.positionFor(piece).applying(CGAffineTransform(translationX: offset.width, y: offset.height)))
+            .gesture(combinedGesture)
+            .rotation3DEffect(.degrees(Double(piece.position.orientation.z) * 90), axis: (x: 0, y: 0, z: 1))
+            .rotation3DEffect(.degrees(Double(piece.position.orientation.y) * 180), axis: (x: 0, y: 1, z: 0))
     }
 }
 
-#Preview {
-    PieceView(piece: Piece(outline: PentominoOutline(name: "I", size: Size(width: 1, height: 5), outline: [Point(x: 0, y: 0), Point(x: 1, y: 0), Point(x: 1, y: 5), Point(x: 0, y: 5), Point(x: 0, y: 0)])))
-        .environmentObject(PuzzleManager())
-    
-}
+//#Preview {
+//    PieceView(piece: Piece(outline: PentominoOutline(name: "I", size: Size(width: 1, height: 5), outline: [Point(x: 0, y: 0), Point(x: 1, y: 0), Point(x: 1, y: 5), Point(x: 0, y: 5), Point(x: 0, y: 0)])))
+//        .environmentObject(PuzzleManager())
+//    
+//}
 //PentominoOutline(name: "X", size: Size(width: 3, height: 3), outline: [Point(x: 1, y: 0), Point(x: 2, y: 0), Point(x: 2, y: 1), Point(x: 3, y: 1), Point(x: 3, y: 2), Point(x: 2, y: 2), Point(x: 2, y: 3), Point(x: 1, y: 3), Point(x: 1, y: 2), Point(x: 0, y: 2), Point(x: 0, y: 1), Point(x: 1, y: 1), Point(x: 1, y: 0)])

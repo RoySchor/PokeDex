@@ -50,7 +50,26 @@ class PuzzleManager: ObservableObject {
     }
     
     func resetCurrentPuzzle() {
+        let _ = print(pieces)
         currentPuzzle = nil
+    }
+    
+    func offset(for piece:Piece, from size:CGSize) -> Position {
+        let position = offset(for: size)
+        return position
+    }
+    
+    func positionFor(_ piece: Piece) -> CGPoint {
+        let x = (CGFloat(piece.position.x) + 2.3) * CGFloat(gridViewBlockSize)
+        let y = (CGFloat(piece.position.y) + 1.9) * CGFloat(gridViewBlockSize)
+        return CGPoint(x: x, y: y)
+    }
+    
+    private func offset( for size:CGSize) -> Position {
+        let newX = Int(round(size.width/gridViewBlockSize))
+        let newY = Int(round(size.height/gridViewBlockSize))
+        
+        return Position(x: newX, y: newY)
     }
     
     private func loadPentominoes() {
