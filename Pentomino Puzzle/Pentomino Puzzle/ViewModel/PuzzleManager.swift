@@ -50,7 +50,16 @@ class PuzzleManager: ObservableObject {
     }
     
     func resetCurrentPuzzle() {
-        let _ = print(pieces)
+        for index in pieces.indices {
+            // Reset the position to the origin (0,0)
+            pieces[index].position.x = 0
+            pieces[index].position.y = 0
+            
+            // Reset the orientation to the default state
+            pieces[index].position.orientation.x = 0
+            pieces[index].position.orientation.y = 0
+            pieces[index].position.orientation.z = 0
+        }
         currentPuzzle = nil
     }
     
