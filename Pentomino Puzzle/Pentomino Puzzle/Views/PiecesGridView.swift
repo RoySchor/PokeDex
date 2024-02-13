@@ -13,7 +13,7 @@ struct PiecesGridView: View {
     var gridItems: [GridItem] = Array(repeating: .init(.flexible(), spacing: 10), count: 4)
     
     var body: some View {
-        LazyVGrid(columns: gridItems, spacing: 50) {
+        LazyVGrid(columns: gridItems, spacing: 70) {
             ForEach($puzzleManager.pieces, id: \.outline.name) { $piece in
                 PieceView(piece: $piece)
             }
