@@ -48,7 +48,7 @@ struct GameboardRootView: View {
                     
                     Button {
                         withAnimation {
-                            puzzleManager.solveCurrentPuzzle()
+//                            puzzleManager.solveCurrentPuzzle()
                         }
                     } label: {
                         Text("Solve")

@@ -47,15 +47,17 @@ struct PieceView: View {
                     }
                 }
             }
-        
-        let combinedGesture = dragGesture.simultaneously(with: tapGesture).simultaneously(with: longPressGesture)
-        
+                
         PentominoView(outline: piece.outline, color: Color(piece: piece))
-            .opacity(piece.isCorrect ? 0.5 : 1.0)
+//            .opacity(piece.isCorrect ? 0.5 : 1.0)
             .scaleEffect(isDragging ? 1.2 : 1.0)
             .shadow(radius: isDragging ? 5 : 0)
-            .position(puzzleManager.positionFor(piece).applying(CGAffineTransform(translationX: offset.width, y: offset.height)))
-            .gesture(combinedGesture)
+            .position(puzzleManager.positionFor(piece))
+            .offset(offset)
+            .gesture(tapGesture)
+            .gesture(longPressGesture)
+            .gesture(dragGesture)
+//            .rotation3DEffect(.degrees(Double(piece.position.orientation.x) * 90), axis: (x: 1, y: 0, z: 0))
             .rotation3DEffect(.degrees(Double(piece.position.orientation.z) * 90), axis: (x: 0, y: 0, z: 1))
             .rotation3DEffect(.degrees(Double(piece.position.orientation.y) * 180), axis: (x: 0, y: 1, z: 0))
     }

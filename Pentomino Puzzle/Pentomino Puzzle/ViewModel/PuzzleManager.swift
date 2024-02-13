@@ -74,18 +74,29 @@ class PuzzleManager: ObservableObject {
         return CGPoint(x: x, y: y)
     }
     
-    func solveCurrentPuzzle() {
-        guard let puzzleName = currentPuzzle?.name else { return }
-        guard let solutionPositions = solutions[puzzleName] else { return }
-        
-        for index in pieces.indices {
-            let pieceName = pieces[index].outline.name
-            if let solutionPosition = solutionPositions[pieceName] {
-                pieces[index].position = solutionPosition
-                pieces[index].isCorrect = true
-            }
-        }
-    }
+//    func solveCurrentPuzzle() {
+//        guard let puzzleName = currentPuzzle?.name else { return }
+//        
+//        guard let puzzleSolution = solutions[puzzleName] else { return
+//        }
+//        
+////        guard let solutionPositions = solutions[puzzleName] else { return }
+//        
+////        for index in pieces.indices {
+////            let pieceName = pieces[index].outline.name
+////            if let solutionPosition = puzzleSolution[pieceName] {
+////                pieces[index].position = solutionPosition
+////                pieces[index].isCorrect = true
+////            }
+////        }
+//        
+//        for index in pieces.indices {
+//            let pieceName = pieces[index].outline.name
+//            if let solutionPosition = puzzleSolution[pieceName] {
+//                pieces[index].to(Position(x: solutionPosition.x, y: solutionPosition.y, orientation: orientationFromString(solutionPosition.orientation)))
+//            }
+//        }
+//    }
     
     func updatePiecesCorrectness() {
         guard let puzzleName = currentPuzzle?.name else { return }
@@ -99,6 +110,34 @@ class PuzzleManager: ObservableObject {
                 pieces[index].isCorrect = false
             }
         }
+    }
+    
+    private func orientationFromString(_ orientation: String) -> Orientation3D {
+        // Assuming default orientation is 'up' with no rotation or flip.
+        var x = 0, y = 0, z = 0
+        
+        switch orientation {
+        case "up":
+            z = 0
+        case "right":
+            z = 1
+        case "down":
+            z = 2
+        case "left":
+            z = 3
+        case "upMirrored":
+            z = 0; y = 1
+        case "rightMirrored":
+            z = 1; y = 1
+        case "downMirrored":
+            z = 2; y = 1
+        case "leftMirrored":
+            z = 3; y = 1
+        default:
+            break
+        }
+        
+        return Orientation3D(x: x, y: y, z: z)
     }
     
     private func offset( for size:CGSize) -> Position {
