@@ -32,19 +32,19 @@ struct PieceView: View {
         
         let tapGesture = TapGesture()
             .onEnded { _ in
-                if !isDragging {
+//                if !isDragging {
                     withAnimation {
                         piece.rotate90DegreesClockwise()
                     }
-                }
+//                }
             }
         
         let longPressGesture = LongPressGesture()
             .onEnded { _ in
-                if !isDragging {
+//                if !isDragging {
                     withAnimation {
                         piece.flipVertically()
-                    }
+//                    }
                 }
             }
                 
@@ -57,9 +57,10 @@ struct PieceView: View {
             .gesture(tapGesture)
             .gesture(longPressGesture)
             .gesture(dragGesture)
-//            .rotation3DEffect(.degrees(Double(piece.position.orientation.x) * 90), axis: (x: 1, y: 0, z: 0))
-            .rotation3DEffect(.degrees(Double(piece.position.orientation.z) * 90), axis: (x: 0, y: 0, z: 1))
-            .rotation3DEffect(.degrees(Double(piece.position.orientation.y) * 180), axis: (x: 0, y: 1, z: 0))
+            .rotation3DEffect(.degrees(piece.position.orientation.rotationAngle), axis: (x: 0, y: 0, z: 1))
+            .rotation3DEffect(.degrees(piece.position.orientation.isMirrored ? 180 : 0), axis: (x: 0, y: 1, z: 0))
+//            .rotation3DEffect(.degrees(Double(piece.position.orientation.z) * 90), axis: (x: 0, y: 0, z: 1))
+//            .rotation3DEffect(.degrees(Double(piece.position.orientation.y) * 180), axis: (x: 0, y: 1, z: 0))
     }
 }
 

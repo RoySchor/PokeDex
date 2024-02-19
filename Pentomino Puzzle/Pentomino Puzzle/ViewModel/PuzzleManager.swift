@@ -56,9 +56,10 @@ class PuzzleManager: ObservableObject {
             pieces[index].position.y = 0
             
             // Reset the orientation to default
-            pieces[index].position.orientation.x = 0
-            pieces[index].position.orientation.y = 0
-            pieces[index].position.orientation.z = 0
+            pieces[index].position.orientation = .up
+//            pieces[index].position.orientation.x = 0
+//            pieces[index].position.orientation.y = 0
+//            pieces[index].position.orientation.z = 0
         }
         currentPuzzle = nil
     }
@@ -80,22 +81,29 @@ class PuzzleManager: ObservableObject {
 //        guard let puzzleSolution = solutions[puzzleName] else { return
 //        }
 //        
-////        guard let solutionPositions = solutions[puzzleName] else { return }
-//        
-////        for index in pieces.indices {
-////            let pieceName = pieces[index].outline.name
-////            if let solutionPosition = puzzleSolution[pieceName] {
-////                pieces[index].position = solutionPosition
-////                pieces[index].isCorrect = true
-////            }
-////        }
-//        
 //        for index in pieces.indices {
 //            let pieceName = pieces[index].outline.name
 //            if let solutionPosition = puzzleSolution[pieceName] {
-//                pieces[index].to(Position(x: solutionPosition.x, y: solutionPosition.y, orientation: orientationFromString(solutionPosition.orientation)))
+////                pieces[index].to(Position(x: solutionPosition.x, y: solutionPosition.y, orientation: orientationFromString(solutionPosition.orientation.rawValue)))
+//                let orientedPosition = orientationFromString(solutionPosition.orientation.rawValue)
+//                let screenPosition = calculateScreenPositionFor(piecePosition: Position(x: solutionPosition.x, y: solutionPosition.y, orientation: orientedPosition), puzzleSize: currentPuzzle!.size)
+//                pieces[index].to(screenPosition)
 //            }
 //        }
+//    }
+    
+//    private func calculateScreenPositionFor(piecePosition: Position, puzzleSize: Size) -> Position {
+//        let x = CGFloat(piecePosition.x) * gridViewBlockSize
+//        let y = CGFloat(piecePosition.y) * gridViewBlockSize
+//        
+//        // Optionally, adjust for any offset to center the puzzle on the board
+//        // This part is simplified and might need adjustment based on your UI layout
+////        let offsetX = (CGFloat(puzzleSize.width) * gridViewBlockSize - CGFloat(gridViewSideSize) * gridViewBlockSize) / 2
+////        let offsetY = (CGFloat(puzzleSize.height) * gridViewBlockSize - CGFloat(gridViewSideSize) * gridViewBlockSize) / 2
+//        let offsetX = CGFloat(gridViewSideSize) * gridViewBlockSize
+//        
+////        return Position(x: Int(x - offsetX), y: Int(y - offsetY), orientation: piecePosition.orientation)
+//        return Position(x: Int(offsetX / 2), y: Int(offsetX / 2), orientation: piecePosition.orientation)
 //    }
     
     func updatePiecesCorrectness() {
@@ -112,33 +120,56 @@ class PuzzleManager: ObservableObject {
         }
     }
     
-    private func orientationFromString(_ orientation: String) -> Orientation3D {
-        // Assuming default orientation is 'up' with no rotation or flip.
-        var x = 0, y = 0, z = 0
-        
-        switch orientation {
-        case "up":
-            z = 0
-        case "right":
-            z = 1
-        case "down":
-            z = 2
-        case "left":
-            z = 3
-        case "upMirrored":
-            z = 0; y = 1
-        case "rightMirrored":
-            z = 1; y = 1
-        case "downMirrored":
-            z = 2; y = 1
-        case "leftMirrored":
-            z = 3; y = 1
-        default:
-            break
+    private func orientationFromString(_ orientation: String) -> Orientation {
+            switch orientation {
+            case "up":
+                return .up
+            case "right":
+                return .right
+            case "down":
+                return .down
+            case "left":
+                return .left
+            case "upMirrored":
+                return .upMirrored
+            case "rightMirrored":
+                return .rightMirrored
+            case "downMirrored":
+                return .downMirrored
+            case "leftMirrored":
+                return .leftMirrored
+            default:
+                return .up // Default orientation
+            }
         }
-        
-        return Orientation3D(x: x, y: y, z: z)
-    }
+    
+//    private func orientationFromString(_ orientation: String) -> Orientation3D {
+//        // Assuming default orientation is 'up' with no rotation or flip.
+//        var x = 0, y = 0, z = 0
+//        
+//        switch orientation {
+//        case "up":
+//            z = 0
+//        case "right":
+//            z = 1
+//        case "down":
+//            z = 2
+//        case "left":
+//            z = 3
+//        case "upMirrored":
+//            z = 0; y = 1
+//        case "rightMirrored":
+//            z = 1; y = 1
+//        case "downMirrored":
+//            z = 2; y = 1
+//        case "leftMirrored":
+//            z = 3; y = 1
+//        default:
+//            break
+//        }
+//        
+//        return Orientation3D(x: x, y: y, z: z)
+//    }
     
     private func offset( for size:CGSize) -> Position {
         let newX = Int(round(size.width/gridViewBlockSize))
