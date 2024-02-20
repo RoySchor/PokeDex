@@ -11,6 +11,8 @@ struct BuildingListView: View {
     @EnvironmentObject var manager: MapManager
     @Environment(\.dismiss) var dismiss
     @Environment(\.presentationMode) var presentationMode
+    @State private var areAllFavoritesSelected = false
+    
     @State private var searchText = ""
     
     var filteredBuildings: [Building] {
@@ -24,6 +26,13 @@ struct BuildingListView: View {
     var body: some View {
         NavigationView {
             List {
+                Section(header: Text("Buildings")) {
+                }
+                .font(.title)
+                .bold()
+                .frame(height: 5)
+                .foregroundColor(.gray)
+                
                 ForEach(manager.buildings.sorted(by: { $0.name < $1.name })) { building in
 //                ForEach(filteredBuildings.sorted(by: { $0.name < $1.name })) { building in
                     HStack {
@@ -45,10 +54,20 @@ struct BuildingListView: View {
                 }
             }
 //            .searchable(text: $searchText, prompt: "Search Buildings")
-            .navigationBarItems(trailing: Button("Done") {
-                dismiss()
-            })
-            .navigationTitle("Buildings")
+            .navigationBarItems(
+                leading: HStack {
+                    SelectFavoritesButton()
+                        .environmentObject(manager)
+                    ClearSelectedButton()
+                        .environmentObject(manager)
+                },
+                trailing: HStack {
+                    Button("Done") {
+                        dismiss()
+                    }
+                }
+            )
+//            .navigationTitle("Buildings")
         }
     }
 }

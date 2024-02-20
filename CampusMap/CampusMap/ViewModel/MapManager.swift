@@ -34,6 +34,23 @@ class MapManager : ObservableObject {
         }
     }
     
+    func toggleAllFavoritesSelection() {
+        let allFavoritesSelected = areAllFavoritesSelected()
+        buildings = buildings.map { building in
+            var modifiedBuilding = building
+            if modifiedBuilding.isFavorite {
+                modifiedBuilding.isSelected = !allFavoritesSelected
+            }
+            return modifiedBuilding
+        }
+        saveBuildings()
+    }
+    
+    func areAllFavoritesSelected() -> Bool {
+        let favoritedBuildings = buildings.filter { $0.isFavorite }
+        return favoritedBuildings.allSatisfy { $0.isSelected }
+    }
+    
     private func saveBuildings() {
         do {
             let encoder = JSONEncoder()
@@ -87,4 +104,29 @@ class MapManager : ObservableObject {
 //            print("Error decoding buildings data")
 //        }
 //    }
+}
+
+extension MapManager {
+    
+    var allFavoritesSelected: Bool {
+        let favoritedBuildings = buildings.filter { $0.isFavorite }
+        return favoritedBuildings.allSatisfy { $0.isSelected }
+    }
+    
+    func toggleSelectAllFavorites() {
+        let allSelected = allFavoritesSelected
+        buildings.indices.forEach { index in
+            if buildings[index].isFavorite {
+                buildings[index].isSelected = !allSelected
+            }
+        }
+        saveBuildings()
+    }
+    
+    func deselectAllBuildings() {
+        buildings.indices.forEach { index in
+            buildings[index].isSelected = false
+        }
+        saveBuildings()
+    }
 }

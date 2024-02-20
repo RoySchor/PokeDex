@@ -14,6 +14,11 @@ struct MapTopControls: View {
         HStack(spacing:20) {
             BuildingSearchButton()
                 .environmentObject(manager)
+            Spacer()
+                .frame(width: 15)
+            ClearSelectedButton()
+                .environmentObject(manager)
+            
         }
     }
 }
