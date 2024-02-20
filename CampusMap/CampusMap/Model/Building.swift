@@ -13,7 +13,7 @@ struct Coord {
     var longitude : Double
 }
 
-struct Building: Identifiable, Decodable, Hashable {
+struct Building: Identifiable, Codable, Hashable {
     var id: String { name }
     var latitude: Double
     var longitude: Double
@@ -39,22 +39,4 @@ struct Building: Identifiable, Decodable, Hashable {
         isSelected = false
         isFavorite = false
     }
-    
-//    init(latitude: Double, longitude: Double, name: String, opp_bldg_code: Int, photo: String?, year_constructed: Int?) {
-//            self.latitude = latitude
-//            self.longitude = longitude
-//            self.name = name
-//            self.opp_bldg_code = opp_bldg_code
-//            self.photo = photo
-//            self.year_constructed = year_constructed
-//        }
-//    
-//    static let standardBuilding = Building(
-//        latitude: 40.80379999807,
-//        longitude: -77.8652166663766,
-//        name: "Business Building",
-//        opp_bldg_code: 23001,
-//        photo: "businessbuilding",
-//        year_constructed: 2005
-//    )
 }

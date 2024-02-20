@@ -37,7 +37,7 @@ struct MainView: View {
                 Color.white
                 MapTopControls()
             }
-            .frame(height: 40)
+            .frame(height: 50)
             .padding()
             .shadow(radius: 20)
 
