@@ -26,7 +26,6 @@ struct MainView: View {
     
     var body: some View {
         Map(position: $camera) {
-//            selectedMarkers
             selectedMarkerAnnotations
             centerCampusAnnotationsView
         }

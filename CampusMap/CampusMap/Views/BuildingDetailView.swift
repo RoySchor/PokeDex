@@ -13,7 +13,7 @@ struct BuildingDetailView: View {
     
     var body: some View {
         VStack {
-            if let imageName = building.photo, !imageName.isEmpty {
+            if let imageName = building.photo, !imageName.isEmpty, UIImage(named: imageName) != nil {
                 Image(imageName)
                     .resizable()
                     .scaledToFit()
