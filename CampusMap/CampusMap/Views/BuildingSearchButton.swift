@@ -18,6 +18,7 @@ struct BuildingSearchButton: View {
         }) {
             Image(systemName: "building.2.crop.circle")
                 .font(.system(size: 30))
+                .foregroundColor(.primary)
         }
         .sheet(isPresented: $showBuildingList) {
             BuildingListView()

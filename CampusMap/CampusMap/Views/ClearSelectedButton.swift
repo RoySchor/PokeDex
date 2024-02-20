@@ -16,6 +16,7 @@ struct ClearSelectedButton: View {
         }) {
             Text("Clear All")
                 .font(.system(size: 17))
+                .foregroundColor(.black)
         }
     }
 }

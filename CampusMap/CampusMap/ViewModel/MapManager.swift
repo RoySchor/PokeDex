@@ -18,19 +18,20 @@ class MapManager : ObservableObject {
     
     init() {
         loadBuildings()
+        loadPersistedBuildings()
     }
     
     func toggleBuildingSelection(building: Building) {
         if let index = buildings.firstIndex(where: { $0.id == building.id }) {
             buildings[index].isSelected.toggle()
-            saveBuildings()
+            savePersistedBuildings()
         }
     }
     
     func toggleFavoriteStatus(for building: Building) {
         if let index = buildings.firstIndex(where: { $0.id == building.id }) {
             buildings[index].isFavorite.toggle()
-            saveBuildings()
+            savePersistedBuildings()
         }
     }
     
@@ -43,7 +44,6 @@ class MapManager : ObservableObject {
             }
             return modifiedBuilding
         }
-        saveBuildings()
     }
     
     func areAllFavoritesSelected() -> Bool {
@@ -51,34 +51,10 @@ class MapManager : ObservableObject {
         return favoritedBuildings.allSatisfy { $0.isSelected }
     }
     
-    private func saveBuildings() {
-        do {
-            let encoder = JSONEncoder()
-            let data = try encoder.encode(buildings)
-            UserDefaults.standard.set(data, forKey: "buildingsData")
-        } catch {
-            print("Failed to encode buildings data: \(error)")
-        }
-    }
-    
     private func loadBuildings() {
-        if let data = UserDefaults.standard.data(forKey: "buildingsData") {
-            do {
-                let decoder = JSONDecoder()
-                buildings = try decoder.decode([Building].self, from: data)
-            } catch {
-                print("Error decoding buildings data: \(error)")
-                loadBuildingsFromBundle()
-            }
-        } else {
-            loadBuildingsFromBundle()
-        }
-    }
-    
-    private func loadBuildingsFromBundle() {
         guard let url = Bundle.main.url(forResource: "buildings", withExtension: "json"),
               let data = try? Data(contentsOf: url) else {
-            print("Buildings data not found in bundle")
+            print("Buildings data not found")
             return
         }
 
@@ -86,24 +62,47 @@ class MapManager : ObservableObject {
         if let decodedData = try? decoder.decode([Building].self, from: data) {
             self.buildings = decodedData
         } else {
-            print("Error decoding buildings data from bundle")
+            print("Error decoding buildings data")
         }
     }
     
-//    private func loadBuildings() {
-//        guard let url = Bundle.main.url(forResource: "buildings", withExtension: "json"),
-//              let data = try? Data(contentsOf: url) else {
-//            print("Buildings data not found")
-//            return
-//        }
-//
-//        let decoder = JSONDecoder()
-//        if let decodedData = try? decoder.decode([Building].self, from: data) {
-//            self.buildings = decodedData
-//        } else {
-//            print("Error decoding buildings data")
-//        }
-//    }
+    private func loadPersistedBuildings() {
+        let fileManager = FileManager.default
+        guard let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+        let persistedFileURL = documentDirectory.appendingPathComponent("persistedBuildings.json")
+
+        guard let data = try? Data(contentsOf: persistedFileURL) else { return }
+
+        let decoder = JSONDecoder()
+        if let persistedBuildings = try? decoder.decode(PersistedBuildings.self, from: data) {
+
+            self.buildings = self.buildings.map { building in
+                var modifiedBuilding = building
+                if persistedBuildings.favorites.contains(building.id) {
+                    modifiedBuilding.isFavorite = true
+                }
+                if persistedBuildings.selected.contains(building.id) {
+                    modifiedBuilding.isSelected = true
+                }
+                return modifiedBuilding
+            }
+        }
+    }
+    
+    private func savePersistedBuildings() {
+        let fileManager = FileManager.default
+        guard let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+        let persistedFileURL = documentDirectory.appendingPathComponent("persistedBuildings.json")
+
+        let favorites = buildings.filter { $0.isFavorite }.map { $0.id }
+        let selected = buildings.filter { $0.isSelected }.map { $0.id }
+        let persistedBuildings = PersistedBuildings(favorites: favorites, selected: selected)
+
+        let encoder = JSONEncoder()
+        if let encodedData = try? encoder.encode(persistedBuildings) {
+            try? encodedData.write(to: persistedFileURL)
+        }
+    }
 }
 
 extension MapManager {
@@ -122,7 +121,7 @@ extension MapManager {
             buildings[index].isFavorite.toggle()
 
             objectWillChange.send()
-            saveBuildings()
+            savePersistedBuildings()
         }
     }
     
@@ -140,6 +139,6 @@ extension MapManager {
         buildings.indices.forEach { index in
             buildings[index].isSelected = false
         }
-        saveBuildings()
+        savePersistedBuildings()
     }
 }

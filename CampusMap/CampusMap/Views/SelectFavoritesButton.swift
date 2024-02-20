@@ -14,7 +14,9 @@ struct SelectFavoritesButton: View {
         Button(action: toggleSelectAllFavorites) {
             Image(systemName: manager.allFavoritesSelected ? "circle" : "circle.fill")
                 .font(.body)
+                .foregroundColor(.black)
             Text(manager.allFavoritesSelected ? "Deselect Favorites" : "Select Favorites")
+                .foregroundColor(.black)
         }
         .frame(width: 195, height: 25)
     }
