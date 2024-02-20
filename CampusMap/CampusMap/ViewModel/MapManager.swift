@@ -127,14 +127,24 @@ extension MapManager {
     }
     
     func toggleSelectAllFavorites() {
-        let allSelected = allFavoritesSelected
+        let allFavoritesSelected = areAllFavoritesSelected()
         buildings.indices.forEach { index in
             if buildings[index].isFavorite {
-                buildings[index].isSelected = !allSelected
+                buildings[index].isSelected = !allFavoritesSelected
             }
         }
-        saveBuildings()
+        objectWillChange.send()
     }
+    
+//    func toggleSelectAllFavorites() {
+//        let allSelected = allFavoritesSelected
+//        buildings.indices.forEach { index in
+//            if buildings[index].isFavorite {
+//                buildings[index].isSelected = !allSelected
+//            }
+//        }
+//        saveBuildings()
+//    }
     
     func deselectAllBuildings() {
         buildings.indices.forEach { index in
