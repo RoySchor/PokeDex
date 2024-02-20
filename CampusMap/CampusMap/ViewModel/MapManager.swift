@@ -136,16 +136,6 @@ extension MapManager {
         objectWillChange.send()
     }
     
-//    func toggleSelectAllFavorites() {
-//        let allSelected = allFavoritesSelected
-//        buildings.indices.forEach { index in
-//            if buildings[index].isFavorite {
-//                buildings[index].isSelected = !allSelected
-//            }
-//        }
-//        saveBuildings()
-//    }
-    
     func deselectAllBuildings() {
         buildings.indices.forEach { index in
             buildings[index].isSelected = false

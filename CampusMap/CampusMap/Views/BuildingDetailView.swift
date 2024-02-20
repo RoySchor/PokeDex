@@ -43,8 +43,3 @@ struct BuildingDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 }
-
-//#Preview {
-//    @EnvironmentObject var manager: MapManager
-//    BuildingDetailView(building: Building.standardBuilding, toggleFavorite: manager.toggleFavoriteStatus)
-//}

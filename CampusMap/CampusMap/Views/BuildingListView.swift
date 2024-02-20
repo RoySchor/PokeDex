@@ -10,18 +10,7 @@ import SwiftUI
 struct BuildingListView: View {
     @EnvironmentObject var manager: MapManager
     @Environment(\.dismiss) var dismiss
-    @Environment(\.presentationMode) var presentationMode
     @State private var areAllFavoritesSelected = false
-    
-    @State private var searchText = ""
-    
-    var filteredBuildings: [Building] {
-        if searchText.isEmpty {
-            return manager.buildings
-        } else {
-            return manager.buildings.filter { $0.name.lowercased().contains(searchText.lowercased()) }
-        }
-    }
     
     var body: some View {
         NavigationView {
@@ -34,7 +23,6 @@ struct BuildingListView: View {
                 .foregroundColor(.gray)
                 
                 ForEach(manager.buildings.sorted(by: { $0.name < $1.name })) { building in
-//                ForEach(filteredBuildings.sorted(by: { $0.name < $1.name })) { building in
                     HStack {
                         Image(systemName: building.isSelected ? "checkmark.square" : "square")
                             .foregroundColor(.blue)
@@ -53,7 +41,6 @@ struct BuildingListView: View {
                     }
                 }
             }
-//            .searchable(text: $searchText, prompt: "Search Buildings")
             .navigationBarItems(
                 leading: HStack {
                     SelectFavoritesButton()
@@ -67,7 +54,6 @@ struct BuildingListView: View {
                     }
                 }
             )
-//            .navigationTitle("Buildings")
         }
     }
 }
