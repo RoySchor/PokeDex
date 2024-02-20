@@ -26,8 +26,8 @@ struct MainView: View {
     
     var body: some View {
         Map(position: $camera) {
-            selectedMarkers
-            
+//            selectedMarkers
+            selectedMarkerAnnotations
             centerCampusAnnotationsView
         }
         .onMapCameraChange{ context in
@@ -43,6 +43,10 @@ struct MainView: View {
             .shadow(radius: 20)
 
         }
+        .sheet(item: $selectedBuilding) { selectedBuilding in
+            BuildingDetailView(building: selectedBuilding, toggleFavorite: manager.toggleFavoriteStatus)
+                .presentationDetents([.fraction(0.3)])
+        }
     }
 }
 
@@ -52,8 +56,26 @@ extension MainView {
         ForEach(manager.buildings.filter { $0.isSelected }) { building in
                 if building.isSelected {
                     Marker(building.name, coordinate: .init(coord: Coord(latitude: building.latitude, longitude: building.longitude)))
-                        .tint(building.isFavorite ? .cyan : .yellow)
+                        .tint(building.isFavorite ? .cyan : .red)
                 }
+        }
+    }
+    
+    var selectedMarkerAnnotations : some MapContent {
+        ForEach(manager.buildings.filter { $0.isSelected }) { building in
+            if building.isSelected {
+                Annotation(building.name, coordinate: .init(coord: Coord(latitude: building.latitude, longitude: building.longitude))) {
+                            
+                    Button {
+                        selectedBuilding = building
+                    } label: {
+                        Image(systemName: "mappin")
+                            .font(.system(size: 40))
+                            .foregroundStyle(building.isFavorite ? .cyan : .red)
+                    }
+                    
+                }
+            }
         }
     }
     
