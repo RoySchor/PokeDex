@@ -28,27 +28,12 @@ class MapManager : ObservableObject {
         }
     }
     
-    func toggleFavoriteStatus(for building: Building) {
-        if let index = buildings.firstIndex(where: { $0.id == building.id }) {
+    func toggleFavoriteStatus(for id: String) {
+        if let index = buildings.firstIndex(where: { $0.id == id }) {
             buildings[index].isFavorite.toggle()
             savePersistedBuildings()
         }
-    }
-    
-    func toggleAllFavoritesSelection() {
-        let allFavoritesSelected = areAllFavoritesSelected()
-        buildings = buildings.map { building in
-            var modifiedBuilding = building
-            if modifiedBuilding.isFavorite {
-                modifiedBuilding.isSelected = !allFavoritesSelected
-            }
-            return modifiedBuilding
-        }
-    }
-    
-    func areAllFavoritesSelected() -> Bool {
-        let favoritedBuildings = buildings.filter { $0.isFavorite }
-        return favoritedBuildings.allSatisfy { $0.isSelected }
+        objectWillChange.send()
     }
     
     func toggleShowOnlyFavorites() {
@@ -118,15 +103,6 @@ extension MapManager {
     
     func building(withId id: String) -> Building {
         return buildings.first(where: { $0.id == id })!
-    }
-    
-    func toggleFavoriteStatus(for id: String) {
-        if let index = buildings.firstIndex(where: { $0.id == id }) {
-            buildings[index].isFavorite.toggle()
-
-            objectWillChange.send()
-            savePersistedBuildings()
-        }
     }
     
     func toggleSelectAllFavorites() {

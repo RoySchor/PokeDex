@@ -40,10 +40,3 @@ struct Building: Identifiable, Codable, Hashable {
         isFavorite = false
     }
 }
-
-//extension Building {
-//    struct PersistedBuildings: Codable {
-//        var favorites: [String]
-//        var selected: [String]
-//    }
-//}
