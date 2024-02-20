@@ -43,7 +43,8 @@ struct MainView: View {
 
         }
         .sheet(item: $selectedBuilding) { selectedBuilding in
-            BuildingDetailView(building: selectedBuilding, toggleFavorite: manager.toggleFavoriteStatus)
+            BuildingDetailView(buildingId: selectedBuilding.id)
+                .environmentObject(manager)
                 .presentationDetents([.fraction(0.3)])
         }
     }

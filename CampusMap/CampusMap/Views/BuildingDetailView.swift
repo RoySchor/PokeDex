@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct BuildingDetailView: View {
-    var building: Building
-    var toggleFavorite: (Building) -> Void
+    @EnvironmentObject var manager: MapManager
+    var buildingId: String
     
     var body: some View {
+        let building = manager.building(withId: buildingId)
+        
         VStack {
             if let imageName = building.photo, !imageName.isEmpty, UIImage(named: imageName) != nil {
                 Image(imageName)
@@ -31,7 +33,7 @@ struct BuildingDetailView: View {
                 .frame(height: 10)
             
             Button(action: {
-                toggleFavorite(building)
+                manager.toggleFavoriteStatus(for: buildingId)
             }) {
                 Image(systemName: building.isFavorite ? "heart.fill" : "heart")
                     .foregroundColor(building.isFavorite ? .red : .gray)

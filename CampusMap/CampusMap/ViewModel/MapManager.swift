@@ -113,6 +113,19 @@ extension MapManager {
         return favoritedBuildings.allSatisfy { $0.isSelected }
     }
     
+    func building(withId id: String) -> Building {
+        return buildings.first(where: { $0.id == id })!
+    }
+    
+    func toggleFavoriteStatus(for id: String) {
+        if let index = buildings.firstIndex(where: { $0.id == id }) {
+            buildings[index].isFavorite.toggle()
+
+            objectWillChange.send()
+            saveBuildings()
+        }
+    }
+    
     func toggleSelectAllFavorites() {
         let allSelected = allFavoritesSelected
         buildings.indices.forEach { index in
