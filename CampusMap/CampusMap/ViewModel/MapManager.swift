@@ -11,10 +11,10 @@ import SwiftUI
 
 class MapManager : ObservableObject {
     @Published var camera : MapCameraPosition = .region(MKCoordinateRegion(center: .oldMain, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)))
-    
     @Published var region = MKCoordinateRegion(center: .oldMain, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
     
     @Published var buildings: [Building] = []
+    @Published var showOnlyFavorites: Bool = false
     
     init() {
         loadBuildings()
@@ -49,6 +49,10 @@ class MapManager : ObservableObject {
     func areAllFavoritesSelected() -> Bool {
         let favoritedBuildings = buildings.filter { $0.isFavorite }
         return favoritedBuildings.allSatisfy { $0.isSelected }
+    }
+    
+    func toggleShowOnlyFavorites() {
+        showOnlyFavorites.toggle()
     }
     
     private func loadBuildings() {
@@ -126,10 +130,12 @@ extension MapManager {
     }
     
     func toggleSelectAllFavorites() {
-        let allFavoritesSelected = areAllFavoritesSelected()
-        buildings.indices.forEach { index in
-            if buildings[index].isFavorite {
-                buildings[index].isSelected = !allFavoritesSelected
+        showOnlyFavorites = !showOnlyFavorites
+        if showOnlyFavorites {
+            buildings.indices.forEach { index in
+                if buildings[index].isFavorite {
+                    buildings[index].isSelected = !allFavoritesSelected
+                }
             }
         }
         objectWillChange.send()

@@ -11,11 +11,13 @@ struct SelectFavoritesButton: View {
     @EnvironmentObject var manager : MapManager
     
     var body: some View {
-        Button(action: toggleSelectAllFavorites) {
-            Image(systemName: manager.allFavoritesSelected ? "circle" : "circle.fill")
+        Button(action: {
+            manager.toggleShowOnlyFavorites()
+        }) {
+            Image(systemName: manager.showOnlyFavorites ? "circle.fill" : "circle")
                 .font(.body)
                 .foregroundColor(.black)
-            Text(manager.allFavoritesSelected ? "Deselect Favorites" : "Select Favorites")
+            Text(manager.showOnlyFavorites ? "Show All" : "Show Favorites")
                 .foregroundColor(.black)
         }
         .frame(width: 195, height: 25)
