@@ -8,6 +8,11 @@
 import Foundation
 import MapKit
 
+struct Coord {
+    var latitude : Double
+    var longitude : Double
+}
+
 struct Building: Identifiable, Decodable, Hashable {
     var id: String { name }
     var latitude: Double

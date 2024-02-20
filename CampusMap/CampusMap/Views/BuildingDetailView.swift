@@ -20,10 +20,12 @@ struct BuildingDetailView: View {
             }
             Text(building.name)
                 .font(.title)
+            Spacer()
             if let year = building.year_constructed {
-                Text("Constructed in \(year)")
+                Text("Constructed in \(String(year))")
                     .font(.subheadline)
             }
+            Spacer()
             Button(action: {
                 toggleFavorite(building)
             }) {
