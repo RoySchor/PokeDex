@@ -15,7 +15,6 @@ class MapManager : ObservableObject {
     @Published var region = MKCoordinateRegion(center: .oldMain, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
     
     @Published var buildings: [Building] = []
-    @Published var selectedBuildings: [Building] = []
     
     init() {
         loadBuildings()

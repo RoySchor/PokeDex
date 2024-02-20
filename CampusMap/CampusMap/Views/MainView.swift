@@ -22,11 +22,11 @@ struct MainView: View {
     
     @State private var camera : MapCameraPosition = .automatic
     
+    @State var selectedBuilding : Building?
+    
     var body: some View {
         Map(position: $camera) {
-            if !manager.selectedBuildings.isEmpty {
-                selectedMarkers
-            }
+            selectedMarkers
             
             centerCampusAnnotationsView
         }
@@ -49,27 +49,12 @@ struct MainView: View {
 extension MainView {
     
     var selectedMarkers : some MapContent {
-        ForEach(manager.buildings) { building in
-            if building.isSelected {
-                Annotation(building.name, coordinate: CLLocationCoordinate2D(latitude: building.latitude, longitude: building.longitude)) {
-                    VStack {
-                        Image(systemName: building.isFavorite ? "star.fill" : "mappin.circle")
-                            .foregroundColor(building.isFavorite ? .yellow : .red)
-                            .imageScale(.large)
-                        Text(building.name)
-                            .fixedSize()
-                            .font(.caption)
-                        //                            .hidden()
-                    }
+        ForEach(manager.buildings.filter { $0.isSelected }) { building in
+                if building.isSelected {
+                    Marker(building.name, coordinate: .init(coord: Coord(latitude: building.latitude, longitude: building.longitude)))
+                        .tint(building.isFavorite ? .cyan : .yellow)
                 }
-                .annotationTitles(.visible)
-            }
         }
-                            
-//        ForEach(manager.favorites) { favorite in
-//            Marker(favorite.title, coordinate: .init(coord: favorite.coord))
-//                .tint(.cyan)
-//        }
     }
     
     var centerCampusAnnotationsView: some MapContent {
