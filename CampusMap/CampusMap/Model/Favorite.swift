@@ -15,13 +15,13 @@ struct Coord {
 struct Favorite : Identifiable {
     
     let coord : Coord
-    let title : String
+    let name : String
     let subtitle : String?
     var id = UUID()
     
-    init(coord:Coord, title:String, subtitle:String? = nil) {
+    init(coord:Coord, name:String, subtitle:String? = nil) {
         self.coord = coord
-        self.title = title
+        self.name = name
         self.subtitle = subtitle
     }
    

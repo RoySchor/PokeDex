@@ -10,20 +10,27 @@ import MapKit
 import SwiftUI
 
 class MapManager : ObservableObject {
-    @Published var places = [Place]()
-    
     @Published var camera : MapCameraPosition = .region(MKCoordinateRegion(center: .oldMain, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)))
     
-    @Published var region = MKCoordinateRegion(center: .oldMain, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
+    @Published var region = MKCoordinateRegion(center: .oldMain, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
     
     @Published var buildings: [Building] = []
-
+    @Published var selectedBuildings: [Building] = []
+    
     init() {
         loadBuildings()
     }
     
-    func clearAll() {
-        places.removeAll()
+    func toggleBuildingSelection(building: Building) {
+        if let index = buildings.firstIndex(where: { $0.id == building.id }) {
+            buildings[index].isSelected.toggle()
+        }
+    }
+    
+    func toggleFavoriteStatus(for building: Building) {
+        if let index = buildings.firstIndex(where: { $0.id == building.id }) {
+            buildings[index].isFavorite.toggle()
+        }
     }
     
     private func loadBuildings() {

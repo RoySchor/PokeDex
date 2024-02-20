@@ -24,9 +24,66 @@ struct MainView: View {
     
     var body: some View {
         Map(position: $camera) {
+            if !manager.selectedBuildings.isEmpty {
+                selectedMarkers
+            }
+            
+            centerCampusAnnotationsView
+        }
+        .onMapCameraChange{ context in
+            manager.region = context.region
+        }
+        .safeAreaInset(edge: .top) {
+            ZStack {
+                Color.white
+                MapTopControls()
+            }
+            .frame(height: 50)
+            .padding()
+            .shadow(radius: 20)
+
         }
     }
 }
+
+extension MainView {
+    
+    var selectedMarkers : some MapContent {
+        ForEach(manager.buildings) { building in
+            if building.isSelected {
+                Annotation(building.name, coordinate: CLLocationCoordinate2D(latitude: building.latitude, longitude: building.longitude)) {
+                    VStack {
+                        Image(systemName: building.isFavorite ? "star.fill" : "mappin.circle")
+                            .foregroundColor(building.isFavorite ? .yellow : .red)
+                            .imageScale(.large)
+                        Text(building.name)
+                            .fixedSize()
+                            .font(.caption)
+                        //                            .hidden()
+                    }
+                }
+                .annotationTitles(.visible)
+            }
+        }
+                            
+//        ForEach(manager.favorites) { favorite in
+//            Marker(favorite.title, coordinate: .init(coord: favorite.coord))
+//                .tint(.cyan)
+//        }
+    }
+    
+    var centerCampusAnnotationsView: some MapContent {
+        ForEach(manager.buildings.filter { $0.name == "HUB Parking Deck" || $0.name == "Old Main" }) { building in
+            Annotation(building.name, coordinate: CLLocationCoordinate2D(latitude: building.latitude, longitude: building.longitude)) {
+                Text(building.name)
+                    .hidden()
+            }
+            .annotationTitles(.hidden)
+        }
+    }
+
+}
+
 
 #Preview {
     MainView()

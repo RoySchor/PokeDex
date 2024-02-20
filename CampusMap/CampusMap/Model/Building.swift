@@ -6,25 +6,38 @@
 //
 
 import Foundation
+import MapKit
 
-struct Building: Identifiable, Decodable {
-    var id: UUID = UUID()
-    var name: String
+struct Building: Identifiable, Decodable, Hashable {
+    var id: String { name }
     var latitude: Double
     var longitude: Double
-    var yearConstructed: Int?
-    var isFavorite: Bool = false
+    var name: String
+    var opp_bldg_code: Int
+    var year_constructed: Int?
+    var photo: String?
     var isSelected: Bool = false
+    var isFavorite: Bool = false
 
-    private enum CodingKeys: String, CodingKey {
-        case name, latitude, longitude, yearConstructed = "year_constructed"
+    enum CodingKeys: String, CodingKey {
+        case latitude, longitude, name, opp_bldg_code, year_constructed, photo
     }
-
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.name = try container.decode(String.self, forKey: .name)
-        self.latitude = try container.decode(Double.self, forKey: .latitude)
-        self.longitude = try container.decode(Double.self, forKey: .longitude)
-        self.yearConstructed = try container.decodeIfPresent(Int.self, forKey: .yearConstructed)
+        latitude = try container.decode(Double.self, forKey: .latitude)
+        longitude = try container.decode(Double.self, forKey: .longitude)
+        name = try container.decode(String.self, forKey: .name)
+        opp_bldg_code = try container.decode(Int.self, forKey: .opp_bldg_code)
+        year_constructed = try container.decodeIfPresent(Int.self, forKey: .year_constructed)
+        photo = try container.decodeIfPresent(String.self, forKey: .photo)
+        isSelected = false
+        isFavorite = false
     }
 }
+
+//extension Building {
+//    var coordinate: CLLocationCoordinate2D {
+//        CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+//    }
+//}
