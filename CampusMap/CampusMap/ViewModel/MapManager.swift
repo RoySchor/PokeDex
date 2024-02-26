@@ -9,14 +9,29 @@ import Foundation
 import MapKit
 import SwiftUI
 
-class MapManager : ObservableObject {
+class MapManager : NSObject, ObservableObject {
+//class MapManager : ObservableObject {
     @Published var camera : MapCameraPosition = .region(MKCoordinateRegion(center: .oldMain, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)))
     @Published var region = MKCoordinateRegion(center: .oldMain, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
     
     @Published var buildings: [Building] = []
     @Published var showOnlyFavorites: Bool = false
     
-    init() {
+    let locationManager : CLLocationManager
+    
+    @Published var userLocationDescription : String?
+    @Published var showAlert : Bool = false
+        
+//    init() {
+//        loadBuildings()
+//        loadPersistedBuildings()
+//    }
+    
+    override init() {
+        locationManager = CLLocationManager()
+        super.init()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.delegate = self
         loadBuildings()
         loadPersistedBuildings()
     }

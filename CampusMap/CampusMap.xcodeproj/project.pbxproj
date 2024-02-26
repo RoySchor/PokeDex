@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C33C0352B8D2308008995D4 /* MapManager+Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C33C0342B8D2308008995D4 /* MapManager+Location.swift */; };
+		9C33C0372B8D2DC3008995D4 /* CLLocationsCoorsdinate2D+utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C33C0362B8D2DC3008995D4 /* CLLocationsCoorsdinate2D+utils.swift */; };
+		9C33C0392B8D393B008995D4 /* MainCampusMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C33C0382B8D393B008995D4 /* MainCampusMapView.swift */; };
 		9C9690F02B8408C2009A4C0B /* CampusMapApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9690EF2B8408C2009A4C0B /* CampusMapApp.swift */; };
 		9C9690F22B8408C2009A4C0B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9690F12B8408C2009A4C0B /* MainView.swift */; };
 		9C9690F42B8408CB009A4C0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C9690F32B8408CB009A4C0B /* Assets.xcassets */; };
@@ -44,6 +47,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9C33C0342B8D2308008995D4 /* MapManager+Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapManager+Location.swift"; sourceTree = "<group>"; };
+		9C33C0362B8D2DC3008995D4 /* CLLocationsCoorsdinate2D+utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationsCoorsdinate2D+utils.swift"; sourceTree = "<group>"; };
+		9C33C0382B8D393B008995D4 /* MainCampusMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCampusMapView.swift; sourceTree = "<group>"; };
 		9C9690EC2B8408C2009A4C0B /* CampusMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampusMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C9690EF2B8408C2009A4C0B /* CampusMapApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusMapApp.swift; sourceTree = "<group>"; };
 		9C9690F12B8408C2009A4C0B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -154,6 +160,8 @@
 			isa = PBXGroup;
 			children = (
 				9CBFBE8F2B84105400572A89 /* MapManager.swift */,
+				9C33C0342B8D2308008995D4 /* MapManager+Location.swift */,
+				9C33C0362B8D2DC3008995D4 /* CLLocationsCoorsdinate2D+utils.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -171,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				9C9690F12B8408C2009A4C0B /* MainView.swift */,
+				9C33C0382B8D393B008995D4 /* MainCampusMapView.swift */,
 				9CFF210D2B8455B900AE440C /* MapTopControls.swift */,
 				9CFF210F2B84560700AE440C /* BuildingSearchButton.swift */,
 				9CFF21112B8457DA00AE440C /* BuildingListView.swift */,
@@ -317,12 +326,15 @@
 				9CFF211C2B84889E00AE440C /* ClearSelectedButton.swift in Sources */,
 				9CBFBE902B84105400572A89 /* MapManager.swift in Sources */,
 				9CFF211E2B84FB9800AE440C /* PersistedBuilding.swift in Sources */,
+				9C33C0352B8D2308008995D4 /* MapManager+Location.swift in Sources */,
 				9C9690F22B8408C2009A4C0B /* MainView.swift in Sources */,
 				9CFF211A2B84848400AE440C /* SelectFavoritesButton.swift in Sources */,
 				9C9690F02B8408C2009A4C0B /* CampusMapApp.swift in Sources */,
 				9CFF21102B84560700AE440C /* BuildingSearchButton.swift in Sources */,
 				9CFF210E2B8455B900AE440C /* MapTopControls.swift in Sources */,
+				9C33C0392B8D393B008995D4 /* MainCampusMapView.swift in Sources */,
 				9CFF21122B8457DA00AE440C /* BuildingListView.swift in Sources */,
+				9C33C0372B8D2DC3008995D4 /* CLLocationsCoorsdinate2D+utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +501,7 @@
 				DEVELOPMENT_TEAM = AC89BD77SC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "WE WANT TO TRACK YOU WHEN IN APP!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -518,6 +531,7 @@
 				DEVELOPMENT_TEAM = AC89BD77SC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "WE WANT TO TRACK YOU WHEN IN APP!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

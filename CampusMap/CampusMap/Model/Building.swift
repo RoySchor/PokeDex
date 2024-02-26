@@ -39,4 +39,24 @@ struct Building: Identifiable, Codable, Hashable {
         isSelected = false
         isFavorite = false
     }
+    
+    init(latitude: Double, longitude: Double, name: String, opp_bldg_code: Int, photo: String? = nil, year_constructed: Int?, isSelected: Bool = false, isFavorite: Bool = false) {
+        self.latitude = latitude
+        self.longitude = longitude
+        self.name = name
+        self.opp_bldg_code = opp_bldg_code
+        self.photo = photo
+        self.year_constructed = year_constructed
+        self.isSelected = isSelected
+        self.isFavorite = isFavorite
+    }
+    
+    // Static instance for previews
+    static let standard = Building(
+        latitude: 40.7964685139719,
+        longitude: -77.8628317618596,
+        name: "Old Main",
+        opp_bldg_code: 1000,
+        year_constructed: 1930
+    )
 }
