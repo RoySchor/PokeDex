@@ -180,14 +180,3 @@ class MapManager : NSObject, ObservableObject {
     }
 }
 
-//extension MapManager {
-//    func setSourceLocation(_ location: CLLocationCoordinate2D) {
-//        self.sourceLocation = location
-//    }
-//    
-//    func setDestinationLocation(_ location: CLLocationCoordinate2D) {
-//        self.destinationLocation = location
-//    }
-//    
-//    
-//}

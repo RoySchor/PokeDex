@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RouteSelectionView: View {
     @EnvironmentObject var manager: MapManager
+    @Environment(\.dismiss) var dismiss
     
     @State private var selectedStartingPoint: String = "Current Location"
     @State private var selectedDestination: String = "Current Location"
@@ -31,6 +32,31 @@ struct RouteSelectionView: View {
                         }
                     }
                 }
+                
+                Section(header: CenteredHeaderView()) {
+                    
+                }
+                
+            }
+            .navigationBarTitle("Directions", displayMode: .inline)
+            .navigationBarItems(
+                trailing: HStack {
+                    Button("Done") {
+                        dismiss()
+                    }
+                    .foregroundColor(.black)
+                    .bold()
+                }
+            )
+        }
+    }
+    
+    private struct CenteredHeaderView: View {
+        var body: some View {
+            HStack {
+                Spacer()
+                ToggleRouteButton()
+                Spacer()
             }
         }
     }

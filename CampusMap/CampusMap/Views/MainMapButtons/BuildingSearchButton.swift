@@ -16,9 +16,15 @@ struct BuildingSearchButton: View {
         Button(action: {
             showBuildingList.toggle()
         }) {
-            Image(systemName: "building.2.crop.circle")
-                .font(.system(size: 30))
-                .foregroundColor(.primary)
+            VStack {
+                Image(systemName: "building.2.crop.circle")
+                    .font(.system(size: 30))
+                    .foregroundColor(.primary)
+                
+                Text("Buildings")
+                    .font(.headline)
+                    .foregroundColor(.black)
+            }
         }
         .sheet(isPresented: $showBuildingList) {
             BuildingListView()

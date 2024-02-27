@@ -9,21 +9,25 @@ import SwiftUI
 
 struct DirectionsView: View {
     @EnvironmentObject var manager: MapManager
-    @Environment(\.dismiss) var dismiss
+    @State private var showRouteView = false
     
     var body: some View {
-        NavigationView {
-            RouteSelectionView()
-            .navigationBarTitle("Directions", displayMode: .inline)
-            .navigationBarItems(
-                trailing: HStack {
-                    Button("Done") {
-                        dismiss()
-                    }
+        Button(action: {
+            showRouteView.toggle()
+        }) {
+            VStack {
+                Image(systemName: "mappin.circle")
+                    .font(.system(size: 30))
+                    .foregroundColor(.primary)
+                
+                Text("Routes")
+                    .font(.headline)
                     .foregroundColor(.black)
-                    .bold()
-                }
-            )
+            }
+        }
+        .sheet(isPresented: $showRouteView) {
+            RouteSelectionView()
+                .environmentObject(manager)
         }
     }
 }
