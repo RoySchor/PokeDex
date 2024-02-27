@@ -15,12 +15,16 @@ struct MainCampusMapView: View {
     @Binding var selectedBuilding : Building?
     
     var body: some View {
-//            Map(position: $camera, showsUserLocation: true, userTrackingMode: $userTrackingMode) {
         MapReader { proxy in
             Map(position: $camera, interactionModes: interactionMode) {
                 selectedMarkerAnnotations
                 centerCampusAnnotationsView
             }
+            .mapControls {
+                MapUserLocationButton()
+                    .mapControlVisibility(.visible)
+            }
+            .controlSize(.large)
             .onMapCameraChange{ context in
                 manager.region = context.region
             }

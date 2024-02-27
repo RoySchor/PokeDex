@@ -10,22 +10,33 @@ import MapKit
 import SwiftUI
 
 class MapManager : NSObject, ObservableObject {
-//class MapManager : ObservableObject {
     @Published var camera : MapCameraPosition = .region(MKCoordinateRegion(center: .oldMain, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)))
     @Published var region = MKCoordinateRegion(center: .oldMain, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
-    
-    @Published var buildings: [Building] = []
-    @Published var showOnlyFavorites: Bool = false
     
     let locationManager : CLLocationManager
     
     @Published var userLocationDescription : String?
     @Published var showAlert : Bool = false
-        
-//    init() {
-//        loadBuildings()
-//        loadPersistedBuildings()
-//    }
+    
+    @Published var userLocation: CLLocation? {
+        didSet {
+            if centerOnUserLocation {
+                centerMapOnUserLocation()
+            }
+        }
+    }
+    @Published var centerOnUserLocation: Bool = false
+    
+    enum BuildingFilter: String, CaseIterable {
+        case all = "All"
+        case favorites = "Favorites"
+        case selected = "Selected"
+        case nearby = "Nearby"
+    }
+    
+    @Published var buildings: [Building] = []
+    @Published var showOnlyFavorites: Bool = false
+    @Published var buildingFilter: BuildingFilter = .all
     
     override init() {
         locationManager = CLLocationManager()
@@ -53,6 +64,21 @@ class MapManager : NSObject, ObservableObject {
     
     func toggleShowOnlyFavorites() {
         showOnlyFavorites.toggle()
+    }
+    
+    func isBuildingNearby(building: Building) -> Bool {
+        guard let userLocation = userLocation else { return false }
+        let buildingLocation = CLLocation(latitude: building.latitude, longitude: building.longitude)
+        return userLocation.distance(from: buildingLocation) <= 500
+    }
+    
+    func nearbyBuildings(threshold: CLLocationDistance = 500) -> [Building] {
+        guard let userLocation = userLocation else { return [] }
+        
+        return buildings.filter { building in
+            let buildingLocation = CLLocation(latitude: building.latitude, longitude: building.longitude)
+            return buildingLocation.distance(from: userLocation) <= threshold
+        }
     }
     
     private func loadBuildings() {

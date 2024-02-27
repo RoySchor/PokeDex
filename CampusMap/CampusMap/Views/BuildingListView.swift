@@ -14,35 +14,30 @@ struct BuildingListView: View {
     var body: some View {
         NavigationView {
             List {
-                Section(header: Text("Buildings")) {
-                }
-                .font(.title)
-                .bold()
-                .frame(height: 5)
-                .foregroundColor(.gray)
-                
-                ForEach(manager.buildings.filter { building in
+                Section(header: FilterButtonsView(manager: _manager)) {
+                    ForEach(manager.buildings.filter { building in
                         return manager.showOnlyFavorites ? building.isFavorite : true
                     }
                     .sorted(by: { $0.name < $1.name })) { building in
-                    Button(action: {
-                        manager.toggleBuildingSelection(building: building)
-                    }) {
-                        HStack {
-                            Image(systemName: building.isSelected ? "checkmark.square" : "square")
-                                .foregroundColor(.blue)
-                            
-                            Text(building.name)
-                                .frame(width: 300, alignment: .leading)
-                            Spacer()
-                            
-                            if building.isFavorite {
-                                Image(systemName: "heart.fill")
-                                    .foregroundColor(.red)
+                        Button(action: {
+                            manager.toggleBuildingSelection(building: building)
+                        }) {
+                            HStack {
+                                Image(systemName: building.isSelected ? "checkmark.square" : "square")
+                                    .foregroundColor(.blue)
+                                
+                                Text(building.name)
+                                    .frame(width: 300, alignment: .leading)
+                                Spacer()
+                                
+                                if building.isFavorite {
+                                    Image(systemName: "heart.fill")
+                                        .foregroundColor(.red)
+                                }
                             }
                         }
+                        .buttonStyle(PlainButtonStyle())
                     }
-                    .buttonStyle(PlainButtonStyle())
                 }
             }
             .navigationBarItems(

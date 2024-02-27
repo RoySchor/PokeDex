@@ -10,6 +10,7 @@
 		9C33C0352B8D2308008995D4 /* MapManager+Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C33C0342B8D2308008995D4 /* MapManager+Location.swift */; };
 		9C33C0372B8D2DC3008995D4 /* CLLocationsCoorsdinate2D+utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C33C0362B8D2DC3008995D4 /* CLLocationsCoorsdinate2D+utils.swift */; };
 		9C33C0392B8D393B008995D4 /* MainCampusMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C33C0382B8D393B008995D4 /* MainCampusMapView.swift */; };
+		9C33C03B2B8D6569008995D4 /* FilterButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C33C03A2B8D6569008995D4 /* FilterButtonsView.swift */; };
 		9C9690F02B8408C2009A4C0B /* CampusMapApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9690EF2B8408C2009A4C0B /* CampusMapApp.swift */; };
 		9C9690F22B8408C2009A4C0B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9690F12B8408C2009A4C0B /* MainView.swift */; };
 		9C9690F42B8408CB009A4C0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C9690F32B8408CB009A4C0B /* Assets.xcassets */; };
@@ -50,6 +51,7 @@
 		9C33C0342B8D2308008995D4 /* MapManager+Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapManager+Location.swift"; sourceTree = "<group>"; };
 		9C33C0362B8D2DC3008995D4 /* CLLocationsCoorsdinate2D+utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationsCoorsdinate2D+utils.swift"; sourceTree = "<group>"; };
 		9C33C0382B8D393B008995D4 /* MainCampusMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCampusMapView.swift; sourceTree = "<group>"; };
+		9C33C03A2B8D6569008995D4 /* FilterButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButtonsView.swift; sourceTree = "<group>"; };
 		9C9690EC2B8408C2009A4C0B /* CampusMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampusMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C9690EF2B8408C2009A4C0B /* CampusMapApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusMapApp.swift; sourceTree = "<group>"; };
 		9C9690F12B8408C2009A4C0B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				9CFF21172B846FE900AE440C /* BuildingDetailView.swift */,
 				9CFF21192B84848400AE440C /* SelectFavoritesButton.swift */,
 				9CFF211B2B84889E00AE440C /* ClearSelectedButton.swift */,
+				9C33C03A2B8D6569008995D4 /* FilterButtonsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				9CBFBE932B84155100572A89 /* Building.swift in Sources */,
 				9CFF21182B846FE900AE440C /* BuildingDetailView.swift in Sources */,
 				9CFF211C2B84889E00AE440C /* ClearSelectedButton.swift in Sources */,
+				9C33C03B2B8D6569008995D4 /* FilterButtonsView.swift in Sources */,
 				9CBFBE902B84105400572A89 /* MapManager.swift in Sources */,
 				9CFF211E2B84FB9800AE440C /* PersistedBuilding.swift in Sources */,
 				9C33C0352B8D2308008995D4 /* MapManager+Location.swift in Sources */,

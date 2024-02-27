@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import MapKit
 
 extension MapManager: CLLocationManagerDelegate {
     
@@ -23,35 +24,20 @@ extension MapManager: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
-
+        guard let location = locations.first else { return }
+        userLocation = location
+        if centerOnUserLocation {
+            centerMapOnUserLocation()
+        }
     }
     
+    func centerMapOnUserLocation() {
+        guard let userLocation = userLocation else { return }
+        let region = MKCoordinateRegion(center: userLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
+        self.region = region
+    }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error.localizedDescription)
     }
 }
-//    
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        guard let location = locations.first else { return }
-//        self.userLocation = location.coordinate
-//    }
-//    
-////    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-////        switch manager.authorizationStatus {
-////            case .notDetermined, .restricted, .denied:
-////                print("Location access denied or restricted")
-////            case .authorizedWhenInUse, .authorizedAlways:
-////                locationManager.startUpdatingLocation()
-////            @unknown default:
-////                fatalError("Unhandled case in locationManagerDidChangeAuthorization")
-////        }
-////    }
-//    
-//    func centerOnUserLocation() {
-//        guard let userLocation = self.userLocation else { return }
-//        let region = MKCoordinateRegion(center: userLocation, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
-//        self.camera = .region(region)
-//    }
-//    
-//}
