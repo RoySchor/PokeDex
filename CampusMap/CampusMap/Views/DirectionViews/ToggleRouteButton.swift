@@ -14,6 +14,10 @@ struct ToggleRouteButton: View {
     
     var body: some View {
         Button(action: {
+            if selectedStartingPoint.isEmpty || selectedDestination.isEmpty {
+                return
+            }
+            
             manager.showRoute.toggle()
             
             if manager.showRoute {

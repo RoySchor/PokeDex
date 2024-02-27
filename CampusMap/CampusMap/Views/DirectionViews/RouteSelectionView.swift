@@ -11,14 +11,16 @@ struct RouteSelectionView: View {
     @EnvironmentObject var manager: MapManager
     @Environment(\.dismiss) var dismiss
     
-    @State var selectedStartingPoint: String = "Current Location"
-    @State var selectedDestination: String = "Current Location"
+    @State var selectedStartingPoint: String = ""
+    @State var selectedDestination: String = ""
     
     var body: some View {
         NavigationView {
             List {
                 Section(header: Text("Starting Point")) {
                     Picker("Starting Point", selection: $selectedStartingPoint) {
+                        Text("None").tag("")
+                        
                         Text("Current Location").tag("Current Location")
                         
                         ForEach(manager.buildings.sorted { $0.name < $1.name } ) { building in
@@ -29,6 +31,8 @@ struct RouteSelectionView: View {
                 
                 Section(header: Text("End Point")) {
                     Picker("Destination", selection: $selectedDestination) {
+                        Text("None").tag("")
+                        
                         Text("Current Location").tag("Current Location")
                         
                         ForEach(manager.buildings.sorted { $0.name < $1.name } ) { building in

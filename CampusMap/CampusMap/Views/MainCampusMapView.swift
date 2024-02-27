@@ -22,6 +22,8 @@ struct MainCampusMapView: View {
                 centerCampusAnnotationsView
                 
                 if manager.showRoute {
+                    routeMarkerAnnotations
+                    
                     if let route = manager.route {
                         ForEach(route.steps, id:\.self) { step in
                             MapPolyline(step.polyline)
@@ -75,6 +77,58 @@ extension MainCampusMapView {
                             .foregroundStyle(building.isFavorite ? .cyan : .red)
                     }
                     
+                }
+            }
+        }
+    }
+    
+    var routeMarkerAnnotations : some MapContent {
+        Group {
+            if let sourceBuilding = manager.sourceLocationBuilding {
+                Annotation(sourceBuilding.name, coordinate: .init(coord: Coord(latitude: sourceBuilding.latitude, longitude: sourceBuilding.longitude))) {
+                    
+                    Button {
+                        selectedBuilding = sourceBuilding
+                    } label: {
+                        Image(systemName: "mappin")
+                            .font(.system(size: 40))
+                            .foregroundStyle(sourceBuilding.isFavorite ? .cyan : .red)
+                    }
+                }
+            } else if let userLocation = manager.userLocation {
+                Annotation("Current Location", coordinate: .init(coord: Coord(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude))) {
+                    
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "mappin")
+                            .font(.system(size: 40))
+                            .foregroundStyle(.cyan)
+                    }
+                }
+            }
+            
+            if let destinationBuilding = manager.destinationLocationBuilding {
+                Annotation(destinationBuilding.name, coordinate: .init(coord: Coord(latitude: destinationBuilding.latitude, longitude: destinationBuilding.longitude))) {
+                    
+                    Button {
+                        selectedBuilding = destinationBuilding
+                    } label: {
+                        Image(systemName: "mappin")
+                            .font(.system(size: 40))
+                            .foregroundStyle(destinationBuilding.isFavorite ? .cyan : .red)
+                    }
+                }
+            } else if let userLocation = manager.userLocation {
+                Annotation("Current Location", coordinate: .init(coord: Coord(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude))) {
+                    
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "mappin")
+                            .font(.system(size: 40))
+                            .foregroundStyle(.cyan)
+                    }
                 }
             }
         }
