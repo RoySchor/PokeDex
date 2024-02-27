@@ -42,12 +42,22 @@ extension MapManager {
         }
     }
     
-    func setStartPoint(_ location: CLLocationCoordinate2D?) {
-        self.sourceLocation = location
+//    func setStartPoint(_ location: CLLocationCoordinate2D?) {
+    func setStartPoint(buildingName: String) {
+        if let startBuilding = buildingByName(buildingName) {
+            let startCoordinate = CLLocationCoordinate2D(latitude: startBuilding.latitude, longitude: startBuilding.longitude)
+            
+            self.sourceLocation = startCoordinate
+        }
+        
     }
-    
-    func setEndPoint(_ location: CLLocationCoordinate2D?) {
-        self.destinationLocation = location
+
+    func setEndPoint(buildingName: String) {
+        if let endBuilding = buildingByName(buildingName) {
+            let endCoordinate = CLLocationCoordinate2D(latitude: endBuilding.latitude, longitude: endBuilding.longitude)
+            self.destinationLocation = endCoordinate
+        }
+//        self.destinationLocation = location
     }
     
     func clearRoute() {

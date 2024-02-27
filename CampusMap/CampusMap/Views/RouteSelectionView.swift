@@ -11,8 +11,8 @@ struct RouteSelectionView: View {
     @EnvironmentObject var manager: MapManager
     @Environment(\.dismiss) var dismiss
     
-    @State private var selectedStartingPoint: String = "Current Location"
-    @State private var selectedDestination: String = "Current Location"
+    @State var selectedStartingPoint: String = ""
+    @State var selectedDestination: String = ""
     
     var body: some View {
         NavigationView {
@@ -33,7 +33,7 @@ struct RouteSelectionView: View {
                     }
                 }
                 
-                Section(header: CenteredHeaderView()) {
+                Section(header: CenteredHeaderView(selectedStartingPoint: $selectedStartingPoint, selectedDestination: $selectedDestination)) {
                     
                 }
                 
@@ -52,10 +52,13 @@ struct RouteSelectionView: View {
     }
     
     private struct CenteredHeaderView: View {
+        @Binding var selectedStartingPoint: String
+        @Binding var selectedDestination: String
+        
         var body: some View {
             HStack {
                 Spacer()
-                ToggleRouteButton()
+                ToggleRouteButton(selectedStartingPoint: $selectedStartingPoint, selectedDestination: $selectedDestination)
                 Spacer()
             }
         }
