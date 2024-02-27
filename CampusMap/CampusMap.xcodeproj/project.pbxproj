@@ -25,7 +25,6 @@
 		9CFF21102B84560700AE440C /* BuildingSearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFF210F2B84560700AE440C /* BuildingSearchButton.swift */; };
 		9CFF21122B8457DA00AE440C /* BuildingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFF21112B8457DA00AE440C /* BuildingListView.swift */; };
 		9CFF21182B846FE900AE440C /* BuildingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFF21172B846FE900AE440C /* BuildingDetailView.swift */; };
-		9CFF211A2B84848400AE440C /* SelectFavoritesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFF21192B84848400AE440C /* SelectFavoritesButton.swift */; };
 		9CFF211C2B84889E00AE440C /* ClearSelectedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFF211B2B84889E00AE440C /* ClearSelectedButton.swift */; };
 		9CFF211E2B84FB9800AE440C /* PersistedBuilding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFF211D2B84FB9800AE440C /* PersistedBuilding.swift */; };
 /* End PBXBuildFile section */
@@ -69,7 +68,6 @@
 		9CFF210F2B84560700AE440C /* BuildingSearchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingSearchButton.swift; sourceTree = "<group>"; };
 		9CFF21112B8457DA00AE440C /* BuildingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingListView.swift; sourceTree = "<group>"; };
 		9CFF21172B846FE900AE440C /* BuildingDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingDetailView.swift; sourceTree = "<group>"; };
-		9CFF21192B84848400AE440C /* SelectFavoritesButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFavoritesButton.swift; sourceTree = "<group>"; };
 		9CFF211B2B84889E00AE440C /* ClearSelectedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearSelectedButton.swift; sourceTree = "<group>"; };
 		9CFF211D2B84FB9800AE440C /* PersistedBuilding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistedBuilding.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -186,7 +184,6 @@
 				9CFF210F2B84560700AE440C /* BuildingSearchButton.swift */,
 				9CFF21112B8457DA00AE440C /* BuildingListView.swift */,
 				9CFF21172B846FE900AE440C /* BuildingDetailView.swift */,
-				9CFF21192B84848400AE440C /* SelectFavoritesButton.swift */,
 				9CFF211B2B84889E00AE440C /* ClearSelectedButton.swift */,
 				9C33C03A2B8D6569008995D4 /* FilterButtonsView.swift */,
 			);
@@ -332,7 +329,6 @@
 				9CFF211E2B84FB9800AE440C /* PersistedBuilding.swift in Sources */,
 				9C33C0352B8D2308008995D4 /* MapManager+Location.swift in Sources */,
 				9C9690F22B8408C2009A4C0B /* MainView.swift in Sources */,
-				9CFF211A2B84848400AE440C /* SelectFavoritesButton.swift in Sources */,
 				9C9690F02B8408C2009A4C0B /* CampusMapApp.swift in Sources */,
 				9CFF21102B84560700AE440C /* BuildingSearchButton.swift in Sources */,
 				9CFF210E2B8455B900AE440C /* MapTopControls.swift in Sources */,

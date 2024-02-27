@@ -24,7 +24,9 @@ struct FilterButtonsView: View {
                         Text(filter.rawValue)
                             .font(.caption)
                             .foregroundColor(.black)
+                        Spacer()
                     }
+                    
                 }
             }
         }

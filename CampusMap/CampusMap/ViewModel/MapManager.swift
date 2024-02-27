@@ -37,6 +37,7 @@ class MapManager : NSObject, ObservableObject {
     @Published var buildings: [Building] = []
     @Published var showOnlyFavorites: Bool = false
     @Published var buildingFilter: BuildingFilter = .all
+    @Published var filteredBuildings: [Building] = []
     
     override init() {
         locationManager = CLLocationManager()
@@ -66,12 +67,6 @@ class MapManager : NSObject, ObservableObject {
         showOnlyFavorites.toggle()
     }
     
-    func isBuildingNearby(building: Building) -> Bool {
-        guard let userLocation = userLocation else { return false }
-        let buildingLocation = CLLocation(latitude: building.latitude, longitude: building.longitude)
-        return userLocation.distance(from: buildingLocation) <= 500
-    }
-    
     func nearbyBuildings(threshold: CLLocationDistance = 500) -> [Building] {
         guard let userLocation = userLocation else { return [] }
         
@@ -79,6 +74,23 @@ class MapManager : NSObject, ObservableObject {
             let buildingLocation = CLLocation(latitude: building.latitude, longitude: building.longitude)
             return buildingLocation.distance(from: userLocation) <= threshold
         }
+    }
+    
+    func filterBuildings() -> [Building] {
+        let filteredBuildings: [Building]
+        
+        switch buildingFilter {
+        case .all:
+            filteredBuildings = buildings
+        case .favorites:
+            filteredBuildings = buildings.filter { $0.isFavorite }
+        case .selected:
+            filteredBuildings = buildings.filter { $0.isSelected }
+        case .nearby:
+            filteredBuildings = nearbyBuildings()
+        }
+        
+        return filteredBuildings.sorted { $0.name < $1.name }
     }
     
     private func loadBuildings() {
@@ -144,18 +156,6 @@ extension MapManager {
     
     func building(withId id: String) -> Building {
         return buildings.first(where: { $0.id == id })!
-    }
-    
-    func toggleSelectAllFavorites() {
-        showOnlyFavorites = !showOnlyFavorites
-        if showOnlyFavorites {
-            buildings.indices.forEach { index in
-                if buildings[index].isFavorite {
-                    buildings[index].isSelected = !allFavoritesSelected
-                }
-            }
-        }
-        objectWillChange.send()
     }
     
     func deselectAllBuildings() {

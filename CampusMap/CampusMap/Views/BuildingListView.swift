@@ -11,14 +11,24 @@ struct BuildingListView: View {
     @EnvironmentObject var manager: MapManager
     @Environment(\.dismiss) var dismiss
     
+    var filteredBuildings: [Building] {
+        switch manager.buildingFilter {
+        case .all:
+            return manager.buildings
+        case .favorites:
+            return manager.buildings.filter { $0.isFavorite }
+        case .selected:
+            return manager.buildings.filter { $0.isSelected }
+        case .nearby:
+            return manager.nearbyBuildings()
+        }
+    }
+    
     var body: some View {
         NavigationView {
             List {
                 Section(header: FilterButtonsView(manager: _manager)) {
-                    ForEach(manager.buildings.filter { building in
-                        return manager.showOnlyFavorites ? building.isFavorite : true
-                    }
-                    .sorted(by: { $0.name < $1.name })) { building in
+                    ForEach(manager.filterBuildings()) { building in
                         Button(action: {
                             manager.toggleBuildingSelection(building: building)
                         }) {
@@ -42,8 +52,6 @@ struct BuildingListView: View {
             }
             .navigationBarItems(
                 leading: HStack {
-                    SelectFavoritesButton()
-                        .environmentObject(manager)
                     ClearSelectedButton()
                         .environmentObject(manager)
                 },
@@ -51,6 +59,8 @@ struct BuildingListView: View {
                     Button("Done") {
                         dismiss()
                     }
+                    .foregroundColor(.black)
+                    .bold()
                 }
             )
         }
