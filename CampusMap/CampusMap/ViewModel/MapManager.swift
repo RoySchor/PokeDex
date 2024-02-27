@@ -39,6 +39,13 @@ class MapManager : NSObject, ObservableObject {
     @Published var buildingFilter: BuildingFilter = .all
     @Published var filteredBuildings: [Building] = []
     
+    @Published var routes = [MKRoute]()
+    @Published var sourceLocation: CLLocationCoordinate2D?
+    @Published var destinationLocation: CLLocationCoordinate2D?
+    @Published var currentRoute: MKRoute?
+    
+    @Published var showRoute: Bool = false
+    
     override init() {
         locationManager = CLLocationManager()
         super.init()
@@ -63,8 +70,15 @@ class MapManager : NSObject, ObservableObject {
         objectWillChange.send()
     }
     
-    func toggleShowOnlyFavorites() {
-        showOnlyFavorites.toggle()
+    func building(withId id: String) -> Building {
+        return buildings.first(where: { $0.id == id })!
+    }
+    
+    func deselectAllBuildings() {
+        buildings.indices.forEach { index in
+            buildings[index].isSelected = false
+        }
+        savePersistedBuildings()
     }
     
     func nearbyBuildings(threshold: CLLocationDistance = 500) -> [Building] {
@@ -91,6 +105,25 @@ class MapManager : NSObject, ObservableObject {
         }
         
         return filteredBuildings.sorted { $0.name < $1.name }
+    }
+    
+    func requestWalkingDirections(from sourceLocation: CLLocationCoordinate2D, to destinationBuilding: Building, completion: @escaping (MKRoute?) -> Void) {
+        let sourcePlacemark = MKPlacemark(coordinate: sourceLocation)
+        let destinationPlacemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: destinationBuilding.latitude, longitude: destinationBuilding.longitude))
+        
+        let request = MKDirections.Request()
+        request.source = MKMapItem(placemark: sourcePlacemark)
+        request.destination = MKMapItem(placemark: destinationPlacemark)
+        request.transportType = .walking
+        
+        let directions = MKDirections(request: request)
+        directions.calculate { response, error in
+            guard let route = response?.routes.first else {
+                completion(nil)
+                return
+            }
+            completion(route)
+        }
     }
     
     private func loadBuildings() {
@@ -147,21 +180,14 @@ class MapManager : NSObject, ObservableObject {
     }
 }
 
-extension MapManager {
-    
-    var allFavoritesSelected: Bool {
-        let favoritedBuildings = buildings.filter { $0.isFavorite }
-        return favoritedBuildings.allSatisfy { $0.isSelected }
-    }
-    
-    func building(withId id: String) -> Building {
-        return buildings.first(where: { $0.id == id })!
-    }
-    
-    func deselectAllBuildings() {
-        buildings.indices.forEach { index in
-            buildings[index].isSelected = false
-        }
-        savePersistedBuildings()
-    }
-}
+//extension MapManager {
+//    func setSourceLocation(_ location: CLLocationCoordinate2D) {
+//        self.sourceLocation = location
+//    }
+//    
+//    func setDestinationLocation(_ location: CLLocationCoordinate2D) {
+//        self.destinationLocation = location
+//    }
+//    
+//    
+//}

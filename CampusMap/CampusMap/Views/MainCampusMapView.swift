@@ -19,6 +19,13 @@ struct MainCampusMapView: View {
             Map(position: $camera, interactionModes: interactionMode) {
                 selectedMarkerAnnotations
                 centerCampusAnnotationsView
+                
+                if let route = manager.routes.first {
+                    ForEach(route.steps, id:\.self) { step in
+                        MapPolyline(step.polyline)
+                            .stroke(.black, lineWidth: 5.0)
+                    }
+                }
             }
             .mapControls {
                 MapUserLocationButton()

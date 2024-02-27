@@ -11,6 +11,7 @@
 		9C33C0372B8D2DC3008995D4 /* CLLocationsCoorsdinate2D+utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C33C0362B8D2DC3008995D4 /* CLLocationsCoorsdinate2D+utils.swift */; };
 		9C33C0392B8D393B008995D4 /* MainCampusMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C33C0382B8D393B008995D4 /* MainCampusMapView.swift */; };
 		9C33C03B2B8D6569008995D4 /* FilterButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C33C03A2B8D6569008995D4 /* FilterButtonsView.swift */; };
+		9C33C03E2B8D8236008995D4 /* MapManager+Directions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C33C03D2B8D8236008995D4 /* MapManager+Directions.swift */; };
 		9C9690F02B8408C2009A4C0B /* CampusMapApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9690EF2B8408C2009A4C0B /* CampusMapApp.swift */; };
 		9C9690F22B8408C2009A4C0B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9690F12B8408C2009A4C0B /* MainView.swift */; };
 		9C9690F42B8408CB009A4C0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C9690F32B8408CB009A4C0B /* Assets.xcassets */; };
@@ -21,6 +22,8 @@
 		9CBFBE882B840BDC00572A89 /* buildings.json in Resources */ = {isa = PBXBuildFile; fileRef = 9CBFBE872B840BDC00572A89 /* buildings.json */; };
 		9CBFBE902B84105400572A89 /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBFBE8F2B84105400572A89 /* MapManager.swift */; };
 		9CBFBE932B84155100572A89 /* Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBFBE922B84155100572A89 /* Building.swift */; };
+		9CF3B6ED2B8DA6CE00B6E16B /* DirectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF3B6EC2B8DA6CE00B6E16B /* DirectionsView.swift */; };
+		9CF3B6EF2B8DAA1300B6E16B /* RouteSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF3B6EE2B8DAA1300B6E16B /* RouteSelectionView.swift */; };
 		9CFF210E2B8455B900AE440C /* MapTopControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFF210D2B8455B900AE440C /* MapTopControls.swift */; };
 		9CFF21102B84560700AE440C /* BuildingSearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFF210F2B84560700AE440C /* BuildingSearchButton.swift */; };
 		9CFF21122B8457DA00AE440C /* BuildingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFF21112B8457DA00AE440C /* BuildingListView.swift */; };
@@ -51,6 +54,7 @@
 		9C33C0362B8D2DC3008995D4 /* CLLocationsCoorsdinate2D+utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationsCoorsdinate2D+utils.swift"; sourceTree = "<group>"; };
 		9C33C0382B8D393B008995D4 /* MainCampusMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCampusMapView.swift; sourceTree = "<group>"; };
 		9C33C03A2B8D6569008995D4 /* FilterButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButtonsView.swift; sourceTree = "<group>"; };
+		9C33C03D2B8D8236008995D4 /* MapManager+Directions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapManager+Directions.swift"; sourceTree = "<group>"; };
 		9C9690EC2B8408C2009A4C0B /* CampusMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampusMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C9690EF2B8408C2009A4C0B /* CampusMapApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusMapApp.swift; sourceTree = "<group>"; };
 		9C9690F12B8408C2009A4C0B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -64,6 +68,8 @@
 		9CBFBE872B840BDC00572A89 /* buildings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = buildings.json; sourceTree = "<group>"; };
 		9CBFBE8F2B84105400572A89 /* MapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
 		9CBFBE922B84155100572A89 /* Building.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Building.swift; sourceTree = "<group>"; };
+		9CF3B6EC2B8DA6CE00B6E16B /* DirectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionsView.swift; sourceTree = "<group>"; };
+		9CF3B6EE2B8DAA1300B6E16B /* RouteSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteSelectionView.swift; sourceTree = "<group>"; };
 		9CFF210D2B8455B900AE440C /* MapTopControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTopControls.swift; sourceTree = "<group>"; };
 		9CFF210F2B84560700AE440C /* BuildingSearchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingSearchButton.swift; sourceTree = "<group>"; };
 		9CFF21112B8457DA00AE440C /* BuildingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingListView.swift; sourceTree = "<group>"; };
@@ -97,6 +103,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9C33C03C2B8D7D6C008995D4 /* MainMapButtons */ = {
+			isa = PBXGroup;
+			children = (
+				9CFF210D2B8455B900AE440C /* MapTopControls.swift */,
+				9CFF210F2B84560700AE440C /* BuildingSearchButton.swift */,
+				9CFF211B2B84889E00AE440C /* ClearSelectedButton.swift */,
+			);
+			path = MainMapButtons;
+			sourceTree = "<group>";
+		};
 		9C9690E32B8408C2009A4C0B = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +178,7 @@
 				9CBFBE8F2B84105400572A89 /* MapManager.swift */,
 				9C33C0342B8D2308008995D4 /* MapManager+Location.swift */,
 				9C33C0362B8D2DC3008995D4 /* CLLocationsCoorsdinate2D+utils.swift */,
+				9C33C03D2B8D8236008995D4 /* MapManager+Directions.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -178,16 +195,24 @@
 		9CBFBE912B84118B00572A89 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9CF3B6F02B8DAFD200B6E16B /* BuildingListViews */,
+				9C33C03C2B8D7D6C008995D4 /* MainMapButtons */,
 				9C9690F12B8408C2009A4C0B /* MainView.swift */,
 				9C33C0382B8D393B008995D4 /* MainCampusMapView.swift */,
-				9CFF210D2B8455B900AE440C /* MapTopControls.swift */,
-				9CFF210F2B84560700AE440C /* BuildingSearchButton.swift */,
-				9CFF21112B8457DA00AE440C /* BuildingListView.swift */,
-				9CFF21172B846FE900AE440C /* BuildingDetailView.swift */,
-				9CFF211B2B84889E00AE440C /* ClearSelectedButton.swift */,
-				9C33C03A2B8D6569008995D4 /* FilterButtonsView.swift */,
+				9CF3B6EC2B8DA6CE00B6E16B /* DirectionsView.swift */,
+				9CF3B6EE2B8DAA1300B6E16B /* RouteSelectionView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		9CF3B6F02B8DAFD200B6E16B /* BuildingListViews */ = {
+			isa = PBXGroup;
+			children = (
+				9CFF21112B8457DA00AE440C /* BuildingListView.swift */,
+				9C33C03A2B8D6569008995D4 /* FilterButtonsView.swift */,
+				9CFF21172B846FE900AE440C /* BuildingDetailView.swift */,
+			);
+			path = BuildingListViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,6 +352,7 @@
 				9C33C03B2B8D6569008995D4 /* FilterButtonsView.swift in Sources */,
 				9CBFBE902B84105400572A89 /* MapManager.swift in Sources */,
 				9CFF211E2B84FB9800AE440C /* PersistedBuilding.swift in Sources */,
+				9CF3B6EF2B8DAA1300B6E16B /* RouteSelectionView.swift in Sources */,
 				9C33C0352B8D2308008995D4 /* MapManager+Location.swift in Sources */,
 				9C9690F22B8408C2009A4C0B /* MainView.swift in Sources */,
 				9C9690F02B8408C2009A4C0B /* CampusMapApp.swift in Sources */,
@@ -334,6 +360,8 @@
 				9CFF210E2B8455B900AE440C /* MapTopControls.swift in Sources */,
 				9C33C0392B8D393B008995D4 /* MainCampusMapView.swift in Sources */,
 				9CFF21122B8457DA00AE440C /* BuildingListView.swift in Sources */,
+				9C33C03E2B8D8236008995D4 /* MapManager+Directions.swift in Sources */,
+				9CF3B6ED2B8DA6CE00B6E16B /* DirectionsView.swift in Sources */,
 				9C33C0372B8D2DC3008995D4 /* CLLocationsCoorsdinate2D+utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

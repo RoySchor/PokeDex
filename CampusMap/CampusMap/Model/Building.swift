@@ -28,6 +28,12 @@ struct Building: Identifiable, Codable, Hashable {
         case latitude, longitude, name, opp_bldg_code, year_constructed, photo
     }
     
+    var mapItem: MKMapItem {
+        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: nil)
+        return MKMapItem(placemark: placemark)
+    }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         latitude = try container.decode(Double.self, forKey: .latitude)

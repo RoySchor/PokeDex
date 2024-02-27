@@ -15,6 +15,13 @@ struct MapTopControls: View {
             BuildingSearchButton()
                 .environmentObject(manager)
             Spacer()
+                .frame(width: 20)
+            
+            DirectionsView()
+                .environmentObject(manager)
+            Spacer()
+                .frame(width: 20)
+            
                 .frame(width: 15)
             ClearSelectedButton()
                 .environmentObject(manager)

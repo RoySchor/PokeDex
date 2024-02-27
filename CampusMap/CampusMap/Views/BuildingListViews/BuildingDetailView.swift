@@ -35,11 +35,21 @@ struct BuildingDetailView: View {
             Button(action: {
                 manager.toggleFavoriteStatus(for: buildingId)
             }) {
-                Image(systemName: building.isFavorite ? "heart.fill" : "heart")
-                    .foregroundColor(building.isFavorite ? .red : .gray)
+                HStack {
+                    Text("Favorite")
+                        .foregroundColor(.black)
+                    
+                    Image(systemName: building.isFavorite ? "heart.fill" : "heart")
+                        .foregroundColor(building.isFavorite ? .red : .gray)
+                }
             }
         }
         .padding()
         .navigationBarTitleDisplayMode(.inline)
     }
+}
+
+#Preview {
+    BuildingDetailView(buildingId: "Brumbaugh Hall")
+        .environmentObject(MapManager())
 }
