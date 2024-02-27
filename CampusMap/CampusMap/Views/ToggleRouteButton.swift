@@ -15,9 +15,11 @@ struct ToggleRouteButton: View {
     var body: some View {
         Button(action: {
             manager.showRoute.toggle()
+            
             if manager.showRoute {
                 manager.setStartPoint(buildingName: selectedStartingPoint)
                 manager.setEndPoint(buildingName: selectedDestination)
+                manager.calculateRoute()
             }
             else {
                 manager.clearRoute()

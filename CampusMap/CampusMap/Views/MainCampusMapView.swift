@@ -20,10 +20,12 @@ struct MainCampusMapView: View {
                 selectedMarkerAnnotations
                 centerCampusAnnotationsView
                 
-                if let route = manager.routes.first {
-                    ForEach(route.steps, id:\.self) { step in
-                        MapPolyline(step.polyline)
-                            .stroke(.black, lineWidth: 5.0)
+                if manager.showRoute {
+                    if let route = manager.routes.first {
+                        ForEach(route.steps, id:\.self) { step in
+                            MapPolyline(step.polyline)
+                                .stroke(.black, lineWidth: 5.0)
+                        }
                     }
                 }
             }
@@ -41,7 +43,7 @@ struct MainCampusMapView: View {
                 Color.white
                 MapTopControls()
             }
-            .frame(height: 50)
+            .frame(height: 60)
             .padding()
             .shadow(radius: 20)
             
