@@ -13,6 +13,7 @@ struct ClearSelectedButton: View {
     var body: some View {
         Button(action: {
             manager.deselectAllBuildings()
+            manager.clearRoute()
         }) {
             Text("Clear All")
                 .font(.system(size: 17))

@@ -39,7 +39,8 @@ class MapManager : NSObject, ObservableObject {
     @Published var buildingFilter: BuildingFilter = .all
     @Published var filteredBuildings: [Building] = []
     
-    @Published var routes = [MKRoute]()
+//    @Published var routes = [MKRoute]()
+    @Published var route: MKRoute?
     @Published var sourceLocation: CLLocationCoordinate2D?
     @Published var destinationLocation: CLLocationCoordinate2D?
     @Published var currentRoute: MKRoute?

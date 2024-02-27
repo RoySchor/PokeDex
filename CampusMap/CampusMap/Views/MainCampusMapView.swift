@@ -17,21 +17,21 @@ struct MainCampusMapView: View {
     var body: some View {
         MapReader { proxy in
             Map(position: $camera, interactionModes: interactionMode) {
+                UserAnnotation()
                 selectedMarkerAnnotations
                 centerCampusAnnotationsView
                 
                 if manager.showRoute {
-                    if let route = manager.routes.first {
+                    if let route = manager.route {
                         ForEach(route.steps, id:\.self) { step in
                             MapPolyline(step.polyline)
-                                .stroke(.black, lineWidth: 5.0)
+                                .stroke(.black, lineWidth: 3.0)
                         }
                     }
                 }
             }
             .mapControls {
                 MapUserLocationButton()
-                    .mapControlVisibility(.visible)
             }
             .controlSize(.large)
             .onMapCameraChange{ context in
