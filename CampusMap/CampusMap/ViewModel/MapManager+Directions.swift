@@ -43,6 +43,8 @@ extension MapManager {
         if buildingName == "Current Location" {
             self.sourceLocation = nil
         } else if let startBuilding = buildingByName(buildingName) {
+            self.sourceLocationBuilding = startBuilding
+            
             let startCoordinate = CLLocationCoordinate2D(latitude: startBuilding.latitude, longitude: startBuilding.longitude)
             self.sourceLocation = startCoordinate
         }
@@ -52,6 +54,8 @@ extension MapManager {
         if buildingName == "Current Location" {
             self.destinationLocation = nil
         } else if let endBuilding = buildingByName(buildingName) {
+            self.destinationLocationBuilding = endBuilding
+            
             let endCoordinate = CLLocationCoordinate2D(latitude: endBuilding.latitude, longitude: endBuilding.longitude)
             self.destinationLocation = endCoordinate
         }
