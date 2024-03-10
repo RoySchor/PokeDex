@@ -13,42 +13,61 @@ struct MainCampusMapView: View {
     @State private var camera : MapCameraPosition = .automatic
     @Binding var interactionMode : MapInteractionModes
     @Binding var selectedBuilding : Building?
+    @State private var selectedStepIndex = 0
     
     var body: some View {
-        MapReader { proxy in
-            Map(position: $camera, interactionModes: interactionMode) {
-                UserAnnotation()
-                selectedMarkerAnnotations
-                centerCampusAnnotationsView
-                
-                if manager.showRoute {
-                    routeMarkerAnnotations
+        ZStack(alignment: .bottom) {
+            MapReader { proxy in
+                Map(position: $camera, interactionModes: interactionMode) {
+                    UserAnnotation()
+                    selectedMarkerAnnotations
+                    centerCampusAnnotationsView
                     
-                    if let route = manager.route {
-                        ForEach(route.steps, id:\.self) { step in
-                            MapPolyline(step.polyline)
-                                .stroke(.black, lineWidth: 3.0)
+                    if manager.showRoute {
+                        routeMarkerAnnotations
+                        
+                        if let route = manager.route {
+                            ForEach(route.steps, id:\.self) { step in
+                                MapPolyline(step.polyline)
+                                    .stroke(.black, lineWidth: 3.0)
+                            }
                         }
+//                        if manager.showRoute, let route = manager.route {
+//                            RouteStepView(steps: route.steps, selectedStepIndex: $selectedStepIndex)
+//                                .transition(.move(edge: .bottom))
+//                                .animation(.default, value: selectedStepIndex)
+//                        }
+//                        if let steps = manager.route?.steps {
+//                            RouteStepView(steps: .constant(steps))
+//                                .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 50)
+//                                .transition(.slide)
+//                                .animation(.easeInOut, value: selectedStepIndex)
+//                        }
                     }
                 }
+                .mapControls {
+                    MapUserLocationButton()
+                }
+                .controlSize(.large)
+                .onMapCameraChange{ context in
+                    manager.region = context.region
+                }
             }
-            .mapControls {
-                MapUserLocationButton()
+            .safeAreaInset(edge: .top) {
+                ZStack {
+                    Color.white
+                    MapTopControls()
+                }
+                .frame(height: 60)
+                .padding()
+                .shadow(radius: 20)
+                
             }
-            .controlSize(.large)
-            .onMapCameraChange{ context in
-                manager.region = context.region
+            if manager.showRoute, let route = manager.route {
+                RouteStepView(steps: route.steps, selectedStepIndex: $selectedStepIndex)
+                    .transition(.move(edge: .bottom))
+                    .animation(.default, value: selectedStepIndex)
             }
-        }
-        .safeAreaInset(edge: .top) {
-            ZStack {
-                Color.white
-                MapTopControls()
-            }
-            .frame(height: 60)
-            .padding()
-            .shadow(radius: 20)
-            
         }
     }
 }
