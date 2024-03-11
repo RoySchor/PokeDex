@@ -27,7 +27,6 @@ struct MapSelectionView: View {
                 .alert("User's Location", isPresented: $manager.showAlert, actions: {}) {
                     Text(manager.userLocationDescription ?? "No Location Found")
                 }
-//                .ignoresSafeArea()
                 .safeAreaInset(edge: .top) {
                     ZStack {
                         Color.white

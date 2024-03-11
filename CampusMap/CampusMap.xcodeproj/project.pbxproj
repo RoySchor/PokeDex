@@ -184,6 +184,13 @@
 			path = CampusMapUITests;
 			sourceTree = "<group>";
 		};
+		9C9935672B9F8544005F874A /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		9CBFBE892B840DFF00572A89 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,15 +214,16 @@
 		9CBFBE912B84118B00572A89 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9C9935672B9F8544005F874A /* New Group */,
 				9CF3B6F32B8E345800B6E16B /* DirectionViews */,
 				9CF3B6F02B8DAFD200B6E16B /* BuildingListViews */,
 				9C33C03C2B8D7D6C008995D4 /* MainMapButtons */,
 				9C9690F12B8408C2009A4C0B /* MainView.swift */,
-				9C33C0382B8D393B008995D4 /* MainCampusMapView.swift */,
 				9C99355C2B9EC033005F874A /* MapSelectionView.swift */,
 				9C9935582B9EBD29005F874A /* CampusMapViewUIKit.swift */,
 				9C99355A2B9EBF5A005F874A /* MapType.swift */,
 				9C99355E2B9F4EC2005F874A /* MapViewCoordinator.swift */,
+				9C33C0382B8D393B008995D4 /* MainCampusMapView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

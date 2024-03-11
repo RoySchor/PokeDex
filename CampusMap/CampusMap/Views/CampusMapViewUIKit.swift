@@ -16,12 +16,12 @@ struct CampusMapViewUIKit: UIViewRepresentable {
 
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
+        
         mapView.region = manager.region
         mapView.showsUserLocation = true
         mapView.showsUserTrackingButton = true
-        mapView.delegate = context.coordinator
-        
         mapView.mapType = mapType.toMKMapType()
+        mapView.delegate = context.coordinator
         
         updateAnnotations(on: mapView)
         updateRouteAnnotations(on: mapView)

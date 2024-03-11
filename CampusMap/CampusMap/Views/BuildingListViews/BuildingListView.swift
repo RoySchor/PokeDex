@@ -37,12 +37,15 @@ struct BuildingListView: View {
                                     .foregroundColor(.blue)
                                 
                                 Text(building.name)
-                                    .frame(width: 300, alignment: .leading)
+                                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                                 Spacer()
                                 
                                 if building.isFavorite {
                                     Image(systemName: "heart.fill")
                                         .foregroundColor(.red)
+                                } else {
+                                    Image(systemName: "heart")
+                                        .opacity(0)
                                 }
                             }
                         }

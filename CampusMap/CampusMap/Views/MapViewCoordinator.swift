@@ -20,18 +20,15 @@ class MapViewCoordinator : NSObject, MKMapViewDelegate {
     
    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
        let clusterID = "Cluster"
-       switch annotation {
-       case is MKClusterAnnotation:
+       if annotation is MKClusterAnnotation {
            let cluster = annotation as! MKClusterAnnotation
            let clusterView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: clusterID)
            clusterView.markerTintColor = .blue
            clusterView.glyphText = "\(cluster.memberAnnotations.count)"
            return clusterView
-       default:
-           return nil
-           
        }
        
+       return nil
     }
     
     func mapView(_ mapView: MKMapView, clusterAnnotationForMemberAnnotations memberAnnotations: [MKAnnotation]) -> MKClusterAnnotation {
@@ -61,6 +58,5 @@ class MapViewCoordinator : NSObject, MKMapViewDelegate {
             onAnnotationTapped(building)
         }
     }
-    
 }
 
