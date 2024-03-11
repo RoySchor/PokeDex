@@ -12,6 +12,7 @@ import SwiftUI
 struct CampusMapViewUIKit: UIViewRepresentable {
     @EnvironmentObject var manager: MapManager
     @Binding var mapType: MapType
+    var onAnnotationTapped: (Building) -> Void
 
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
@@ -23,6 +24,7 @@ struct CampusMapViewUIKit: UIViewRepresentable {
         mapView.mapType = mapType.toMKMapType()
         
         updateAnnotations(on: mapView)
+        updateRouteAnnotations(on: mapView)
 
         return mapView
     }
@@ -30,6 +32,7 @@ struct CampusMapViewUIKit: UIViewRepresentable {
     func updateUIView(_ uiView: MKMapView, context: Context) {
         uiView.mapType = mapType.toMKMapType()
         updateAnnotations(on: uiView)
+        updateRouteAnnotations(on: uiView)
     }
     
     func updateAnnotations(on mapView: MKMapView) {
@@ -46,12 +49,33 @@ struct CampusMapViewUIKit: UIViewRepresentable {
         }
     }
     
+    func updateRouteAnnotations(on mapView: MKMapView) {
+        mapView.removeOverlays(mapView.overlays)
+        mapView.removeAnnotations(mapView.annotations.filter { $0.title == "Current Location" || $0.title == manager.sourceLocationBuilding?.name || $0.title == manager.destinationLocationBuilding?.name })
+        
+        addRouteAnnotationForBuilding(mapView, building: manager.sourceLocationBuilding, asSource: true)
+        addRouteAnnotationForBuilding(mapView, building: manager.destinationLocationBuilding, asSource: false)
+        
+        if let route = manager.route {
+            let polyline = route.polyline
+            mapView.addOverlay(polyline)
+        }
+    }
+
+    func addRouteAnnotationForBuilding(_ mapView: MKMapView, building: Building?, asSource: Bool) {
+        guard let building = building else { return }
+        let annotation = MKPointAnnotation()
+        annotation.title = building.name
+        annotation.coordinate = CLLocationCoordinate2D(latitude: building.latitude, longitude: building.longitude)
+        mapView.addAnnotation(annotation)
+    }
+    
     func makeCoordinator() -> MapViewCoordinator {
-        MapViewCoordinator(manager: manager)
+        MapViewCoordinator(manager: manager, onAnnotationTapped: onAnnotationTapped)
     }
 }
 
-#Preview {
-    CampusMapViewUIKit(mapType: .constant(.standard))
-        .environmentObject(MapManager())
-}
+//#Preview {
+//    CampusMapViewUIKit(mapType: .constant(.standard))
+//        .environmentObject(MapManager())
+//}

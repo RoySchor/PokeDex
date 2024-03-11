@@ -11,9 +11,11 @@ import MapKit
 
 class MapViewCoordinator : NSObject, MKMapViewDelegate {
     let manager : MapManager
+    var onAnnotationTapped: (Building) -> Void
     
-    init(manager: MapManager) {
+    init(manager: MapManager, onAnnotationTapped: @escaping (Building) -> Void) {
         self.manager = manager
+        self.onAnnotationTapped = onAnnotationTapped
     }
     
    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -42,25 +44,23 @@ class MapViewCoordinator : NSObject, MKMapViewDelegate {
     
     // Called when Map needs to display an overlay on the map
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-
-        switch overlay {
-        case is MKPolyline:
-            let polyLineRenderer = MKPolylineRenderer(overlay: overlay)
-            polyLineRenderer.strokeColor = UIColor.red
-            polyLineRenderer.lineWidth = 4.0
-            return polyLineRenderer
-        default:
-            assert(false, "Unhandled Overlay")
+        
+        if overlay is MKPolyline {
+            let polylineRenderer = MKPolylineRenderer(overlay: overlay)
+            polylineRenderer.strokeColor = UIColor.red
+            polylineRenderer.lineWidth = 4.0
+            return polylineRenderer
         }
-
+        return MKOverlayRenderer()
     }
     
     
-//    func mapView(_ mapView: MKMapView, didSelect annotation: MKAnnotation) {
-//        if let selectedPlace = annotation as? Place {
-//            self.manager.selectedPlace = selectedPlace
-//        }
-//    }
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if let annotationTitle = view.annotation?.title as? String,
+           let building = manager.buildings.first(where: { $0.name == annotationTitle }) {
+            onAnnotationTapped(building)
+        }
+    }
     
 }
 

@@ -63,6 +63,10 @@ extension MapManager {
     
     func clearRoute() {
         self.route = nil
+        self.sourceLocation = nil
+        self.destinationLocation = nil
+        self.sourceLocationBuilding = nil
+        self.destinationLocationBuilding = nil
         self.showRoute = false
     }
     

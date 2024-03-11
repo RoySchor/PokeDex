@@ -13,10 +13,37 @@ struct MapSelectionView: View {
     @Binding var interactionMode : MapInteractionModes
     @Binding var selectedBuilding : Building?
     @Binding var selectedMapType: MapType
+    @State private var selectedStepIndex = 0
     
     var body: some View {
-        CampusMapViewUIKit(mapType: $selectedMapType)
-            .ignoresSafeArea()
+        ZStack(alignment: .bottom) {
+            CampusMapViewUIKit(mapType: $selectedMapType, onAnnotationTapped: { building in
+                self.selectedBuilding = building})
+                .sheet(item: $selectedBuilding) { selectedBuilding in
+                    BuildingDetailView(buildingId: selectedBuilding.id)
+                        .environmentObject(manager)
+                        .presentationDetents([.fraction(0.3)])
+                }
+                .alert("User's Location", isPresented: $manager.showAlert, actions: {}) {
+                    Text(manager.userLocationDescription ?? "No Location Found")
+                }
+//                .ignoresSafeArea()
+                .safeAreaInset(edge: .top) {
+                    ZStack {
+                        Color.white
+                        MapTopControls()
+                    }
+                    .frame(height: 60)
+                    .padding()
+                    .shadow(radius: 20)
+                }
+            
+            if manager.showRoute, let route = manager.route {
+                RouteStepView(steps: route.steps, selectedStepIndex: $selectedStepIndex)
+                    .transition(.move(edge: .bottom))
+                    .animation(.default, value: selectedStepIndex)
+            }
+        }
     }
 }
 
