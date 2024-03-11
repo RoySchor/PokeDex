@@ -32,17 +32,6 @@ struct MainCampusMapView: View {
                                     .stroke(.black, lineWidth: 3.0)
                             }
                         }
-//                        if manager.showRoute, let route = manager.route {
-//                            RouteStepView(steps: route.steps, selectedStepIndex: $selectedStepIndex)
-//                                .transition(.move(edge: .bottom))
-//                                .animation(.default, value: selectedStepIndex)
-//                        }
-//                        if let steps = manager.route?.steps {
-//                            RouteStepView(steps: .constant(steps))
-//                                .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 50)
-//                                .transition(.slide)
-//                                .animation(.easeInOut, value: selectedStepIndex)
-//                        }
                     }
                 }
                 .mapControls {

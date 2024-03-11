@@ -20,6 +20,7 @@ struct RouteStepView: View {
                     .background(Color.white)
                     .cornerRadius(10)
                     .shadow(radius: 5)
+                    .padding(.horizontal, 10)
                     .tag(index)
             }
         }

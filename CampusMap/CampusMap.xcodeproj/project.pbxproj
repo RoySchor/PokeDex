@@ -204,7 +204,6 @@
 				9C33C03C2B8D7D6C008995D4 /* MainMapButtons */,
 				9C9690F12B8408C2009A4C0B /* MainView.swift */,
 				9C33C0382B8D393B008995D4 /* MainCampusMapView.swift */,
-				9CF3B6F42B8E489800B6E16B /* RouteStepView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -222,6 +221,7 @@
 		9CF3B6F32B8E345800B6E16B /* DirectionViews */ = {
 			isa = PBXGroup;
 			children = (
+				9CF3B6F42B8E489800B6E16B /* RouteStepView.swift */,
 				9CF3B6F12B8DB43200B6E16B /* ToggleRouteButton.swift */,
 				9CF3B6EE2B8DAA1300B6E16B /* RouteSelectionView.swift */,
 				9CF3B6EC2B8DA6CE00B6E16B /* DirectionsView.swift */,
