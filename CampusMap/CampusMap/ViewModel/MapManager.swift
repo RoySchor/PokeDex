@@ -48,6 +48,8 @@ class MapManager : NSObject, ObservableObject {
     
     @Published var showRoute: Bool = false
     
+    @Published var mapType: MapType = .standard
+    
     override init() {
         locationManager = CLLocationManager()
         super.init()
