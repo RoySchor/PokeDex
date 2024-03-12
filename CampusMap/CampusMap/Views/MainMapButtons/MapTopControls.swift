@@ -11,23 +11,30 @@ struct MapTopControls: View {
     @EnvironmentObject var manager : MapManager
     
     var body: some View {
-        HStack(spacing: 7) {
-            BuildingSearchButton()
-                .environmentObject(manager)
+        VStack {
+            HStack(spacing: 7) {
+                BuildingSearchButton()
+                    .environmentObject(manager)
+                Spacer()
+                    .frame(width: 8)
+                
+                DirectionsView()
+                    .environmentObject(manager)
+                Spacer()
+                    .frame(width: 8)
+                
+                ClearSelectedButton()
+                    .environmentObject(manager)
+                Spacer()
+                    .frame(width: 8)
+                
+                ClearCustomBuildingsButton()
+                    .environmentObject(manager)
+            }
             Spacer()
-                .frame(width: 8)
+                .frame(height: 15)
             
-            DirectionsView()
-                .environmentObject(manager)
-            Spacer()
-                .frame(width: 8)
-            
-            ClearSelectedButton()
-                .environmentObject(manager)
-            Spacer()
-                .frame(width: 8)
-            
-            ClearCustomBuildingsButton()
+            ClearCurrentRouteButton()
                 .environmentObject(manager)
         }
     }

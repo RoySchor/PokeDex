@@ -47,7 +47,7 @@ struct MainCampusMapView: View {
                     Color.white
                     MapTopControls()
                 }
-                .frame(height: 60)
+                .frame(height: 120)
                 .padding()
                 .shadow(radius: 20)
                 

@@ -9,12 +9,13 @@ import SwiftUI
 
 struct BuildingDetailView: View {
     @EnvironmentObject var manager: MapManager
+    @State private var selectedStepIndex = 0
     var buildingId: String
     
     var body: some View {
         let building = manager.building(withId: buildingId)
         
-        VStack {
+        VStack(spacing: 3) {
             if let imageName = building.photo, !imageName.isEmpty, UIImage(named: imageName) != nil {
                 Image(imageName)
                     .resizable()
@@ -56,6 +57,25 @@ struct BuildingDetailView: View {
                     
                     Image(systemName: building.isSelected ? "checkmark.square" : "square")
                         .foregroundColor(.black)
+                }
+            }
+            Spacer()
+                .frame(height: 10)
+            
+            Button(action: {
+                manager.setStartPoint(buildingName: "Current Location")
+                manager.setEndPoint(buildingName: building.name)
+                manager.calculateRoute()
+                manager.showRoute = true
+            }) {
+                HStack {
+                    Text("Get Directions")
+                        .font(.system(size: 17))
+                        .foregroundColor(.black)
+                    
+                    Image(systemName: "figure.walk.circle")
+                        .foregroundColor(.black)
+                        .font(.system(size: 23))
                 }
             }
         }

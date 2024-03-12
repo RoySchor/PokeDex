@@ -62,6 +62,7 @@ class MapManager : NSObject, ObservableObject {
     func toggleBuildingSelection(building: Building) {
         if let index = buildings.firstIndex(where: { $0.id == building.id }) {
             buildings[index].isSelected.toggle()
+            clearRoute()
             savePersistedBuildings()
         }
     }
