@@ -33,9 +33,12 @@ struct CampusMapViewUIKit: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: MKMapView, context: Context) {
-        uiView.mapType = mapType.toMKMapType()
+        if uiView.mapType != mapType.toMKMapType() {
+            uiView.mapType = mapType.toMKMapType()
+        }
         updateAnnotations(on: uiView)
         updateRouteAnnotations(on: uiView)
+
     }
     
     func updateAnnotations(on mapView: MKMapView) {

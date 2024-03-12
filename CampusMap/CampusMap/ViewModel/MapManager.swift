@@ -37,7 +37,6 @@ class MapManager : NSObject, ObservableObject {
     @Published var buildings: [Building] = []
     @Published var showOnlyFavorites: Bool = false
     @Published var buildingFilter: BuildingFilter = .all
-    @Published var filteredBuildings: [Building] = []
     
     @Published var route: MKRoute?
     @Published var sourceLocation: CLLocationCoordinate2D?
@@ -73,6 +72,13 @@ class MapManager : NSObject, ObservableObject {
             savePersistedBuildings()
         }
         objectWillChange.send()
+    }
+    
+    func selectBuilding(building: Building) {
+        if let index = buildings.firstIndex(where: { $0.id == building.id }) {
+            buildings[index].isSelected = true
+            savePersistedBuildings()
+        }
     }
     
     func building(withId id: String) -> Building {
@@ -125,10 +131,11 @@ class MapManager : NSObject, ObservableObject {
         
         DispatchQueue.main.async {
             self.buildings.append(newMarker)
+            self.savePersistedBuildings()
             self.objectWillChange.send()
         }
         
-        savePersistedBuildings()
+        selectBuilding(building: newMarker)
     }
     
     private func loadBuildings() {

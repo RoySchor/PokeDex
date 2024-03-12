@@ -18,5 +18,4 @@ extension CLLocationCoordinate2D {
     var coord : Coord {
         Coord(latitude: self.latitude, longitude: self.longitude)
     }
-    
 }

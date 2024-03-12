@@ -83,3 +83,13 @@ struct Building: Identifiable, Codable, Hashable {
         year_constructed: 1930
     )
 }
+
+extension Building: Equatable {
+    static func == (lhs: Building, rhs: Building) -> Bool {
+        return lhs.latitude == rhs.latitude &&
+               lhs.longitude == rhs.longitude &&
+               lhs.name == rhs.name &&
+               lhs.isSelected == rhs.isSelected &&
+               lhs.customMarker == rhs.customMarker
+    }
+}

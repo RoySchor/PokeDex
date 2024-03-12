@@ -14,7 +14,6 @@ class MapViewCoordinator : NSObject, MKMapViewDelegate {
     var onAnnotationTapped: (Building) -> Void
     
     init(manager: MapManager, onAnnotationTapped: @escaping (Building) -> Void) {
-//    init(manager: MapManager) {
         self.manager = manager
         self.onAnnotationTapped = onAnnotationTapped
     }
@@ -27,6 +26,16 @@ class MapViewCoordinator : NSObject, MKMapViewDelegate {
            clusterView.markerTintColor = .blue
            clusterView.glyphText = "\(cluster.memberAnnotations.count)"
            return clusterView
+       }
+       
+       let buildingID = "Building"
+       if let title = annotation.title, let buildingName = title, let building = manager.buildings.first(where: { $0.name == buildingName }) {
+           let view = mapView.dequeueReusableAnnotationView(withIdentifier: buildingID) as? MKMarkerAnnotationView ?? MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: buildingID)
+           
+           view.markerTintColor = building.isFavorite ? .red : .blue
+           view.canShowCallout = true
+                      
+           return view
        }
        
        return nil
@@ -51,7 +60,6 @@ class MapViewCoordinator : NSObject, MKMapViewDelegate {
         }
         return MKOverlayRenderer()
     }
-    
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if let annotationTitle = view.annotation?.title as? String,
