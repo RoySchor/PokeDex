@@ -14,6 +14,7 @@ class MapViewCoordinator : NSObject, MKMapViewDelegate {
     var onAnnotationTapped: (Building) -> Void
     
     init(manager: MapManager, onAnnotationTapped: @escaping (Building) -> Void) {
+//    init(manager: MapManager) {
         self.manager = manager
         self.onAnnotationTapped = onAnnotationTapped
     }
@@ -58,20 +59,26 @@ class MapViewCoordinator : NSObject, MKMapViewDelegate {
             onAnnotationTapped(building)
         }
     }
-    
-    @objc func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
-        if gesture.state != .began { return }
-        
-        let point = gesture.location(in: gesture.view as? MKMapView)
-        guard let mapView = gesture.view as? MKMapView else { return }
-        
-        let coordinate = mapView.convert(point, toCoordinateFrom: mapView)
+}
 
-        let customBuilding = Building(latitude: coordinate.latitude, longitude: coordinate.longitude, name: "Custom Marker", customMarker: true)
-        DispatchQueue.main.async {
-            self.manager.buildings.append(customBuilding)
-            self.manager.objectWillChange.send()
+extension MapViewCoordinator {
+    @objc func handleMapLongPress(_ gesture: UILongPressGestureRecognizer) {
+        if gesture.state != .began { return }
+        let touchPoint = gesture.location(in: gesture.view)
+        let coordinate = (gesture.view as! MKMapView).convert(touchPoint, toCoordinateFrom: gesture.view)
+        
+        let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(location) { [weak self] (placemarks, error) in
+            guard let self = self else { return }
+            if let placemark = placemarks?.first, let name = placemark.name {
+                self.manager.addCustomMarker(latitude: coordinate.latitude, longitude: coordinate.longitude, name: name, isSelected: true)
+            } else {
+                self.manager.addCustomMarker(latitude: coordinate.latitude, longitude: coordinate.longitude, name: "Custom Location", isSelected: true)
+            }
         }
+        manager.savePersistedBuildings()
     }
 }
 

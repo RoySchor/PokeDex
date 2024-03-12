@@ -120,6 +120,17 @@ class MapManager : NSObject, ObservableObject {
         buildings.removeAll { $0.customMarker }
     }
     
+    func addCustomMarker(latitude: Double, longitude: Double, name: String, isSelected: Bool = false) {
+        let newMarker = Building(latitude: latitude, longitude: longitude, name: name, customMarker: true, isSelected: isSelected)
+        
+        DispatchQueue.main.async {
+            self.buildings.append(newMarker)
+            self.objectWillChange.send()
+        }
+        
+        savePersistedBuildings()
+    }
+    
     private func loadBuildings() {
         guard let url = Bundle.main.url(forResource: "buildings", withExtension: "json"),
               let data = try? Data(contentsOf: url) else {
@@ -158,7 +169,7 @@ class MapManager : NSObject, ObservableObject {
         }
     }
     
-    private func savePersistedBuildings() {
+    func savePersistedBuildings() {
         let fileManager = FileManager.default
         guard let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
         let persistedFileURL = documentDirectory.appendingPathComponent("persistedBuildings.json")

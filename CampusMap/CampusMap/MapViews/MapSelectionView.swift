@@ -19,6 +19,7 @@ struct MapSelectionView: View {
         ZStack(alignment: .bottom) {
             CampusMapViewUIKit(mapType: $selectedMapType, onAnnotationTapped: { building in
                 self.selectedBuilding = building})
+//            CampusMapViewUIKit(mapType: $selectedMapType)
                 .sheet(item: $selectedBuilding) { selectedBuilding in
                     BuildingDetailView(buildingId: selectedBuilding.id)
                         .environmentObject(manager)

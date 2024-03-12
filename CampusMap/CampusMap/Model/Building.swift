@@ -65,12 +65,13 @@ struct Building: Identifiable, Codable, Hashable {
         self.isFavorite = isFavorite
     }
     
-    init(latitude: Double, longitude: Double, name: String = "Custom Location", customMarker: Bool = true) {
+    init(latitude: Double, longitude: Double, name: String = "Custom Location", customMarker: Bool = true, isSelected: Bool) {
         self.latitude = latitude
         self.longitude = longitude
         self.name = name
         self.opp_bldg_code = 0
         self.customMarker = customMarker
+        self.isSelected = isSelected
     }
     
     // Static instance for previews
