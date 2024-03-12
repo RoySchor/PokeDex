@@ -10,24 +10,9 @@ import MapKit
 
 struct RouteStepView: View {
     @ObservedObject var viewModel: RouteStepViewModel
-//    var steps: [MKRoute.Step]
     @Binding var selectedStepIndex: Int
     
     var body: some View {
-//        TabView(selection: $selectedStepIndex) {
-//            ForEach(steps.indices, id: \.self) { index in
-//                Text(steps[index].instructions)
-//                    .padding()
-//                    .background(Color.white)
-//                    .cornerRadius(10)
-//                    .shadow(radius: 5)
-//                    .padding(.horizontal, 10)
-//                    .tag(index)
-//            }
-//        }
-//        .tabViewStyle(.page(indexDisplayMode: .automatic))
-//        .frame(height: 150)
-//        .padding(.bottom, 20)
         TabView(selection: $selectedStepIndex) {
             ForEach(viewModel.steps.indices, id: \.self) { index in
                 VStack {

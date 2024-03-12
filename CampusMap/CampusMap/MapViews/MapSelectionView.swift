@@ -38,7 +38,6 @@ struct MapSelectionView: View {
                 }
             
             if manager.showRoute, let route = manager.route {
-//                RouteStepView(steps: route.steps, selectedStepIndex: $selectedStepIndex)
                 RouteStepView(viewModel: RouteStepViewModel(steps: route.steps), selectedStepIndex: $selectedStepIndex)
                     .transition(.move(edge: .bottom))
                     .animation(.default, value: selectedStepIndex)

@@ -23,6 +23,8 @@ struct MainView: View {
         
         MapSelectionView(interactionMode: $interactionMode, selectedBuilding: $selectedBuilding, selectedMapType: $manager.mapType)
         
+        
+//        For Map that is Swift UI implemented, above is MapKit
 //        MainCampusMapView(interactionMode: $interactionMode, selectedBuilding: $selectedBuilding)
 //            .sheet(item: $selectedBuilding) { selectedBuilding in
 //                BuildingDetailView(buildingId: selectedBuilding.id)
