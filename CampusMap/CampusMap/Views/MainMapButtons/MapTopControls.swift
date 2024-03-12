@@ -11,21 +11,24 @@ struct MapTopControls: View {
     @EnvironmentObject var manager : MapManager
     
     var body: some View {
-        HStack(spacing:20) {
+        HStack(spacing: 7) {
             BuildingSearchButton()
                 .environmentObject(manager)
             Spacer()
-                .frame(width: 20)
+                .frame(width: 8)
             
             DirectionsView()
                 .environmentObject(manager)
             Spacer()
-                .frame(width: 20)
+                .frame(width: 8)
             
-                .frame(width: 15)
             ClearSelectedButton()
                 .environmentObject(manager)
+            Spacer()
+                .frame(width: 8)
             
+            ClearCustomBuildingsButton()
+                .environmentObject(manager)
         }
     }
 }

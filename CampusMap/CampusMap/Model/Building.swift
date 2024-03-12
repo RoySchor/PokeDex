@@ -14,7 +14,14 @@ struct Coord {
 }
 
 struct Building: Identifiable, Codable, Hashable {
-    var id: String { name }
+    var id: String {
+        if customMarker {
+            return "\(latitude),\(longitude)"
+        } else {
+            return name
+        }
+    }
+//    var id: String { name }
     var latitude: Double
     var longitude: Double
     var name: String
@@ -23,6 +30,7 @@ struct Building: Identifiable, Codable, Hashable {
     var year_constructed: Int?
     var isSelected: Bool = false
     var isFavorite: Bool = false
+    var customMarker: Bool = false
 
     enum CodingKeys: String, CodingKey {
         case latitude, longitude, name, opp_bldg_code, year_constructed, photo
@@ -55,6 +63,14 @@ struct Building: Identifiable, Codable, Hashable {
         self.year_constructed = year_constructed
         self.isSelected = isSelected
         self.isFavorite = isFavorite
+    }
+    
+    init(latitude: Double, longitude: Double, name: String = "Custom Location", customMarker: Bool = true) {
+        self.latitude = latitude
+        self.longitude = longitude
+        self.name = name
+        self.opp_bldg_code = 0
+        self.customMarker = customMarker
     }
     
     // Static instance for previews

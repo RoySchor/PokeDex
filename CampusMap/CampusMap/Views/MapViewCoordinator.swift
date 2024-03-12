@@ -58,5 +58,20 @@ class MapViewCoordinator : NSObject, MKMapViewDelegate {
             onAnnotationTapped(building)
         }
     }
+    
+    @objc func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
+        if gesture.state != .began { return }
+        
+        let point = gesture.location(in: gesture.view as? MKMapView)
+        guard let mapView = gesture.view as? MKMapView else { return }
+        
+        let coordinate = mapView.convert(point, toCoordinateFrom: mapView)
+
+        let customBuilding = Building(latitude: coordinate.latitude, longitude: coordinate.longitude, name: "Custom Marker", customMarker: true)
+        DispatchQueue.main.async {
+            self.manager.buildings.append(customBuilding)
+            self.manager.objectWillChange.send()
+        }
+    }
 }
 

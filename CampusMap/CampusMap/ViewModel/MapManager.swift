@@ -115,6 +115,10 @@ class MapManager : NSObject, ObservableObject {
         return buildings.first { $0.name == name }
     }
     
+    func removeAllCustomMarkers() {
+        buildings.removeAll { $0.customMarker }
+    }
+    
     private func loadBuildings() {
         guard let url = Bundle.main.url(forResource: "buildings", withExtension: "json"),
               let data = try? Data(contentsOf: url) else {

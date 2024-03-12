@@ -25,6 +25,9 @@ struct CampusMapViewUIKit: UIViewRepresentable {
         
         updateAnnotations(on: mapView)
         updateRouteAnnotations(on: mapView)
+        
+        let longPressGesture = UILongPressGestureRecognizer(target: context.coordinator, action: #selector(context.coordinator.handleLongPress(_:)))
+        mapView.addGestureRecognizer(longPressGesture)
 
         return mapView
     }

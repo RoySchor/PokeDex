@@ -43,6 +43,21 @@ struct BuildingDetailView: View {
                         .foregroundColor(building.isFavorite ? .red : .gray)
                 }
             }
+            Spacer()
+                .frame(height: 10)
+            
+            Button(action: {
+                manager.toggleBuildingSelection(building: building)
+            }) {
+                HStack {
+                    Text(building.isSelected ? "Deselect Building" : "Select Building")
+                        .font(.system(size: 17))
+                        .foregroundColor(.black)
+                    
+                    Image(systemName: building.isSelected ? "checkmark.square" : "square")
+                        .foregroundColor(.black)
+                }
+            }
         }
         .padding()
         .navigationBarTitleDisplayMode(.inline)
