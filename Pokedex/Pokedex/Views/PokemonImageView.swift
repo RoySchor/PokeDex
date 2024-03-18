@@ -17,6 +17,7 @@ struct PokemonImageView: View {
         Image(pokemon.imageName)
             .resizable()
             .aspectRatio(contentMode: .fit)
+            .padding(15)
             .background(gradient)
             .clipShape(RoundedRectangle(cornerRadius: 20))
     }

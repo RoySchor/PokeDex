@@ -30,12 +30,16 @@ struct PokemonDetailView: View {
                 VStack {
                     Text("Types")
                         .font(.system(size: 20, weight: .heavy))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.leading, 15)
+                    
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
                             ForEach(pokemon.types, id: \.self) { type in
                                 CapsuleTextView(pokemonType: type)
                             }
                         }
+                        .padding(.leading, 15)
                     }
                     
                     Spacer()
@@ -43,12 +47,16 @@ struct PokemonDetailView: View {
                     
                     Text("Weaknesses")
                         .font(.system(size: 20, weight: .heavy))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.leading, 15)
+                    
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
                             ForEach(pokemon.weaknesses, id: \.self) { weakness in
                                 CapsuleTextView(pokemonType: weakness)
                             }
                         }
+                        .padding(.leading, 15)
                     }
                 }
             }

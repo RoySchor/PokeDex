@@ -1,5 +1,5 @@
 //
-//  PokemonListView.swift
+//  PokedexListView.swift
 //  Pokedex
 //
 //  Created by Roy Schor on 3/18/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PokemonListView: View {
+struct PokedexListView: View {
     @EnvironmentObject var manager: PokedexManager
     
     var body: some View {
@@ -33,6 +33,6 @@ struct PokemonListView: View {
 }
 
 #Preview {
-    PokemonListView()
+    PokedexListView()
         .environmentObject(PokedexManager())
 }
