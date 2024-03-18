@@ -12,12 +12,19 @@ struct PokemonRowView: View {
     
     var body: some View {
         HStack {
-            Text(String(format: "#%03d", pokemon.id))
-            Text(pokemon.name)
+            Text(String(pokemon.id))
             Spacer()
+                .frame(width: 20)
+            
+            Text(pokemon.name)
+                .font(.system(size: 15))
+                .bold()
+                .lineLimit(1)
+            Spacer()
+            
             PokemonImageView(pokemon: pokemon)
-                .frame(width: 50, height: 50)
         }
+        .frame(maxWidth: .infinity)
     }
 }
 

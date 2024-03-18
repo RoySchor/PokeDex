@@ -15,8 +15,11 @@ struct PokemonImageView: View {
         let gradient = LinearGradient(colors: colors, startPoint: .topLeading, endPoint: .bottomTrailing)
 
         Image(pokemon.imageName)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 110, height: 110)
             .background(gradient)
-            .clipShape(RoundedRectangle(cornerRadius: 60))
+            .clipShape(RoundedRectangle(cornerRadius: 20))
     }
 }
 

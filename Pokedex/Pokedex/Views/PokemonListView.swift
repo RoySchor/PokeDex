@@ -13,7 +13,7 @@ struct PokemonListView: View {
     var body: some View {
         NavigationStack {
             List {
-                Section(header: Text("All Pokémon")) {
+                Section {
                     ForEach(manager.pokemons) { pokemon in
                         NavigationLink(destination: PokemonDetailView(pokemon: pokemon)) {
                             PokemonRowView(pokemon: pokemon)
