@@ -8,11 +8,30 @@
 import SwiftUI
 
 struct PokemonListView: View {
+    @EnvironmentObject var manager: PokedexManager
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            List {
+                Section(header: Text("All Pokémon")) {
+                    ForEach(manager.pokemons) { pokemon in
+                        NavigationLink(destination: PokemonDetailView(pokemon: pokemon)) {
+                            PokemonRowView(pokemon: pokemon)
+                        }
+                    }
+                }
+            }
+            .navigationTitle("Pokedex")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Text("Sort/Filter")
+                }
+            }
+        }
     }
 }
 
 #Preview {
     PokemonListView()
+        .environmentObject(PokedexManager())
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Pokedex: ObservableObject {
+class PokedexManager: ObservableObject {
     @Published var pokemons: [Pokemon] = []
     
     init() {

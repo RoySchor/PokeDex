@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct PokedexApp: App {
+    var pokedexManager = PokedexManager()
+    
     var body: some Scene {
         WindowGroup {
             PokemonListView()
+                .environmentObject(pokedexManager)
         }
     }
 }

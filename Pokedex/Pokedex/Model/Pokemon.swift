@@ -14,17 +14,26 @@ struct Pokemon: Codable, Identifiable {
     var height: Double
     var weight: Double
     var weaknesses: [PokemonType]
-    var prevEvolution: [Evolution]?
-    var nextEvolution: [Evolution]?
-    
-    struct Evolution: Codable {
-        var id: Int
-    }
+    var prevEvolution: [Int]?
+    var nextEvolution: [Int]?
     
     var imageName: String {
         return String(format: "%03d", id)
     }
     
+    static let standard = Pokemon(
+        id: 1,
+        name: "Bulbasaur",
+        types: [.grass, .poison],
+        height: 0.71,
+        weight: 6.9,
+        weaknesses: [.fire, .ice, .flying, .psychic],
+        prevEvolution: nil,
+        nextEvolution: [2, 3]
+    )
+}
+
+extension Pokemon {
     enum CodingKeys: String, CodingKey {
         case id, name, types, height, weight, weaknesses, prevEvolution, nextEvolution
     }
@@ -37,7 +46,7 @@ struct Pokemon: Codable, Identifiable {
         height = try values.decode(Double.self, forKey: .height)
         weight = try values.decode(Double.self, forKey: .weight)
         weaknesses = try values.decode([PokemonType].self, forKey: .weaknesses)
-        prevEvolution = try values.decodeIfPresent([Evolution].self, forKey: .prevEvolution)
-        nextEvolution = try values.decodeIfPresent([Evolution].self, forKey: .nextEvolution)
+        prevEvolution = try values.decodeIfPresent([Int].self, forKey: .prevEvolution)
+        nextEvolution = try values.decodeIfPresent([Int].self, forKey: .nextEvolution)
     }
 }
