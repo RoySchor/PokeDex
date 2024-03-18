@@ -23,6 +23,7 @@ struct PokemonRowView: View {
             Spacer()
             
             PokemonImageView(pokemon: pokemon)
+                .frame(width: 110, height: 110)
         }
         .frame(maxWidth: .infinity)
     }

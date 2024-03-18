@@ -22,6 +22,7 @@ struct PokemonListView: View {
                 }
             }
             .navigationTitle("Pokedex")
+//            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Text("Sort/Filter")

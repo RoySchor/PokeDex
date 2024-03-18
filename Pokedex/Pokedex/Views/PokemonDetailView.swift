@@ -13,10 +13,44 @@ struct PokemonDetailView: View {
     var body: some View {
         ScrollView {
             VStack {
-                Text(pokemon.name)
-                    .font(.largeTitle)
-                PokemonImageView(pokemon: pokemon)
-                    .frame(width: 500, height: 600)
+                ZStack(alignment: .bottomTrailing) {
+                    PokemonImageView(pokemon: pokemon)
+                        .frame(width: 350, height: 350)
+                    
+                    Text("#" + String(pokemon.id))
+                        .font(.system(size: 20, weight: .heavy))
+                        .padding([.bottom, .trailing], 10)
+                }
+                
+                HStack {
+                    StatView(label: "Height", value: String(pokemon.height))
+                    StatView(label: "Weight", value: String(pokemon.weight))
+                }
+                
+                VStack {
+                    Text("Types")
+                        .font(.system(size: 20, weight: .heavy))
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            ForEach(pokemon.types, id: \.self) { type in
+                                CapsuleTextView(pokemonType: type)
+                            }
+                        }
+                    }
+                    
+                    Spacer()
+                        .frame(height: 30)
+                    
+                    Text("Weaknesses")
+                        .font(.system(size: 20, weight: .heavy))
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            ForEach(pokemon.weaknesses, id: \.self) { weakness in
+                                CapsuleTextView(pokemonType: weakness)
+                            }
+                        }
+                    }
+                }
             }
         }
         .navigationTitle(pokemon.name)
