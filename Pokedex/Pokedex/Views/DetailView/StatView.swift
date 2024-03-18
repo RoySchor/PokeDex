@@ -8,39 +8,17 @@
 import SwiftUI
 
 struct StatView: View {
-    var label: String
-    var value: String
+    var pokemonHeight: Double
+    var pokemonWeight: Double
     
     var body: some View {
-        VStack {
-            Text(label)
-                .font(.system(size: 15, weight: .semibold))
-                .foregroundColor(.primary)
-                .bold()
-            HStack(spacing: 10) {
-                Text(value)
-                    .font(.system(size: 35, weight: .heavy))
-                    .foregroundColor(.primary)
-                Text(unit)
-                    .font(.system(size: 25, weight: .semibold))
-                    .foregroundColor(.primary)
-            }
-        }
-        .padding()
-    }
-    
-    private var unit: String {
-        switch label.lowercased() {
-        case "height":
-            return "m"
-        case "weight":
-            return "kg"
-        default:
-            return ""
+        HStack {
+            StatComponentView(label: "Height", value: String(pokemonHeight))
+            StatComponentView(label: "Weight", value: String(pokemonWeight))
         }
     }
 }
 
 #Preview {
-    StatView(label: "Height", value: String(Pokemon.standard.height))
+    StatView(pokemonHeight: Pokemon.standard.height, pokemonWeight: Pokemon.standard.weight)
 }
