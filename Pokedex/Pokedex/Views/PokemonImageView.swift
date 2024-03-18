@@ -9,9 +9,10 @@ import SwiftUI
 
 struct PokemonImageView: View {
     var pokemon: Pokemon
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
-        let colors = pokemon.types.map { Color(pokemonType: $0) }
+        let colors = pokemon.types.map { Color(pokemonType: $0, colorScheme: colorScheme) }
         let gradient = LinearGradient(colors: colors, startPoint: .topLeading, endPoint: .bottomTrailing)
 
         Image(pokemon.imageName)

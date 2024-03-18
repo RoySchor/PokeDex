@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PokedexListView: View {
     @EnvironmentObject var manager: PokedexManager
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         NavigationStack {
@@ -21,8 +22,8 @@ struct PokedexListView: View {
                     }
                 }
             }
+            .background(Color.appBackground(for: colorScheme))
             .navigationTitle("Pokedex")
-//            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Text("Sort/Filter")
