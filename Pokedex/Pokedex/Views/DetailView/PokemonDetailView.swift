@@ -35,27 +35,11 @@ struct PokemonDetailView: View {
                 StatView(pokemonHeight: pokemon.height, pokemonWeight: pokemon.weight)
                 
                 TypesWeaknessView(pokemon: pokemon)
+                Spacer()
+                    .frame(height: 15)
                 
-                Text(pokemonCard.captured ? "Captured" : "Not Captured Yet...")
-                    .font(.title)
-                    .fontWeight(.bold)
-                
-                Button(action: {
-                    if pokemonCard.captured {
-                        manager.uncapturePokemon(withID: pokemonCard.id)
-                    } else {
-                        manager.capturePokemon(withID: pokemonCard.id)
-                    }
-                }) {
-                    VStack {
-                        Image(pokemonCard.captured ? "closedPokeBall" : "openPokeBall")
-                            .resizable()
-                            .frame(width: 50, height: 50)
-                        Text(pokemonCard.captured ? "Release Pokemon to the Wild?" : "Capture Pokemon?")
-                            .font(.headline)
-                            .foregroundColor(.primary)
-                    }
-                }
+                CapturedPokemonButton(pokemonCard: $pokemonCard)
+                    .environmentObject(manager)
             }
         }
         .navigationTitle(pokemon.name)
@@ -64,8 +48,6 @@ struct PokemonDetailView: View {
 }
 
 #Preview {
-//    PokemonDetailView(pokemonCard: Pokemon.standard.cards[0])
-//        .environmentObject(PokedexManager())
     PokemonDetailView(pokemonCard: .constant(Pokemon.standard.cards[0]))
         .environmentObject(PokedexManager())
 }

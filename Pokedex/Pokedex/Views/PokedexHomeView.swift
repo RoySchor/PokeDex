@@ -19,34 +19,40 @@ struct PokedexHomeView: View {
                         Section(header: Text("Captured Pokémon")) {
                             ScrollView(.horizontal, showsIndicators: false) {
                                 HStack {
-//                                    ForEach(manager.capturedPokemonCards) { pokemonCard in
-//                                        NavigationLink(destination: PokemonDetailView(pokemonCard: pokemonCard)) {
-//                                            PokedexRowView(pokemonCard: pokemonCard)
-//                                        }
-//                                        .frame(width: 150, height: 100)
-//                                    }
-                                    
                                     ForEach(Array(manager.capturedPokemonCards.enumerated()), id: \.element.id) { index, _ in
                                         NavigationLink(destination: PokemonDetailView(pokemonCard: $manager.capturedPokemonCards[index])) {
-                                            PokedexRowView(pokemonCard: manager.capturedPokemonCards[index])
+                                            PokedexCardView(pokemonCard: manager.capturedPokemonCards[index])
                                         }
                                         .frame(width: 150, height: 100)
+                                        .padding(.leading, 10)
                                     }
                                 }
                             }
-                            .frame(height: 100)
                         }
                     }
+                }
                     
-//                    ForEach(manager.pokemonCards) { pokemonCard in
-//                        NavigationLink(destination: PokemonDetailView(pokemonCard: pokemonCard)) {
-//                            PokedexRowView(pokemonCard: pokemonCard)
+//                ForEach(Array(manager.pokemonCardsByType.keys).sorted(by: { $0.rawValue < $1.rawValue }), id: \.self) { type in
+//                    if let cardsOfType = manager.pokemonCardsByType[type] {
+//                        Section(header: Text(type.rawValue)) {
+//                            ScrollView(.horizontal, showsIndicators: false) {
+//                                HStack {
+//                                    ForEach(cardsOfType, id: \.id) { card in
+//                                        NavigationLink(destination: PokemonDetailView(pokemonCard: card)) {
+//                                            PokedexCardView(pokemonCard: card)
+//                                        }
+//                                        .frame(width: 150, height: 100)
+//                                        .padding(.leading, 10)
+//                                    }
+//                                }
+//                            }
+//                            .frame(height: 100)
 //                        }
 //                    }
-                    ForEach(Array(manager.pokemonCards.enumerated()), id: \.element.id) { index, _ in
-                        NavigationLink(destination: PokemonDetailView(pokemonCard: $manager.pokemonCards[index])) {
-                            PokedexRowView(pokemonCard: manager.pokemonCards[index])
-                        }
+//                }
+                ForEach(Array(manager.pokemonCards.enumerated()), id: \.element.id) { index, _ in
+                    NavigationLink(destination: PokemonDetailView(pokemonCard: $manager.pokemonCards[index])) {
+                        PokedexCardView(pokemonCard: manager.pokemonCards[index])
                     }
                 }
             }

@@ -11,6 +11,7 @@ class PokedexManager: ObservableObject {
     @Published var pokemons: [Pokemon] = []
     @Published var pokemonCards: [PokemonCard] = []
     @Published var capturedPokemonCards: [PokemonCard] = []
+    @Published var pokemonCardsByType: [PokemonType: [PokemonCard]] = [:]
     
     init() {
         loadPokemons()
@@ -51,5 +52,6 @@ class PokedexManager: ObservableObject {
     
     private func populatePokemonCards() {
         pokemonCards = pokemons.flatMap { $0.cards }
+        pokemonCardsByType = Dictionary(grouping: pokemonCards, by: { $0.type })
     }
 }
