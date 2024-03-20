@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct PokemonDetailView: View {
-    var pokemonCard: PokemonCard
+    @EnvironmentObject var manager: PokedexManager
+    @Binding var pokemonCard: PokemonCard
     
     var body: some View {
         let pokemon: Pokemon = pokemonCard.pokemon
@@ -38,7 +39,23 @@ struct PokemonDetailView: View {
                 Text(pokemonCard.captured ? "Captured" : "Not Captured Yet...")
                     .font(.title)
                     .fontWeight(.bold)
-                    .padding(.top, 20)
+                
+                Button(action: {
+                    if pokemonCard.captured {
+                        manager.uncapturePokemon(withID: pokemonCard.id)
+                    } else {
+                        manager.capturePokemon(withID: pokemonCard.id)
+                    }
+                }) {
+                    VStack {
+                        Image(pokemonCard.captured ? "closedPokeBall" : "openPokeBall")
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                        Text(pokemonCard.captured ? "Release Pokemon to the Wild?" : "Capture Pokemon?")
+                            .font(.headline)
+                            .foregroundColor(.primary)
+                    }
+                }
             }
         }
         .navigationTitle(pokemon.name)
@@ -47,5 +64,8 @@ struct PokemonDetailView: View {
 }
 
 #Preview {
-    PokemonDetailView(pokemonCard: Pokemon.standard.cards[0])
+//    PokemonDetailView(pokemonCard: Pokemon.standard.cards[0])
+//        .environmentObject(PokedexManager())
+    PokemonDetailView(pokemonCard: .constant(Pokemon.standard.cards[0]))
+        .environmentObject(PokedexManager())
 }

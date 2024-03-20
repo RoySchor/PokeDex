@@ -27,7 +27,7 @@ struct TypesWeaknessView: View {
             }
             
             Spacer()
-                .frame(height: 30)
+                .frame(height: 15)
             
             Text("Weaknesses")
                 .font(.system(size: 20, weight: .heavy))
