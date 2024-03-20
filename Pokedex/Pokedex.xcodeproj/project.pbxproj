@@ -26,6 +26,7 @@
 		9C8FAEEE2BA8B886000FEAAF /* StatComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FAEED2BA8B886000FEAAF /* StatComponentView.swift */; };
 		9C8FAEF12BA8BF90000FEAAF /* TypesWeaknessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FAEF02BA8BF90000FEAAF /* TypesWeaknessView.swift */; };
 		9C8FAEF32BA8C061000FEAAF /* StatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FAEF22BA8C061000FEAAF /* StatView.swift */; };
+		9C8FAEF52BAA70A3000FEAAF /* PokemonCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FAEF42BAA70A3000FEAAF /* PokemonCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		9C8FAEED2BA8B886000FEAAF /* StatComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatComponentView.swift; sourceTree = "<group>"; };
 		9C8FAEF02BA8BF90000FEAAF /* TypesWeaknessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypesWeaknessView.swift; sourceTree = "<group>"; };
 		9C8FAEF22BA8C061000FEAAF /* StatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatView.swift; sourceTree = "<group>"; };
+		9C8FAEF42BAA70A3000FEAAF /* PokemonCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +162,7 @@
 				9C34476A2BA7F8EA00E7876A /* Color+PokemonType.swift */,
 				9C3447702BA7F90900E7876A /* PokemonType.swift */,
 				9C3447732BA802BC00E7876A /* Pokemon.swift */,
+				9C8FAEF42BAA70A3000FEAAF /* PokemonCard.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				9C34477A2BA805AD00E7876A /* PokedexListView.swift in Sources */,
 				9C3447712BA7F90900E7876A /* PokemonType.swift in Sources */,
 				9C3447802BA807DC00E7876A /* PokemonImageView.swift in Sources */,
+				9C8FAEF52BAA70A3000FEAAF /* PokemonCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

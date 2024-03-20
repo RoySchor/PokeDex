@@ -21,6 +21,10 @@ struct Pokemon: Codable, Identifiable {
         return String(format: "%03d", id)
     }
     
+    var cards: [PokemonCard] {
+        types.map { PokemonCard(pokemon: self, type: $0, captured: false) }
+    }
+    
     static let standard = Pokemon(
         id: 1,
         name: "Bulbasaur",
