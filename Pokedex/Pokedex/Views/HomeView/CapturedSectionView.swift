@@ -1,5 +1,5 @@
 //
-//  CapturedPokemonSectionView.swift
+//  CapturedSectionView.swift
 //  Pokedex
 //
 //  Created by Roy Schor on 3/20/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CapturedPokemonSectionView: View {
+struct CapturedSectionView: View {
     @Binding var capturedCards: [PokemonCard]
     
     var body: some View {
@@ -29,5 +29,5 @@ struct CapturedPokemonSectionView: View {
 }
 
 #Preview {
-    CapturedPokemonSectionView(capturedCards: .constant(Pokemon.standard.cards))
+    CapturedSectionView(capturedCards: .constant(Pokemon.standard.cards))
 }

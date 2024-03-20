@@ -63,6 +63,11 @@ class PokedexManager: ObservableObject {
     
     private func populatePokemonCards() {
         pokemonCards = pokemons.flatMap { $0.cards }
-        pokemonCardsByType = Dictionary(grouping: pokemonCards, by: { $0.type })
+//        pokemonCardsByType = Dictionary(grouping: pokemonCards, by: { $0.type })
+        pokemonCardsByType = Dictionary(uniqueKeysWithValues: PokemonType.allCases.map { ($0, [PokemonCard]()) })
+
+        for card in pokemonCards {
+            pokemonCardsByType[card.type]?.append(card)
+        }
     }
 }
