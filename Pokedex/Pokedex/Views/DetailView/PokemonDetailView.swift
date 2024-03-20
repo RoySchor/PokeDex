@@ -16,8 +16,15 @@ struct PokemonDetailView: View {
         ScrollView {
             VStack {
                 ZStack(alignment: .bottomTrailing) {
-                    PokemonImageView(pokemon: pokemon)
-                        .frame(width: 350, height: 350)
+                    ZStack(alignment: .topLeading) {
+                        PokemonImageView(pokemon: pokemon)
+                            .frame(width: 350, height: 350)
+                        
+                        Image(pokemonCard.captured ? "closedPokeBall" : "openPokeBall")
+                            .resizable()
+                            .frame(width: 60, height: 60)
+                            .padding([.top, .leading], 10)
+                    }
                     
                     Text("#" + String(pokemonCard.id))
                         .font(.system(size: 20, weight: .heavy))
@@ -27,6 +34,11 @@ struct PokemonDetailView: View {
                 StatView(pokemonHeight: pokemon.height, pokemonWeight: pokemon.weight)
                 
                 TypesWeaknessView(pokemon: pokemon)
+                
+                Text(pokemonCard.captured ? "Captured" : "Not Captured Yet...")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .padding(.top, 20)
             }
         }
         .navigationTitle(pokemon.name)

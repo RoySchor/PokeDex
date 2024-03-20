@@ -14,15 +14,9 @@ struct PokemonRowView: View {
         let pokemon: Pokemon = pokemonCard.pokemon
         
         HStack {
-            if pokemonCard.captured {
-                Image("closedPokeBall")
-                    .resizable()
-                    .frame(width: 30, height: 30)
-            } else {
-                Image("openPokeBall")
-                    .resizable()
-                    .frame(width: 30, height: 30)
-            }
+            Image(pokemonCard.captured ? "closedPokeBall" : "openPokeBall")
+                .resizable()
+                .frame(width: 30, height: 30)
             
             Text(String(pokemonCard.id))
                 .font(.system(size: 12))
@@ -30,7 +24,7 @@ struct PokemonRowView: View {
                 .frame(width: 10)
             
             Text(pokemon.name)
-                .font(.system(size: 14))
+                .font(.system(size: 15))
                 .bold()
                 .lineLimit(1)
             Spacer()
