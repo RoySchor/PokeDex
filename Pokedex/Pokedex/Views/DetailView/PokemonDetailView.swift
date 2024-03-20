@@ -47,6 +47,6 @@ struct PokemonDetailView: View {
 }
 
 #Preview {
-    PokemonDetailView(pokemonCard: Pokemon.standard.cards[0])
+    PokemonDetailView(pokemonCard: PokemonCard.standard)
         .environmentObject(PokedexManager())
 }

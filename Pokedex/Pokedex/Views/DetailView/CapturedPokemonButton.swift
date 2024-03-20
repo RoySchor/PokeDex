@@ -17,9 +17,12 @@ struct CapturedPokemonButton: View {
         VStack {
             Text(isCaptured ? "Captured" : "Not Captured Yet...")
                 .font(.system(size: 25, weight: .heavy))
+                .animation(.default, value: isCaptured)
             
             Button(action: {
-                manager.togglePokemonCapture(withID: pokemonCardID)
+                withAnimation {
+                    manager.togglePokemonCapture(withID: pokemonCardID)
+                }
             }) {
                 VStack {
                     PokeBallImageView(frameSize: manager.frameSizeForDetailView, pokemonCardID: pokemonCardID)
@@ -28,9 +31,12 @@ struct CapturedPokemonButton: View {
                     Text(isCaptured ? "Release Pokemon to the Wild?" : "Capture Pokemon?")
                         .font(.headline)
                         .foregroundColor(.primary)
+                        .animation(.default, value: isCaptured)
                 }
+                .transition(.opacity)
             }
         }
+        .animation(.easeInOut, value: isCaptured)
     }
 }
 
