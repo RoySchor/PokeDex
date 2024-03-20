@@ -10,6 +10,7 @@ import Foundation
 class PokedexManager: ObservableObject {
     @Published var pokemons: [Pokemon] = []
     @Published var pokemonCards: [PokemonCard] = []
+    @Published var capturedPokemonCards: [PokemonCard] = []
     
     init() {
         loadPokemons()
@@ -18,11 +19,19 @@ class PokedexManager: ObservableObject {
     func capturePokemon(withID id: String) {
         guard let index = pokemonCards.firstIndex(where: { $0.id == id }) else { return }
         pokemonCards[index].captured = true
+        
+        if !capturedPokemonCards.contains(where: { $0.id == id }) {
+            capturedPokemonCards.append(pokemonCards[index])
+        }
     }
 
     func uncapturePokemon(withID id: String) {
         guard let index = pokemonCards.firstIndex(where: { $0.id == id }) else { return }
         pokemonCards[index].captured = false
+
+        if let capturedIndex = capturedPokemonCards.firstIndex(where: { $0.id == id }) {
+            capturedPokemonCards.remove(at: capturedIndex)
+        }
     }
     
     func loadPokemons() {

@@ -24,11 +24,6 @@ struct PokedexListView: View {
             }
             .background(Color.appBackground(for: colorScheme))
             .navigationTitle("Pokedex")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Text("Sort/Filter")
-                }
-            }
         }
     }
 }

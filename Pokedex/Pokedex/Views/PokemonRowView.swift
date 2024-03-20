@@ -18,7 +18,7 @@ struct PokemonRowView: View {
                 .resizable()
                 .frame(width: 30, height: 30)
             
-            Text(String(pokemonCard.id))
+            Text(pokemonCard.type.rawValue)
                 .font(.system(size: 12))
             Spacer()
                 .frame(width: 10)
@@ -30,7 +30,7 @@ struct PokemonRowView: View {
             Spacer()
             
             PokemonImageView(pokemon: pokemon)
-                .frame(width: 90, height: 90)
+                .frame(width: 100, height: 100)
         }
         .frame(maxWidth: .infinity)
     }
