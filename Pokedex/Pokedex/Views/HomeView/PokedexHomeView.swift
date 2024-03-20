@@ -15,14 +15,8 @@ struct PokedexHomeView: View {
     var body: some View {
         NavigationStack {
             List {
-                Section {
-                    Picker("Filter by Type", selection: $selectedType) {
-                        Text("All").tag(PokemonType?.none)
-                        ForEach(PokemonType.allCases, id: \.self) { type in
-                            Text(type.rawValue.capitalized).tag(PokemonType?.some(type))
-                        }
-                    }
-                }
+                FilterPokemonPickerView(selectedType: $selectedType)
+                    .environmentObject(manager)
                 
                 Section {
                     if !manager.capturedPokemonCards.isEmpty {
@@ -35,18 +29,6 @@ struct PokedexHomeView: View {
                         PokemonTypeSectionView(type: type, cards: cards)
                     }
                 }
-                
-//                ForEach(PokemonType.allCases, id: \.self) { type in
-//                    PokemonTypeSectionView(type: type, cards: manager.pokemonCardsByType[type]!)
-//                }
-                
-                
-//                ForEach(Array(manager.pokemonCards.enumerated()), id: \.element.id) { index, _ in
-//                    NavigationLink(destination: PokemonDetailView(pokemonCard: manager.pokemonCards[index])) {
-//                        PokedexCardView(pokemonCard: manager.pokemonCards[index])
-//                            .environmentObject(manager)
-//                    }
-//                }
             }
             .background(Color.appBackground(for: colorScheme))
             .navigationTitle("Pokedex")

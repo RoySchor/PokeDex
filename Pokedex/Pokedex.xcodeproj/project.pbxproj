@@ -31,6 +31,7 @@
 		9C8FAEF72BAA9380000FEAAF /* CapturedPokemonButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FAEF62BAA9380000FEAAF /* CapturedPokemonButton.swift */; };
 		9C8FAEFA2BAA9CCD000FEAAF /* CapturedSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FAEF92BAA9CCD000FEAAF /* CapturedSectionView.swift */; };
 		9C8FAEFC2BAA9EE3000FEAAF /* PokemonTypeSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FAEFB2BAA9EE3000FEAAF /* PokemonTypeSectionView.swift */; };
+		9CF96D3B2BAB736F00DE35C0 /* FilterPokemonPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF96D3A2BAB736F00DE35C0 /* FilterPokemonPickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		9C8FAEF62BAA9380000FEAAF /* CapturedPokemonButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturedPokemonButton.swift; sourceTree = "<group>"; };
 		9C8FAEF92BAA9CCD000FEAAF /* CapturedSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturedSectionView.swift; sourceTree = "<group>"; };
 		9C8FAEFB2BAA9EE3000FEAAF /* PokemonTypeSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonTypeSectionView.swift; sourceTree = "<group>"; };
+		9CF96D3A2BAB736F00DE35C0 /* FilterPokemonPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPokemonPickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +224,7 @@
 				9C34477B2BA8077000E7876A /* PokedexCardView.swift */,
 				9C8FAEF92BAA9CCD000FEAAF /* CapturedSectionView.swift */,
 				9C8FAEFB2BAA9EE3000FEAAF /* PokemonTypeSectionView.swift */,
+				9CF96D3A2BAB736F00DE35C0 /* FilterPokemonPickerView.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				9C34477A2BA805AD00E7876A /* PokedexHomeView.swift in Sources */,
 				9C3447712BA7F90900E7876A /* PokemonType.swift in Sources */,
 				9C3447802BA807DC00E7876A /* PokemonImageView.swift in Sources */,
+				9CF96D3B2BAB736F00DE35C0 /* FilterPokemonPickerView.swift in Sources */,
 				9C8FAEFC2BAA9EE3000FEAAF /* PokemonTypeSectionView.swift in Sources */,
 				9C8FAEF72BAA9380000FEAAF /* CapturedPokemonButton.swift in Sources */,
 				9C8FAEF52BAA70A3000FEAAF /* PokemonCard.swift in Sources */,
