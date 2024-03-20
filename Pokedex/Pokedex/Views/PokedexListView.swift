@@ -15,12 +15,6 @@ struct PokedexListView: View {
         NavigationStack {
             List {
                 Section {
-//                    ForEach(manager.pokemons) { pokemon in
-//                        NavigationLink(destination: PokemonDetailView(pokemon: pokemon)) {
-//                            PokemonRowView(pokemon: pokemon)
-//                        }
-//                    }
-                    
                     ForEach(manager.pokemonCards) { pokemonCard in
                         NavigationLink(destination: PokemonDetailView(pokemonCard: pokemonCard)) {
                             PokemonRowView(pokemonCard: pokemonCard)
