@@ -24,9 +24,11 @@ struct CapturedPokemonButton: View {
                 }
             }) {
                 VStack {
+                    let frameSize = pokemonCard.captured ? CGSize(width: 50, height: 60) : CGSize(width: 60, height: 50)
+                    
                     Image(pokemonCard.captured ? "closedPokeBall" : "openPokeBall")
                         .resizable()
-                        .frame(width: 50, height: 50)
+                        .frame(width: frameSize.width, height: frameSize.height)
                     Text(pokemonCard.captured ? "Release Pokemon to the Wild?" : "Capture Pokemon?")
                         .font(.headline)
                         .foregroundColor(.primary)

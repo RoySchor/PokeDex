@@ -18,12 +18,14 @@ struct PokemonDetailView: View {
             VStack {
                 ZStack(alignment: .bottomTrailing) {
                     ZStack(alignment: .topLeading) {
+                        let frameSize = pokemonCard.captured ? CGSize(width: 50, height: 60) : CGSize(width: 60, height: 50)
+                        
                         PokemonImageView(pokemon: pokemon)
                             .frame(width: 350, height: 350)
                         
                         Image(pokemonCard.captured ? "closedPokeBall" : "openPokeBall")
                             .resizable()
-                            .frame(width: 60, height: 60)
+                            .frame(width: frameSize.width, height: frameSize.height)
                             .padding([.top, .leading], 10)
                     }
                     

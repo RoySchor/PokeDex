@@ -24,9 +24,11 @@ struct PokedexCardView: View {
                 .foregroundColor(.primary)
             
             HStack {
+                let frameSize = pokemonCard.captured ? CGSize(width: 30, height: 40) : CGSize(width: 40, height: 30)
+                
                 Image(pokemonCard.captured ? "closedPokeBall" : "openPokeBall")
                     .resizable()
-                    .frame(width: 30, height: 30)
+                    .frame(width: frameSize.width, height: frameSize.height)
                 
                 Text(pokemonCard.type.rawValue)
                     .font(.system(size: 15))
