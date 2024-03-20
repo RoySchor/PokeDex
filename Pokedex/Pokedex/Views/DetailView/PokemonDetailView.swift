@@ -23,9 +23,7 @@ struct PokemonDetailView: View {
                         PokemonImageView(pokemon: pokemon)
                             .frame(width: 350, height: 350)
                         
-                        Image(pokemonCard.captured ? "closedPokeBall" : "openPokeBall")
-                            .resizable()
-                            .frame(width: frameSize.width, height: frameSize.height)
+                        PokeBallImageView(frameSize: frameSize, captured: pokemonCard.captured)
                             .padding([.top, .leading], 10)
                     }
                     

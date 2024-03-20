@@ -17,17 +17,6 @@ class PokedexManager: ObservableObject {
         loadPokemons()
     }
     
-    func toggleCapturedStatus(forCardWithId cardId: String) {
-        if let index = pokemonCards.firstIndex(where: { $0.id == cardId }) {
-            pokemonCards[index].captured.toggle()
-            if pokemonCards[index].captured {
-                capturedPokemonCards.append(pokemonCards[index])
-            } else {
-                capturedPokemonCards.removeAll { $0.id == cardId }
-            }
-        }
-    }
-    
     func capturePokemon(withID id: String) {
         guard let index = pokemonCards.firstIndex(where: { $0.id == id }) else { return }
         pokemonCards[index].captured = true
