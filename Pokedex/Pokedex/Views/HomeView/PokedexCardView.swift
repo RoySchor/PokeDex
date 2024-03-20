@@ -21,6 +21,7 @@ struct PokedexCardView: View {
                 .font(.system(size: 20))
                 .bold()
                 .lineLimit(1)
+                .foregroundColor(.primary)
             
             HStack {
                 Image(pokemonCard.captured ? "closedPokeBall" : "openPokeBall")
@@ -29,30 +30,10 @@ struct PokedexCardView: View {
                 
                 Text(pokemonCard.type.rawValue)
                     .font(.system(size: 15))
+                    .foregroundColor(.primary)
             }
         }
         .frame(maxHeight: .infinity)
-        
-//        HStack {
-//            Image(pokemonCard.captured ? "closedPokeBall" : "openPokeBall")
-//                .resizable()
-//                .frame(width: 30, height: 30)
-//            
-//            Text(pokemonCard.type.rawValue)
-//                .font(.system(size: 12))
-//            Spacer()
-//                .frame(width: 10)
-//            
-//            Text(pokemon.name)
-//                .font(.system(size: 15))
-//                .bold()
-//                .lineLimit(1)
-//            Spacer()
-//            
-//            PokemonImageView(pokemon: pokemon)
-//                .frame(width: 100, height: 100)
-//        }
-//        .frame(maxWidth: .infinity)
     }
 }
 
