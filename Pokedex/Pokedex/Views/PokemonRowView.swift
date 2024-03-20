@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct PokemonRowView: View {
-    var pokemon: Pokemon
+    var pokemonCard: PokemonCard
     
     var body: some View {
+        let pokemon: Pokemon = pokemonCard.pokemon
+        
         HStack {
-            Text(String(pokemon.id))
+            Text(String(pokemonCard.id))
             Spacer()
                 .frame(width: 20)
             
@@ -30,5 +32,5 @@ struct PokemonRowView: View {
 }
 
 #Preview {
-    PokemonRowView(pokemon: Pokemon.standard)
+    PokemonRowView(pokemonCard: Pokemon.standard.cards[0])
 }
