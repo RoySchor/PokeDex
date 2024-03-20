@@ -17,22 +17,20 @@ class PokedexManager: ObservableObject {
         loadPokemons()
     }
     
-    func capturePokemon(withID id: String) {
+    func togglePokemonCapture(withID id: String) {
         guard let index = pokemonCards.firstIndex(where: { $0.id == id }) else { return }
-        pokemonCards[index].captured = true
+        pokemonCards[index].captured.toggle()
         
-        if !capturedPokemonCards.contains(where: { $0.id == id }) {
-            capturedPokemonCards.append(pokemonCards[index])
+        if pokemonCards[index].captured {
+            if !capturedPokemonCards.contains(where: { $0.id == id }) {
+                capturedPokemonCards.append(pokemonCards[index])
+            }
+        } else {
+            if let capturedIndex = capturedPokemonCards.firstIndex(where: { $0.id == id }) {
+                capturedPokemonCards.remove(at: capturedIndex)
+            }
         }
-    }
-
-    func uncapturePokemon(withID id: String) {
-        guard let index = pokemonCards.firstIndex(where: { $0.id == id }) else { return }
-        pokemonCards[index].captured = false
-
-        if let capturedIndex = capturedPokemonCards.firstIndex(where: { $0.id == id }) {
-            capturedPokemonCards.remove(at: capturedIndex)
-        }
+        self.objectWillChange.send()
     }
     
     func loadPokemons() {

@@ -9,26 +9,25 @@ import SwiftUI
 
 struct CapturedPokemonButton: View {
     @EnvironmentObject var manager: PokedexManager
-    @Binding var pokemonCard: PokemonCard
+    var pokemonCardID: String
     
     var body: some View {
-        VStack{
-            Text(pokemonCard.captured ? "Captured" : "Not Captured Yet...")
+        let isCaptured = manager.pokemonCards.first(where: { $0.id == pokemonCardID })?.captured ?? false
+        
+        VStack {
+            Text(isCaptured ? "Captured" : "Not Captured Yet...")
                 .font(.system(size: 25, weight: .heavy))
             
             Button(action: {
-                if pokemonCard.captured {
-                    manager.uncapturePokemon(withID: pokemonCard.id)
-                } else {
-                    manager.capturePokemon(withID: pokemonCard.id)
-                }
+                manager.togglePokemonCapture(withID: pokemonCardID)
             }) {
                 VStack {
-                    let frameSize = pokemonCard.captured ? CGSize(width: 50, height: 60) : CGSize(width: 60, height: 50)
+                    let frameSize = isCaptured ? CGSize(width: 50, height: 60) : CGSize(width: 60, height: 50)
                     
-                    PokeBallImageView(frameSize: frameSize, captured: pokemonCard.captured)
+                    PokeBallImageView(frameSize: frameSize, pokemonCardID: pokemonCardID)
+                        .environmentObject(manager)
                     
-                    Text(pokemonCard.captured ? "Release Pokemon to the Wild?" : "Capture Pokemon?")
+                    Text(isCaptured ? "Release Pokemon to the Wild?" : "Capture Pokemon?")
                         .font(.headline)
                         .foregroundColor(.primary)
                 }
@@ -38,6 +37,6 @@ struct CapturedPokemonButton: View {
 }
 
 #Preview {
-    CapturedPokemonButton(pokemonCard: .constant(Pokemon.standard.cards[0]))
+    CapturedPokemonButton(pokemonCardID: PokemonCard.standard.id)
         .environmentObject(PokedexManager())
 }

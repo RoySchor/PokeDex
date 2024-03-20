@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PokedexCardView: View {
+    @EnvironmentObject var manager: PokedexManager
     var pokemonCard: PokemonCard
     
     var body: some View {
@@ -26,7 +27,8 @@ struct PokedexCardView: View {
             HStack {
                 let frameSize = pokemonCard.captured ? CGSize(width: 30, height: 40) : CGSize(width: 40, height: 30)
                 
-                PokeBallImageView(frameSize: frameSize, captured: pokemonCard.captured)
+                PokeBallImageView(frameSize: frameSize, pokemonCardID: pokemonCard.id)
+                    .environmentObject(manager)
                 
                 Text(pokemonCard.type.rawValue)
                     .font(.system(size: 15))

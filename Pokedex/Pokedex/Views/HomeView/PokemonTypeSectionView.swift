@@ -16,7 +16,7 @@ struct PokemonTypeSectionView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     ForEach(Array(cards.enumerated()), id: \.element.id) { index, _ in
-                        NavigationLink(destination: PokemonDetailView(pokemonCard: $cards[index])
+                        NavigationLink(destination: PokemonDetailView(pokemonCard: cards[index])
                         ) {
                             PokedexCardView(pokemonCard: cards[index])
                         }

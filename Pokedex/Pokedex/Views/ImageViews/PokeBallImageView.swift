@@ -8,16 +8,19 @@
 import SwiftUI
 
 struct PokeBallImageView: View {
+    @EnvironmentObject var manager: PokedexManager
     var frameSize: CGSize
-    var captured: Bool
+    var pokemonCardID: String
     
     var body: some View {
-        Image(captured ? "closedPokeBall" : "openPokeBall")
+        let isCaptured = manager.pokemonCards.first(where: { $0.id == pokemonCardID })?.captured ?? false
+        
+        Image(isCaptured ? "closedPokeBall" : "openPokeBall")
             .resizable()
             .frame(width: frameSize.width, height: frameSize.height)
     }
 }
 
 #Preview {
-    PokeBallImageView(frameSize: CGSize(width: 50, height: 50), captured: false)
+    PokeBallImageView(frameSize: CGSize(width: 50, height: 50), pokemonCardID: PokemonCard.standard.id)
 }

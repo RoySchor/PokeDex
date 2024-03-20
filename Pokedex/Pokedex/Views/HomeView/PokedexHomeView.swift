@@ -27,8 +27,9 @@ struct PokedexHomeView: View {
                 
 //                THIS ONE WORKS VVV
                 ForEach(Array(manager.pokemonCards.enumerated()), id: \.element.id) { index, _ in
-                    NavigationLink(destination: PokemonDetailView(pokemonCard: $manager.pokemonCards[index])) {
+                    NavigationLink(destination: PokemonDetailView(pokemonCard: manager.pokemonCards[index])) {
                         PokedexCardView(pokemonCard: manager.pokemonCards[index])
+                            .environmentObject(manager)
                     }
                 }
             }

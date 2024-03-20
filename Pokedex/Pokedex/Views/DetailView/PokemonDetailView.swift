@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PokemonDetailView: View {
     @EnvironmentObject var manager: PokedexManager
-    @Binding var pokemonCard: PokemonCard
+    var pokemonCard: PokemonCard
     
     var body: some View {
         let pokemon: Pokemon = pokemonCard.pokemon
@@ -23,7 +23,8 @@ struct PokemonDetailView: View {
                         PokemonImageView(pokemon: pokemon)
                             .frame(width: 350, height: 350)
                         
-                        PokeBallImageView(frameSize: frameSize, captured: pokemonCard.captured)
+                        PokeBallImageView(frameSize: frameSize, pokemonCardID: pokemonCard.id)
+                            .environmentObject(manager)
                             .padding([.top, .leading], 10)
                     }
                     
@@ -38,7 +39,7 @@ struct PokemonDetailView: View {
                 Spacer()
                     .frame(height: 15)
                 
-                CapturedPokemonButton(pokemonCard: $pokemonCard)
+                CapturedPokemonButton(pokemonCardID: pokemonCard.id)
                     .environmentObject(manager)
             }
         }
@@ -48,6 +49,6 @@ struct PokemonDetailView: View {
 }
 
 #Preview {
-    PokemonDetailView(pokemonCard: .constant(Pokemon.standard.cards[0]))
+    PokemonDetailView(pokemonCard: Pokemon.standard.cards[0])
         .environmentObject(PokedexManager())
 }
