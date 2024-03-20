@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PokemonTypeSectionView: View {
     var type: PokemonType
-    @Binding var cards: [PokemonCard]
+    var cards: [PokemonCard]
     
     var body: some View {
         Section(header: Text(type.rawValue)) {
@@ -31,5 +31,5 @@ struct PokemonTypeSectionView: View {
 }
 
 #Preview {
-    PokemonTypeSectionView(type: Pokemon.standard.types[0], cards: .constant(Pokemon.standard.cards))
+    PokemonTypeSectionView(type: Pokemon.standard.types[0], cards: Pokemon.standard.cards)
 }

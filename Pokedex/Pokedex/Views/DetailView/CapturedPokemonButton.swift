@@ -22,9 +22,7 @@ struct CapturedPokemonButton: View {
                 manager.togglePokemonCapture(withID: pokemonCardID)
             }) {
                 VStack {
-                    let frameSize = isCaptured ? CGSize(width: 50, height: 60) : CGSize(width: 60, height: 50)
-                    
-                    PokeBallImageView(frameSize: frameSize, pokemonCardID: pokemonCardID)
+                    PokeBallImageView(frameSize: manager.frameSizeForDetailView, pokemonCardID: pokemonCardID)
                         .environmentObject(manager)
                     
                     Text(isCaptured ? "Release Pokemon to the Wild?" : "Capture Pokemon?")

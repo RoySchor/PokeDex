@@ -13,6 +13,9 @@ class PokedexManager: ObservableObject {
     @Published var capturedPokemonCards: [PokemonCard] = []
     @Published var pokemonCardsByType: [PokemonType: [PokemonCard]] = [:]
     
+    @Published var frameSizeForCard = CGSize(width: 40, height: 40)
+    @Published var frameSizeForDetailView = CGSize(width: 60, height: 60)
+    
     init() {
         loadPokemons()
     }

@@ -24,10 +24,8 @@ struct PokedexCardView: View {
                 .lineLimit(1)
                 .foregroundColor(.primary)
             
-            HStack {
-                let frameSize = pokemonCard.captured ? CGSize(width: 30, height: 40) : CGSize(width: 40, height: 30)
-                
-                PokeBallImageView(frameSize: frameSize, pokemonCardID: pokemonCard.id)
+            HStack {                
+                PokeBallImageView(frameSize: manager.frameSizeForCard, pokemonCardID: pokemonCard.id)
                     .environmentObject(manager)
                 
                 Text(pokemonCard.type.rawValue)

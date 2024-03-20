@@ -20,18 +20,18 @@ struct PokedexHomeView: View {
                     }
                 }
                 
-//                ForEach(PokemonType.allCases, id: \.self) { type in
-//                    PokemonTypeSectionView(type: type, cards: Binding.constant(manager.pokemonCardsByType[type]!))
-//                }
+                ForEach(PokemonType.allCases, id: \.self) { type in
+                    PokemonTypeSectionView(type: type, cards: manager.pokemonCardsByType[type]!)
+                }
                 
                 
 //                THIS ONE WORKS VVV
-                ForEach(Array(manager.pokemonCards.enumerated()), id: \.element.id) { index, _ in
-                    NavigationLink(destination: PokemonDetailView(pokemonCard: manager.pokemonCards[index])) {
-                        PokedexCardView(pokemonCard: manager.pokemonCards[index])
-                            .environmentObject(manager)
-                    }
-                }
+//                ForEach(Array(manager.pokemonCards.enumerated()), id: \.element.id) { index, _ in
+//                    NavigationLink(destination: PokemonDetailView(pokemonCard: manager.pokemonCards[index])) {
+//                        PokedexCardView(pokemonCard: manager.pokemonCards[index])
+//                            .environmentObject(manager)
+//                    }
+//                }
             }
             .background(Color.appBackground(for: colorScheme))
             .navigationTitle("Pokedex")
