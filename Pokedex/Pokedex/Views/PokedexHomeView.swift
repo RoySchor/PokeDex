@@ -1,5 +1,5 @@
 //
-//  PokedexListView.swift
+//  PokedexHomeView.swift
 //  Pokedex
 //
 //  Created by Roy Schor on 3/18/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PokedexListView: View {
+struct PokedexHomeView: View {
     @EnvironmentObject var manager: PokedexManager
     @Environment(\.colorScheme) var colorScheme
     
@@ -17,7 +17,7 @@ struct PokedexListView: View {
                 Section {
                     ForEach(manager.pokemonCards) { pokemonCard in
                         NavigationLink(destination: PokemonDetailView(pokemonCard: pokemonCard)) {
-                            PokemonRowView(pokemonCard: pokemonCard)
+                            PokedexRowView(pokemonCard: pokemonCard)
                         }
                     }
                 }
@@ -29,6 +29,6 @@ struct PokedexListView: View {
 }
 
 #Preview {
-    PokedexListView()
+    PokedexHomeView()
         .environmentObject(PokedexManager())
 }

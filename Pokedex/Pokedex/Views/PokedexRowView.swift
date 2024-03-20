@@ -1,5 +1,5 @@
 //
-//  PokemonRowView.swift
+//  PokedexRowView.swift
 //  Pokedex
 //
 //  Created by Roy Schor on 3/18/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PokemonRowView: View {
+struct PokedexRowView: View {
     var pokemonCard: PokemonCard
     
     var body: some View {
@@ -37,5 +37,5 @@ struct PokemonRowView: View {
 }
 
 #Preview {
-    PokemonRowView(pokemonCard: Pokemon.standard.cards[0])
+    PokedexRowView(pokemonCard: Pokemon.standard.cards[0])
 }
