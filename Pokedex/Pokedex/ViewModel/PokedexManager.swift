@@ -17,6 +17,7 @@ class PokedexManager: ObservableObject {
     @Published var frameSizeForDetailView = CGSize(width: 60, height: 60)
     
     init() {
+        loadCapturedPokemonCards()
         loadPokemons()
     }
     
@@ -33,6 +34,7 @@ class PokedexManager: ObservableObject {
                 capturedPokemonCards.remove(at: capturedIndex)
             }
         }
+        saveCapturedPokemonCards()
         self.objectWillChange.send()
     }
     
@@ -61,6 +63,35 @@ class PokedexManager: ObservableObject {
             populatePokemonCards()
         } catch {
             print("Error loading Pokemons: \(error)")
+        }
+    }
+    
+    func saveCapturedPokemonCards() {
+        let fileManager = FileManager.default
+        guard let directory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+        let persistedFileURL = directory.appendingPathComponent("capturedPokemonCards.json")
+        
+        let encoder = JSONEncoder()
+        do {
+            let data = try encoder.encode(capturedPokemonCards)
+            try data.write(to: persistedFileURL, options: [.atomicWrite, .completeFileProtection])
+        } catch {
+            print("Error saving captured Pokémon cards: \(error)")
+        }
+    }
+    
+    func loadCapturedPokemonCards() {
+        let fileManager = FileManager.default
+        guard let directory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+        let persistedFileURL = directory.appendingPathComponent("capturedPokemonCards.json")
+        
+        guard let data = try? Data(contentsOf: persistedFileURL) else { return }
+        
+        let decoder = JSONDecoder()
+        do {
+            capturedPokemonCards = try decoder.decode([PokemonCard].self, from: data)
+        } catch {
+            print("Error loading captured Pokémon cards: \(error)")
         }
     }
     

@@ -13,7 +13,7 @@ struct PokeBallImageView: View {
     var pokemonCardID: String
     
     var body: some View {
-        let isCaptured = manager.pokemonCards.first(where: { $0.id == pokemonCardID })?.captured ?? false
+        let isCaptured = manager.capturedPokemonCards.contains(where: { $0.id == pokemonCardID })
         
         Image(isCaptured ? "closedPokeBall" : "openPokeBall")
             .resizable()
