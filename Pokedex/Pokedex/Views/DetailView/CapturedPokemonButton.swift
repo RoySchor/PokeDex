@@ -15,10 +15,6 @@ struct CapturedPokemonButton: View {
         let isCaptured = manager.pokemonCards.first(where: { $0.id == pokemonCardID })?.captured ?? false
         
         VStack {
-            Text(isCaptured ? "Captured" : "Not Captured Yet...")
-                .font(.system(size: 25, weight: .heavy))
-                .animation(.default, value: isCaptured)
-            
             Button(action: {
                 withAnimation {
                     manager.togglePokemonCapture(withID: pokemonCardID)

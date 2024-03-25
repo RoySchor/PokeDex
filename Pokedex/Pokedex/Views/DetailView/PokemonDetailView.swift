@@ -39,6 +39,9 @@ struct PokemonDetailView: View {
                 
                 CapturedPokemonButton(pokemonCardID: pokemonCard.id)
                     .environmentObject(manager)
+                
+                EvolutionButtons(pokemonCard: pokemonCard)
+                    .environmentObject(manager)
             }
         }
         .navigationTitle(pokemon.name)

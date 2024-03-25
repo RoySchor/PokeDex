@@ -45,6 +45,10 @@ class PokedexManager: ObservableObject {
         }
     }
     
+    func findPokemonCardByID(id: Int, ofType type: PokemonType) -> PokemonCard? {
+        return pokemonCards.first { $0.pokemon.id == id && $0.type == type }
+    }
+    
     func loadPokemons() {
         guard let url = Bundle.main.url(forResource: "pokedex", withExtension: "json") else { return }
         

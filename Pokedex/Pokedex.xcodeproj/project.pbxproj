@@ -32,6 +32,7 @@
 		9C8FAEFA2BAA9CCD000FEAAF /* CapturedSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FAEF92BAA9CCD000FEAAF /* CapturedSectionView.swift */; };
 		9C8FAEFC2BAA9EE3000FEAAF /* PokemonTypeSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FAEFB2BAA9EE3000FEAAF /* PokemonTypeSectionView.swift */; };
 		9CF96D3B2BAB736F00DE35C0 /* FilterPokemonPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF96D3A2BAB736F00DE35C0 /* FilterPokemonPickerView.swift */; };
+		9CF96D3D2BAB7BB800DE35C0 /* EvolutionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF96D3C2BAB7BB800DE35C0 /* EvolutionButtons.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		9C8FAEF92BAA9CCD000FEAAF /* CapturedSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturedSectionView.swift; sourceTree = "<group>"; };
 		9C8FAEFB2BAA9EE3000FEAAF /* PokemonTypeSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonTypeSectionView.swift; sourceTree = "<group>"; };
 		9CF96D3A2BAB736F00DE35C0 /* FilterPokemonPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPokemonPickerView.swift; sourceTree = "<group>"; };
+		9CF96D3C2BAB7BB800DE35C0 /* EvolutionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvolutionButtons.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,6 +215,7 @@
 				9C8FAEF02BA8BF90000FEAAF /* TypesWeaknessView.swift */,
 				9C8FAEEB2BA8B810000FEAAF /* CapsuleTextView.swift */,
 				9C8FAEF62BAA9380000FEAAF /* CapturedPokemonButton.swift */,
+				9CF96D3C2BAB7BB800DE35C0 /* EvolutionButtons.swift */,
 			);
 			path = DetailView;
 			sourceTree = "<group>";
@@ -365,6 +368,7 @@
 				9C34477E2BA807BF00E7876A /* PokemonDetailView.swift in Sources */,
 				9C8FAEF12BA8BF90000FEAAF /* TypesWeaknessView.swift in Sources */,
 				9C3447742BA802BC00E7876A /* Pokemon.swift in Sources */,
+				9CF96D3D2BAB7BB800DE35C0 /* EvolutionButtons.swift in Sources */,
 				9C8FAEF32BA8C061000FEAAF /* StatView.swift in Sources */,
 				9C34477C2BA8077000E7876A /* PokedexCardView.swift in Sources */,
 				9C34476B2BA7F8EA00E7876A /* Color+PokemonType.swift in Sources */,
