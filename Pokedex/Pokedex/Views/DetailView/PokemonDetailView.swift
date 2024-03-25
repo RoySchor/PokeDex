@@ -36,7 +36,7 @@ struct PokemonDetailView: View {
                 TypesWeaknessView(pokemon: pokemon)
                 Spacer()
                     .frame(height: 15)
-                
+                                
                 CapturedPokemonButton(pokemonCardID: pokemonCard.id)
                     .environmentObject(manager)
                 

@@ -21,12 +21,14 @@ struct PokedexHomeView: View {
                 Section {
                     if !manager.capturedPokemonCards.isEmpty {
                         CapturedSectionView(capturedCards: $manager.capturedPokemonCards)
+                            .environmentObject(manager)
                     }
                 }
                 
                 ForEach(selectedType == nil ? PokemonType.allCases : [selectedType!], id: \.self) { type in
                     if let cards = manager.pokemonCardsByType[type], !cards.isEmpty {
                         PokemonTypeSectionView(type: type, cards: cards)
+                            .environmentObject(manager)
                     }
                 }
             }

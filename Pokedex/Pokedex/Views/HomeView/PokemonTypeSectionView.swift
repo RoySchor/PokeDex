@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PokemonTypeSectionView: View {
+    @EnvironmentObject var manager: PokedexManager
     var type: PokemonType
     var cards: [PokemonCard]
     
@@ -17,6 +18,7 @@ struct PokemonTypeSectionView: View {
                 HStack {
                     ForEach(Array(cards.enumerated()), id: \.element.id) { index, _ in
                         NavigationLink(destination: PokemonDetailView(pokemonCard: cards[index])
+                            .environmentObject(manager)
                         ) {
                             PokedexCardView(pokemonCard: cards[index])
                         }
@@ -32,4 +34,5 @@ struct PokemonTypeSectionView: View {
 
 #Preview {
     PokemonTypeSectionView(type: Pokemon.standard.types[0], cards: Pokemon.standard.cards)
+        .environmentObject(PokedexManager())
 }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CapturedSectionView: View {
+    @EnvironmentObject var manager: PokedexManager
     @Binding var capturedCards: [PokemonCard]
     
     var body: some View {
@@ -15,8 +16,11 @@ struct CapturedSectionView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     ForEach(Array(capturedCards.enumerated()), id: \.element.id) { index, _ in
-                        NavigationLink(destination: PokemonDetailView(pokemonCard: capturedCards[index])) {
+                        NavigationLink(destination: PokemonDetailView(pokemonCard: capturedCards[index])
+                            .environmentObject(manager)
+                        ) {
                             PokedexCardView(pokemonCard: capturedCards[index])
+                                .environmentObject(manager)
                         }
                         .frame(width: 150, height: 225)
                         .padding(.leading, 10)
@@ -30,4 +34,5 @@ struct CapturedSectionView: View {
 
 #Preview {
     CapturedSectionView(capturedCards: .constant(Pokemon.standard.cards))
+        .environmentObject(PokedexManager())
 }
