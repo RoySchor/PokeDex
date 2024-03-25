@@ -15,55 +15,59 @@ struct EvolutionButtons: View {
     var body: some View {
         let prevEvolutionExists = !(pokemonCard.pokemon.prevEvolution?.isEmpty ?? true)
         let nextEvolutionExists = !(pokemonCard.pokemon.nextEvolution?.isEmpty ?? true)
-
+        
         HStack {
-            NavigationLink(destination: PokemonDetailView(pokemonCard: selectedPokemonCardForDetail ?? pokemonCard)) {
-                EmptyView()
-            }.hidden()
-
-            
-            Button(action: {
-                if prevEvolutionExists, let prevID = pokemonCard.pokemon.prevEvolution?.last, let wantedCard = manager.findPokemonCardByID(id: prevID, ofType: pokemonCard.type) {
-                    self.selectedPokemonCardForDetail = wantedCard
+            if prevEvolutionExists, let prevID = pokemonCard.pokemon.prevEvolution?.last, let wantedCard = manager.findPokemonCardByID(id: prevID, ofType: pokemonCard.type) {
+                NavigationLink(
+                    destination: PokemonDetailView(pokemonCard: wantedCard)
+                        .environmentObject(manager)
+                ) {
+                    VStack {
+                        Image(systemName: "arrow.left")
+                            .font(.system(size: 20, weight: .semibold))
+                        Text("Pre-Evolution")
+                    }
+                    .foregroundColor(.primary)
+                    .padding()
                 }
-            }) {
+            } else {
                 VStack {
                     Image(systemName: "arrow.left")
                         .font(.system(size: 20, weight: .semibold))
-                        .foregroundColor(.primary)
                     Text("Pre-Evolution")
-                        .foregroundColor(.primary)
                 }
+                .foregroundColor(.gray)
+                .opacity(0.5)
+                .padding()
             }
-            .opacity(prevEvolutionExists ? 1.0 : 0.5)
-            .disabled(!prevEvolutionExists)
             
             Spacer()
-                
-            Button(action: {
-                if nextEvolutionExists, let prevID = pokemonCard.pokemon.prevEvolution?.first, let wantedCard = manager.findPokemonCardByID(id: prevID, ofType: pokemonCard.type) {
-                    self.selectedPokemonCardForDetail = wantedCard
+            
+            if nextEvolutionExists, let prevID = pokemonCard.pokemon.nextEvolution?.first, let wantedCard = manager.findPokemonCardByID(id: prevID, ofType: pokemonCard.type) {
+                NavigationLink(
+                    destination: PokemonDetailView(pokemonCard: wantedCard)
+                        .environmentObject(manager)
+                ) {
+                    VStack {
+                        Image(systemName: "arrow.right")
+                            .font(.system(size: 20, weight: .semibold))
+                        Text("Next-Evolution")
+                    }
+                    .foregroundColor(.primary)
+                    .padding()
                 }
-//                if nextEvolutionExists {
-//                    var pokemonId = pokemonCard.pokemon.nextEvolution?.first
-//                    var pokemonType = pokemonCard.type
-//                    if let wantedCard = manager.findPokemonCardByID(id: pokemonId!, ofType: pokemonType) {
-//                        PokemonDetailView(pokemonCard: wantedCard)
-//                    }
-//                }
-            }) {
+            } else {
                 VStack {
                     Image(systemName: "arrow.right")
                         .font(.system(size: 20, weight: .semibold))
-                        .foregroundColor(.primary)
                     Text("Next-Evolution")
-                        .foregroundColor(.primary)
                 }
+                .foregroundColor(.gray)
+                .opacity(0.5)
+                .padding()
             }
-            .opacity(nextEvolutionExists ? 1.0 : 0.5)
-            .disabled(!nextEvolutionExists)
+            
         }
-        .padding()
     }
 }
 
