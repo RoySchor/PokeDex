@@ -17,8 +17,8 @@ class PokedexManager: ObservableObject {
     @Published var frameSizeForDetailView = CGSize(width: 60, height: 60)
     
     init() {
-        loadCapturedPokemonCards()
         loadPokemons()
+        loadCapturedPokemonCards()
     }
     
     func togglePokemonCapture(withID id: String) {
